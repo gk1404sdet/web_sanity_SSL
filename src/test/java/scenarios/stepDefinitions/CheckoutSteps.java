@@ -50,7 +50,12 @@ public class CheckoutSteps {
     public void user_validating_the_out_of_stock_product() {
         if(checkoutPage.isOutOfStockDisplayed()) {
             System.out.println("Product is OUT OF STOCK. Retrying product selection...");
-            checkoutPage.closeChildWindowAndSwitchBack();
+            String parentWindow = "";
+            for (String handle : driver.getWindowHandles()) {
+                parentWindow = handle;
+            }
+            driver.close();
+//            driver.switchTo().window(parentWindow);
             try {
                 user_clicks_on_the_men_category();
                 user_selects_a_sub_category_under_men();
@@ -84,7 +89,7 @@ public class CheckoutSteps {
     @Then("user validates that the product is added to the bag")
     public void user_validates_that_the_product_is_added_to_the_bag() {
         if(productAdded){
-            checkoutPage.verifyElementByText("Product added to your cart successfully");
+            checkoutPage.validateErrorMessageByPartialText("Product added to your cart successfully", "Product added to your cart successfully");
         } else {
             System.out.println("Skipping validation as product was not added (View Bag fallback used)");
         }
@@ -167,7 +172,7 @@ public class CheckoutSteps {
     }
     @Then("system should display the Something Went Wrong Message")
     public void system_should_display_the_something_went_wrong_message() {
-        checkoutPage.verifyElementByText("Something went wrong. Please try again!");
+        checkoutPage.validateErrorMessageByPartialText("Something went wrong. Please try again!","Something went wrong. Please try again!");
     }
     @Then("user back to Home Page")
     public void user_back_to_home_page() {

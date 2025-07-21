@@ -287,5 +287,19 @@ public class BasePage {
         } catch (Exception e) {}
     }
 
+    public void validateErrorMessageByPartialText(String partialText, String expectedText) {
+        try {
+            By errorLocator = By.xpath("//*[contains(text(),'" + partialText + "')]");
+            WebElement errorElement = wait.until(ExpectedConditions.visibilityOfElementLocated(errorLocator));
+            String actualText = errorElement.getText().trim();
+
+            System.out.println("Actual: " + actualText);
+            Assert.assertEquals(actualText, expectedText, "Toast message mismatch!");
+            System.out.println("Toasted Message is Matched: " + expectedText);
+        } catch (Exception e) {
+            Assert.fail("Failed to validate error message for partial text: '" + partialText + "' - " + e.getMessage());
+        }
+    }
+
 
 }

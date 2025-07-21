@@ -28,7 +28,7 @@ public class LoginSteps {
     //Login with Mobile Number
     @Given("user launches the application")
     public void user_launches_the_application() {
-        loginPage.goTo(configLoader.getProperty("prodUrl"));
+        loginPage.goTo(configLoader.getProperty("uatUrl"));
     }
     @When("user taps on the Login button")
     public void user_taps_on_the_login_button() {
@@ -108,7 +108,7 @@ public class LoginSteps {
     }
     @Then("user validate that the appropriate error message is displayed")
     public void user_validate_that_the_appropriate_error_message_is_displayed() {
-        loginPage.verifyElementByText("Invalid email or phone number format");
+        loginPage.validateErrorMessageByPartialText("Invalid email or phone number format", "Invalid email or phone number format");
     }
 
     //Login with Invalid Email ID

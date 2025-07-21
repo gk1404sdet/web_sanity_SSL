@@ -75,7 +75,7 @@ public class WishlistSteps {
     }
     @Then("user validates that product add wishlist successfully")
     public void user_validates_that_product_add_wishlist_successfully() {
-        wishlistPage.verifyElementByText("Added to your Wishlist");
+        wishlistPage.validateErrorMessageByPartialText("Added to your Wishlist", "Added to your Wishlist");
     }
     @Then("user removes the product from the wishlist from the product details page")
     public void user_removes_the_product_from_the_wishlist_from_the_product_details_page() {
@@ -83,7 +83,7 @@ public class WishlistSteps {
     }
     @Then("user validates that product removed wishlist successfully")
     public void user_validates_that_product_removed_wishlist_successfully() {
-        wishlistPage.verifyElementByText("Removed from your Wishlist");
+        wishlistPage.validateErrorMessageByPartialText("Removed from your Wishlist", "Removed from your Wishlist");
     }
 
     // Wishlist - Adding to Cart

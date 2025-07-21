@@ -19,7 +19,6 @@ public class AccountSteps {
 
     private final LoginPage loginPage;
     private final AccountPage accountPage;
-    private final HomePage homePage;
     CredsLoader credsLoader;
     ConfigLoader configLoader;
     Scenario scenario;
@@ -28,7 +27,6 @@ public class AccountSteps {
 
         loginPage = context.loginPage;
         accountPage = context.accountPage;
-        homePage = context.homePage;
         this.credsLoader = context.credsLoader;
         this.configLoader = context.configLoader;
         this.scenario = context.scenario;
@@ -73,7 +71,7 @@ public class AccountSteps {
     }
     @When("user validate that personal details successfully updated")
     public void user_validate_that_personal_details_successfully_updated() {
-        accountPage.verifyElementByText("Your profile has been updated successfully!!");
+        accountPage.validateErrorMessageByPartialText("Your profile has been updated successfully!!", "Your profile has been updated successfully!!");
     }
     @When("user is able to add a new address")
     public void user_is_able_to_add_a_new_address() {
@@ -105,7 +103,7 @@ public class AccountSteps {
     }
     @When("user validate that new address added successfully")
     public void user_validate_that_new_address_added_successfully() {
-        accountPage.verifyElementByText("New address has been created successfully!!");
+        accountPage.validateErrorMessageByPartialText("New address has been created successfully!!", "New address has been created successfully!!");
     }
     @Then("user updates an existing address")
     public void user_updates_an_existing_address() {
@@ -129,7 +127,7 @@ public class AccountSteps {
     }
     @Then("validate that existing address has updated")
     public void validate_that_existing_address_has_updated() {
-        accountPage.verifyElementByText("Your address has been updated successfully!!");
+        accountPage.validateErrorMessageByPartialText("Your address has been updated successfully!!", "Your address has been updated successfully!!");
     }
     @Then("user is able to delete exiting address")
     public void user_is_able_to_delete_exiting_address() {
@@ -141,7 +139,7 @@ public class AccountSteps {
     }
     @Then("user validate that delete address message is displayed")
     public void user_validate_that_delete_address_message_is_displayed() {
-        accountPage.verifyElementByText("Address deleted successfully");
+        accountPage.validateErrorMessageByPartialText("Address deleted successfully", "Address deleted successfully");
     }
 
     //Book An Appointment
@@ -164,7 +162,7 @@ public class AccountSteps {
     }
     @When("user validate that get store directions option is displayed")
     public void user_validate_that_get_store_directions_option_is_displayed() {
-        accountPage.verifyElementByText("Get Store Directions");
+        accountPage.validateErrorMessageByPartialText("Get Store Directions", "Get Store Directions");
     }
     @When("user select the date")
     public void user_select_the_date() {
@@ -188,7 +186,7 @@ public class AccountSteps {
     }
     @Then("user validate that booking confirmation is displayed")
     public void user_validate_that_booking_confirmation_is_displayed() {
-        accountPage.verifyElementByText("Your Appointment has booked successfully");
+        accountPage.validateErrorMessageByPartialText("Your Appointment has booked successfully", "Your Appointment has booked successfully");
     }
 
     //My Orders

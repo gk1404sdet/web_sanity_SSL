@@ -91,6 +91,7 @@ public class CheckoutPage extends BasePage {
 
     public boolean isOutOfStockDisplayed() {
         try {
+            waitForOverlayToDisappear();
             List<WebElement> outOfStock = driver.findElements(
                     By.xpath("//*[contains(translate(text(),'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 'OUT OF STOCK')]")
             );

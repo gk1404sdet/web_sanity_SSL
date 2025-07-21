@@ -1,6 +1,6 @@
-@checkout
-Feature: Verify Successful and Failed Payment mode
 
+Feature: Verify Successful and Failed Payment mode
+  @checkout
   Scenario: TES23 - Verify the Sign-in functionality via phone number for existing user
 
     Given user launches the application
@@ -18,6 +18,7 @@ Feature: Verify Successful and Failed Payment mode
     When user selects a sub-category under Men
     And user selects a product from the PLP
     Then user is navigated to the product detail page
+    And user validating the out of stock product
     When user selects a size if available
     And user clicks on Add to Bag and View Bag
     And user clicks on the View Bag
@@ -47,15 +48,15 @@ Feature: Verify Successful and Failed Payment mode
     And user submit the review
     Then user clicks the Continue Shopping Button
 
-@failedPayment
+@failedPayment @checkout
   Scenario: TES59 - Verify a Failed payment
 
     Given user is on the Home Page
     Given user clicks on the Women category
     When user selects a sub-category under Women
     And user selects a product from the PLP
-    Then user validating the out of stock product
     Then user is navigated to the product detail page
+    Then user validating the out of stock product
     And user selects a size if available
     And user clicks on Add to Bag and View Bag
     And user clicks on the View Bag

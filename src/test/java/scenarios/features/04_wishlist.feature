@@ -36,8 +36,8 @@ Feature: Verify the Wishlist Functionality
     When user clicks on the Wishlist icon
     When user validates the wish listed products list
     And user adda a product to bag from wishlist
-    And user validating the out of stock product
     And user is navigated to the product detail page
+    And user validating the out of stock product
     Then user selects a size if available
     And user clicks on Add to Bag and View Bag
 

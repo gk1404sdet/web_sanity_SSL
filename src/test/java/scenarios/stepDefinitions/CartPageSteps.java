@@ -54,11 +54,11 @@ public class CartPageSteps {
     }
     @Then("system should display the appropriate error status")
     public void system_should_display_the_appropriate_error_status() {
-        cartPage.verifyElementByText("*Pincode is not serviceable");
+        cartPage.validateErrorMessageByPartialText("*Pincode is not serviceable", "*Pincode is not serviceable");
     }
     @Then("system should display the appropriate error message")
     public void system_should_display_the_appropriate_error_message() {
-        cartPage.verifyElementByText("*Please enter a valid pincode");
+        cartPage.validateErrorMessageByPartialText("*Please enter a valid pincode", "*Please enter a valid pincode");
     }
 
     // Size - Cart
@@ -104,12 +104,12 @@ public class CartPageSteps {
     }
     @Then("user validate that gift wrap details added successfully")
     public void user_validate_that_gift_wrap_details_added_successfully() throws InterruptedException {
-        cartPage.verifyElementByText("Gift wrap added to cart");
+        cartPage.validateErrorMessageByPartialText("Gift wrap added to cart", "Gift wrap added to cart");
         Thread.sleep(2000);
     }
     @Then("user validate that gift wrap details removed successfully")
     public void user_validate_that_gift_wrap_details_removed_successfully() {
-        cartPage.verifyElementByText("Gift wrap removed from cart");
+        cartPage.validateErrorMessageByPartialText("Gift wrap removed from cart", "Gift wrap removed from cart");
     }
 
 
@@ -124,7 +124,7 @@ public class CartPageSteps {
     }
     @When("user validates that product moved to wishlist from bag")
     public void user_validates_that_product_moved_to_wishlist_from_bag() {
-        cartPage.verifyElementByText("Product removed from your bag and added to your wishlist");
+        cartPage.validateErrorMessageByPartialText("Product removed from your bag and added to your wishlist", "Product removed from your bag and added to your wishlist");
     }
     @Then("user is removing the product from bag")
     public void user_is_removing_the_product_from_bag() {
@@ -132,7 +132,7 @@ public class CartPageSteps {
     }
     @Then("user validates that product removed from bag")
     public void user_validates_that_product_removed_from_bag() {
-        cartPage.verifyElementByText("Product removed from your cart successfully");
+        cartPage.validateErrorMessageByPartialText("Product removed from your cart successfully", "Product removed from your cart successfully");
     }
 
 }

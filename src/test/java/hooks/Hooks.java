@@ -7,7 +7,6 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterSuite;
 import pages.*;
 import utilities.ConfigLoader;
 import utilities.CredsLoader;
@@ -55,10 +54,7 @@ public class Hooks {
             driver.navigate().refresh();
         }
     }
-//    @AfterSuite
-//    public void afterSuite() {
-//        BugasuraUploader.uploadResultsToBugasura();
-//    }
+
     @AfterAll
     public static void tearDownALl() {
 //        DriverFactory.quitDriver();
