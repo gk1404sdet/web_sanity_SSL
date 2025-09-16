@@ -1,4 +1,3 @@
-@wishlist
 Feature: Verify the Wishlist Functionality
 
   Background:
