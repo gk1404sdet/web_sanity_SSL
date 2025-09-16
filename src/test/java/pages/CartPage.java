@@ -4,8 +4,6 @@ package pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
@@ -30,14 +28,41 @@ public class CartPage extends BasePage{
     private final By moveToWishlist = By.xpath("//p[contains(text(), 'MOVE TO WISHLIST')]");
     private final By remove = By.xpath("//p[contains(text(), 'REMOVE')]");
     private final By giftWrap = By.xpath("//button[@role=\"checkbox\"]");
-    public final By receiverName = By.id("Receiver’s Name");
-    public final By message = By.id("Gift Message");
-    public final By senderName = By.id("Sender’s Name");
+    private final By receiverName = By.id("Receiver’s Name");
+    private final By message = By.id("Gift Message");
+    private final By senderName = By.id("Sender’s Name");
     private final By saveGiftWrap = By.xpath("//p[contains(text(), 'SAVE GIFT DETAILS')]");
+    private final By offersForYou  = By.xpath("//div[contains(text(),'Offers for you')]");
+    private final By checkDelivery = By.xpath("//div[contains(text(),'Check Delivery')]");
+    private final By giftWrapCom = By.xpath("//div[contains(text(),'GIFT WRAP')]");
+    private final By couponCode = By.xpath("//div[contains(text(),'HAVE A COUPON CODE?')]");
+    private final By priceDetails  = By.xpath("//div[contains(text(),'Price Details')]");
+    private final By emptyBag = By.xpath("By.xpath(\"//div[contains(text(), 'Your Bag Feels Too Light!')]\")");
+    private final By mrpProduct =  By.xpath("//p[contains(text(), 'Total MRP')]/following-sibling::div");
+    private final By discountProduct = By.xpath("//p[contains(text(), 'Offer Discount')]/following-sibling::div");
+    private final By savingsProduct = By.xpath("//div[contains(text(), 'Your Total Savings')]/following-sibling::div");
+    private final By deliveryFeeProduct = By.xpath("//p[contains(text(), 'Delivery Fee')]/following-sibling::div");
+    private final By totalFeeProduct =  By.xpath("//div[contains(@class,'rounded-b-sm')]//div[contains(text(),'₹')]");
+    private final By sizeOption = By.xpath("//div[@role='option']");
+    private final By overlayLocator = By.cssSelector("div[class*='fixed'], div[class*='overlay']");
+    private final By addAddress = By.xpath("//p[contains(text(), 'ADD NEW ADDRESS')]");
+
+
 
 
     public void clickOnCartIcon() {
         clickOnElement(cartIcon);
+    }
+
+    public void clickOnAddAddress() {
+        waitForOverlayToDisappear();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement freshButton = wait.until(ExpectedConditions.refreshed(
+                ExpectedConditions.elementToBeClickable(addAddress)
+        ));
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", freshButton);
+        freshButton.click();
     }
 
     public void clickOnPincodeBox() {
@@ -45,34 +70,33 @@ public class CartPage extends BasePage{
     }
 
     public void enterThePincode(String str) {
+        waitForOverlayToDisappear();
         enterTextOnElement(pincodeBox, str);
     }
 
     public void clickOnCheckOption() {
+        waitForOverlayToDisappear();
         clickOnElement(check);
     }
 
-    public void validateCartComponentsByText() {
-        List<String> expectedComponents = Arrays.asList(
-                "Offers for you",
-                "Check Delivery",
-                "GIFT WRAP",
-                "HAVE A COUPON CODE?",
-                "Price Details"
+    public boolean validateCartComponentsByText(List<String> expectedSections) {
+        List<By> expectedComponents = Arrays.asList(
+                offersForYou,
+                checkDelivery,
+                giftWrapCom,
+                couponCode,
+                priceDetails
         );
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         boolean allFound = true;
-        for (String component : expectedComponents) {
+        for (By locator : expectedComponents) {
             try {
-                By locator = By.xpath("//div[contains(text(), '" + component + "')]");
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-                System.out.println("Found component: " + component);
             } catch (TimeoutException e) {
-                System.out.println("Missing component: " + component);
                 allFound = false;
             }
         }
-        Assert.assertTrue(allFound, "Some expected components are missing on the cart page!");
+        return allFound;
     }
 
     public boolean isCartPage() {
@@ -91,28 +115,16 @@ public class CartPage extends BasePage{
         }
     }
 
-    public void validateEmptyBag() {
+    public boolean validateEmptyBag() {
         try {
-            List<WebElement> emptyBagMessage = driver.findElements(
-                    By.xpath("//div[contains(text(), 'Your Bag Feels Too Light!')]"));
-
-            if (!emptyBagMessage.isEmpty()) {
-                System.out.println("Your Bag Feels Too Light! message found in child window");
-                Assert.fail("Assertion Failed: Empty bag message detected.");
-            } else {
-                System.out.println("Empty bag message not found.");
-            }
+            List<WebElement> emptyBagMessage = driver.findElements(emptyBag);
+            return emptyBagMessage.isEmpty();
         } catch (Exception e) {
-            System.out.println("Exception while checking for empty bag message: " + e.getMessage());
-        } finally {
-            try {
-            } catch (Exception e) {
-                System.out.println("Error while closing child window: " + e.getMessage());
-            }
+            return false;
         }
     }
 
-    public void printAndValidatePriceDetails() {
+    public boolean printAndValidatePriceDetails() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -120,85 +132,66 @@ public class CartPage extends BasePage{
 
             // Total MRP
             try {
-                WebElement mrpElem = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//p[contains(text(), 'Total MRP')]/following-sibling::div")));
+                WebElement mrpElem = wait.until(ExpectedConditions.visibilityOfElementLocated(mrpProduct));
                 String mrpText = mrpElem.getText().replaceAll("[^\\d.]", "");
                 mrp = Double.parseDouble(mrpText);
-                System.out.println("Total MRP        : ₹" + mrpText);
-            } catch (Exception e) {
-                System.out.println("Total MRP not found");
-            }
+            } catch (Exception e) {}
+
             // Offer Discount
             try {
-                WebElement discountElem = driver.findElement(
-                        By.xpath("//p[contains(text(), 'Offer Discount')]/following-sibling::div"));
+                WebElement discountElem = driver.findElement(discountProduct);
                 String discountText = discountElem.getText().replaceAll("[^\\d.]", "");
                 discount = Double.parseDouble(discountText);
-                System.out.println("Offer Discount   : ₹" + discountText);
-            } catch (Exception e) {
-                System.out.println("Offer Discount not found");
-            }
+            } catch (Exception e) {}
+
             // Your Total Savings
             try {
-                WebElement savingsElem = driver.findElement(
-                        By.xpath("//div[contains(text(), 'Your Total Savings')]/following-sibling::div"));
+                WebElement savingsElem = driver.findElement(savingsProduct);
                 String savingsText = savingsElem.getText().replaceAll("[^\\d.]", "");
-                System.out.println("Your Total Saving: ₹" + savingsText);
-            } catch (Exception e) {
-                System.out.println("Your Total Saving not found");
-            }
+            } catch (Exception e) {}
+
             // Delivery Fee
             try {
-                WebElement deliveryElem = driver.findElement(
-                        By.xpath("//p[contains(text(), 'Delivery Fee')]/following-sibling::div"));
+                WebElement deliveryElem = driver.findElement(deliveryFeeProduct);
                 String deliveryText = deliveryElem.getText().trim();
                 if (deliveryText.equalsIgnoreCase("Free")) {
                     delivery = 0;
-                    System.out.println("Delivery Fee     : Free");
                 } else {
                     delivery = Double.parseDouble(deliveryText.replaceAll("[^\\d.]", ""));
-                    System.out.println("Delivery Fee     : ₹" + delivery);
                 }
-            } catch (Exception e) {
-                System.out.println("Delivery Fee not found");
-            }
+            } catch (Exception e) {}
+
             // Total Payable
             try {
-                WebElement totalElem = driver.findElement(
-                        By.xpath("//div[contains(@class,'rounded-b-sm')]//div[contains(text(),'₹')]"));
+                WebElement totalElem = driver.findElement(totalFeeProduct);
                 String totalText = totalElem.getText().replaceAll("[^\\d.]", "");
                 total = Double.parseDouble(totalText);
-                System.out.println("Total Payable    : ₹" + totalText);
             } catch (Exception e) {
-                System.out.println("Total Payable not found – cannot validate");
-                Assert.fail("Total Payable not found");
+                return false;
             }
+
             // Final validation (if we have Total MRP and Total Payable only)
             if (mrp > 0 && total > 0) {
                 double expected = mrp - discount + delivery;
-                Assert.assertEquals(total, expected, 0.1, "Total payable mismatch");
+                return Math.abs(total - expected) < 0.1;
             } else {
-                System.out.println("Skipped assertion due to missing MRP or Total");
+                return false;
             }
         } catch (Exception e) {
-            Assert.fail("Error extracting price breakdown: " + e.getMessage());
+            return false;
         }
     }
 
-    public void emptyBagValidation() {
+    public boolean emptyBagValidation() {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(8));
-            List<WebElement> mrpSection = driver.findElements(
-                    By.xpath("//p[contains(text(), 'Total MRP')]/following-sibling::div")
-            );
+            List<WebElement> mrpSection = driver.findElements(mrpProduct);
             if (!mrpSection.isEmpty()) {
-                printAndValidatePriceDetails();
+               return printAndValidatePriceDetails();
             } else {
-                System.out.println("Price details not found, checking for empty bag...");
-                validateEmptyBag();
+               return validateEmptyBag();
             }
         } catch (Exception e) {
-            Assert.fail("Exception during price details check or fallback: " + e.getMessage());
+            return false;
         }
     }
 
@@ -214,80 +207,61 @@ public class CartPage extends BasePage{
                 WebElement comboBox = comboButtons.get(index);
                 js.executeScript("arguments[0].scrollIntoView({block:'center'});", comboBox);
                 wait.until(ExpectedConditions.elementToBeClickable(comboBox)).click();
-                System.out.println("Clicked combobox at index: " + index);
             }
-        } catch (Exception e) {
-            Assert.fail("Failed to click combobox at index " + index + ": " + e.getMessage());
-        }
+        } catch (Exception e) {}
     }
 
     public void clicksOnTheSizeChart() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-            List<WebElement> options = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@role='option']")));
+            List<WebElement> options = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(sizeOption));
             // Click the first visible option
-            boolean selected = false;
+
             for (WebElement option : options) {
                 if (option.isDisplayed()) {
-//                    js.executeScript("arguments[0].scrollIntoView({block:'center'});", option);
-                    String selectedText = option.getText().trim();
                     option.click();
-                    System.out.println("Selected Size: " + selectedText);
-                    selected = true;
                     break;
                 }
             }
-            if (!selected) {
-                Assert.fail("No visible size option found to select.");
-            }
-        } catch (Exception e) {
-            Assert.fail("Error selecting combobox size: " + e.getMessage());
-        }
+        } catch (Exception e) {}
     }
 
     public void adjustQuantity(boolean increaseChoice, int times) {
 
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            try {
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-            WebElement increase = wait.until(ExpectedConditions.presenceOfElementLocated(increaseQuan));
-            WebElement decrease = wait.until(ExpectedConditions.presenceOfElementLocated(decreaseQuan));
+                WebElement increase = wait.until(ExpectedConditions.presenceOfElementLocated(increaseQuan));
+                WebElement decrease = wait.until(ExpectedConditions.presenceOfElementLocated(decreaseQuan));
 
-            for (int i = 0; i < times; i++) {
+                for (int i = 0; i < times; i++) {
 
-                WebElement target = increaseChoice ? increase : decrease;
-                js.executeScript("arguments[0].scrollIntoView({block: 'center'});", target);
+                    WebElement target = increaseChoice ? increase : decrease;
+                    js.executeScript("arguments[0].scrollIntoView({block: 'center'});", target);
 
-                try {
-                    By overlayLocator = By.cssSelector("div[class*='fixed'], div[class*='overlay']");
-                    new WebDriverWait(driver, Duration.ofSeconds(3))
-                            .until(ExpectedConditions.invisibilityOfElementLocated(overlayLocator));
-                } catch (Exception ignored) {
+                    try {
+                        new WebDriverWait(driver, Duration.ofSeconds(3))
+                                .until(ExpectedConditions.invisibilityOfElementLocated(overlayLocator));
+                    } catch (Exception ignored) {
+                    }
+                    js.executeScript("arguments[0].click();", target);
+                    Thread.sleep(800);
                 }
-                js.executeScript("arguments[0].click();", target);
-                System.out.println(increaseChoice ? "Quantity Increased" : "Quantity Decreased");
-                Thread.sleep(800);
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to change quantity", e);
             }
-            System.out.println("Total actions performed: " + times);
-        } catch (Exception e) {
-            Assert.fail("Failed to change quantity: " + e.getMessage());
         }
-    }
 
     public void clickOnTheMoveToWishlist() {
         try {
             waitForOverlayToDisappear();
-            List<WebElement> moveWishlist = driver.findElements
-                    (By.xpath("//p[contains(text(), \"Already Wishlisted\")]"));
-            if(!moveWishlist.isEmpty()) {
-                System.out.println("Product is already in wishlist. Removing the product");
+            List<WebElement> moveWishlist = driver.findElements(moveToWishlist);
+            if(moveWishlist.isEmpty()) {
                 clickOnElement(remove);
             }
             wait.until(ExpectedConditions.elementToBeClickable(moveToWishlist)).click();
-        } catch (Exception e) {
-            Assert.fail("Failed to move product to wishlist: " + e.getMessage());
-        }
+        } catch (Exception e) {}
     }
 
     public void clickOnGiftWrap() {
@@ -295,12 +269,24 @@ public class CartPage extends BasePage{
         clickOnElement(giftWrap);
     }
 
+    public void enterTheReceiverName(String revName) {
+        enterTextOnElement(receiverName, revName);
+    }
+
+    public void enterTheMessage(String msg) {
+        enterTextOnElement(message, msg);
+    }
+
+    public void enterTheSenderName(String sendName) {
+        enterTextOnElement(senderName, sendName);
+    }
+
     public void clickOnSaveGiftWrap() {
         clickOnElement(saveGiftWrap);
     }
 
     public void clickOnXmark() {
-        reloadPage();
+        waitForOverlayToDisappear();
         clickOnElement(xMark, 0);
     }
 

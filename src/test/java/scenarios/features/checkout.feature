@@ -1,18 +1,23 @@
-
 Feature: Verify Successful and Failed Payment mode
-  @checkout
-  Scenario: TES23 - Verify the Sign-in functionality via phone number for existing user
+
+  Background:
+  @smoke @sanity @TC002
+  Scenario Outline: Verify the Sign-in functionality via phone number for existing user
 
     Given user launches the application
     When user taps on the Login button
-    And user enters mobile number "9136734340"
+    And user enters mobile number "<mob no>"
     And user clicks on the Proceed button
-    Then user enters OTP "123456"
+    Then user enters OTP "<otp>"
     And user clicks on the Verify OTP button
     Then system should display the appropriate login status
 
-@successfulPayment
-  Scenario: TES60 - Verify a successful payment
+    Examples:
+      | mob no | otp |
+      | 9136734340 | 123456 |
+
+@smoke @sanity @TC014 @TC028 @TC029 @TC030 @TC032 @TC033 @TC042
+  Scenario: Verify a successful payment
 
     Given user clicks on the Men category
     When user selects a sub-category under Men
@@ -32,15 +37,15 @@ Feature: Verify Successful and Failed Payment mode
     Then user checks if Cash on Delivery is available
     When user clicks on Place Order
 
-@orderSummary
-  Scenario: TES61 - Verify the navigation to successful order summary page
+@smoke @sanity @TC038 @TC039
+  Scenario: the navigation to successful order summary page
 
-    Given user validating successful order summary
-    When user validating the Deliver Mode and Address
+    Then user validating successful order summary
+    And user validating the Deliver Mode and Address
     Then user validates the final price details
 
-@reviewShopping
-  Scenario: TES65 - Verify functionality of Review Shopping Experience
+@smoke @sanity @TC043 @TC044
+  Scenario: functionality of Review Shopping Experience
 
     When user verifying the review shopping experience
     And user giving the rate for shopping
@@ -48,9 +53,10 @@ Feature: Verify Successful and Failed Payment mode
     And user submit the review
     Then user clicks the Continue Shopping Button
 
-@failedPayment @checkout
-  Scenario: TES59 - Verify a Failed payment
+@sanity @TC014 @TC028 @TC029 @TC030 @TC032 @TC033 @TC037 @TC042
+  Scenario: Verify a Failed payment
 
+    Given user back to Home Page
     Given user is on the Home Page
     Given user clicks on the Women category
     When user selects a sub-category under Women
@@ -68,5 +74,12 @@ Feature: Verify Successful and Failed Payment mode
     And user verifies the available payment modes
     Then user validates the price details in the bag
     Then user selecting the Wallet Option
-    Then system should display the Something Went Wrong Message
     Then user back to Home Page
+
+@smoke @sanity @TC055
+  Scenario: Verify the logout functionality
+
+    When user back to Home Page
+    When user clicks on the Logout button
+    And user clicks on the yes button for logout
+    Then user validate that the user is logged out

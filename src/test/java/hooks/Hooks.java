@@ -14,17 +14,23 @@ import utilities.CredsLoader;
 import java.io.*;
 
 public class Hooks {
-    private WebDriver driver;
+    private static WebDriver driver;
     private final TestContext context;
 
     public Hooks(TestContext context) {
         this.context = context;
     }
 
+    @BeforeAll
+    public static void setUpAll() {
+        driver = DriverFactory.initializeDriver();
+//        driver = DriverFactory.getDriver();
+    }
+
     @Before
     public void setUp(Scenario scenario) {
 //        driver = DriverFactory.initializeDriver();
-        driver = DriverFactory.getDriver();
+//        driver = DriverFactory.getDriver();
         context.driver = driver;
         context.credsLoader = new CredsLoader();
         context.configLoader = new ConfigLoader();
@@ -36,6 +42,7 @@ public class Hooks {
         context.cartPage = new CartPage(context.driver);
         context.homePage = new HomePage(context.driver);
         context.scenario = scenario;
+
     }
 
     @After
@@ -46,6 +53,7 @@ public class Hooks {
             byte[] fileContent = FileUtils.readFileToByteArray(sourcePath);
             scenario.attach(fileContent, "image/png", "image");
         }
+
         String scenarioName = scenario.getName();
         if (scenarioName.contains("Verify the OTP functionality with an invalid OTP") ||
                 scenarioName.contains("Login as a user with an invalid mobile number") ||
@@ -56,7 +64,7 @@ public class Hooks {
     }
 
     @AfterAll
-    public static void tearDownALl() {
-//        DriverFactory.quitDriver();
+    public static void tearDownAll() {
+        DriverFactory.quitDriver();
     }
 }

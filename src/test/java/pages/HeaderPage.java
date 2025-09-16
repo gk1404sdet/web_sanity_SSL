@@ -1,10 +1,8 @@
 package pages;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.*;
@@ -24,6 +22,19 @@ public class HeaderPage extends BasePage {
     public final By popularBrands = By.xpath("//div[@class=\"bg-transparent flex flex-col flex-wrap\"]");
     private final By storeIcon = By.xpath("//img[@alt=\"near-by-store\"]");
     private final By storeCity = By.id("Select City");
+    private final By topCategory = By.xpath("//div[@class=\"bg-transparent\"]");
+    private final By categoryLocator = By.xpath("//div[@class='bg-transparent']//a");
+    private final By iFrameFashion = By.xpath("//iframe[@class=\"border-0 opacity-100\"]");
+    private final By edit = By.id("mui-2");
+    private final By productCard = By.xpath("//div[@class='content ']");
+    private final By brandLocator = By.xpath(".//div[@class='ff-chatbot-caption brand']");
+    private final By titleLocator = By.xpath(".//div[@class='title  ']");
+    private final By discountPriceLocator = By.xpath(".//div[@class='ff-chatbot-body2 sale-price']");
+    private final By discountPercentLocator = By.xpath(".//div[@class='ff-chatbot-caption discount ']");
+    private final By brandTitle = By.xpath("//div[@class='mb-6 text-lg font-normal uppercase leading-[21.47px] tracking-[1.8px] text-blackSS']");
+    private final By cityDropdownList = By.xpath("//ul[@class=\"options-container countryDropdown absolute left-0 top-full z-[51] m-0 my-1 max-h-56 w-full list-none overflow-y-auto border border-gray-300 bg-white p-0 shadow-xl\"]/li");
+    private final By cityOptionList = By.xpath("//li[@class=\"option cursor-pointer p-2.5 text-xs capitalize text-ssBlack focus-within:bg-red-300 hover:bg-[#f0f0f0] md:text-sm\"]");
+
 
 
 
@@ -32,9 +43,8 @@ public class HeaderPage extends BasePage {
 
         try {
             // Top category section
-            By firstLocator = By.xpath("//div[@class=\"bg-transparent\"]");
-            wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(firstLocator));
-            List<WebElement> firstElements = driver.findElements(firstLocator);
+            wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(topCategory));
+            List<WebElement> firstElements = driver.findElements(topCategory);
 
             for (WebElement element : firstElements) {
                 String text = element.getText().trim();
@@ -42,9 +52,7 @@ public class HeaderPage extends BasePage {
                     componentTexts.add(text);
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Error while fetching component list: " + e.getMessage());
-        }
+        } catch (Exception e) {}
         return componentTexts;
     }
 
@@ -59,8 +67,6 @@ public class HeaderPage extends BasePage {
         urlMap.put("Watches", "watches");
         urlMap.put("Gifts", "gifts");
         urlMap.put("Homestop", "Homestop");
-
-        By categoryLocator = By.xpath("//div[@class='bg-transparent']//a");
 
         for (Map.Entry<String, String> entry : urlMap.entrySet()) {
             String categoryName = entry.getKey();
@@ -77,26 +83,14 @@ public class HeaderPage extends BasePage {
                         .orElse(null);
 
                 if (target == null) {
-                    System.out.println("Category not found: " + categoryName);
                     continue;
                 }
                 wait.until(ExpectedConditions.elementToBeClickable(target)).click();
-                System.out.println("Clicked on category: " + categoryName);
-
                 wait.until(ExpectedConditions.urlContains(expectedUrlPart));
-                String currentUrl = driver.getCurrentUrl();
 
-                if (currentUrl.contains(expectedUrlPart)) {
-                    System.out.println("Navigation successful --> " + currentUrl);
-                } else {
-                    System.out.println("URL mismatch. Expected to contain '" + expectedUrlPart + "' but got: " + currentUrl);
-                }
                 driver.navigate().back();
                 wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(categoryLocator));
-            } catch (Exception e) {
-                System.out.println("Failed navigating category: " + categoryName);
-                e.printStackTrace();
-            }
+            } catch (Exception ignored) {}
         }
     }
 
@@ -106,25 +100,18 @@ public class HeaderPage extends BasePage {
 
     public void entersTheQuery(String str) {
 
-        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[@class=\"border-0 opacity-100\"]")));
-        System.out.println("Switched to Fashion Stylist iframe");
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iFrameFashion));
         // Click on Edit Box
-        WebElement edit = wait.until(ExpectedConditions.elementToBeClickable(
-                By.id("mui-2")));
-        edit.click();
-        edit.sendKeys(str);
-        edit.sendKeys(Keys.ENTER);
+        wait.until(ExpectedConditions.elementToBeClickable(edit)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(edit)).sendKeys(str);
+        wait.until(ExpectedConditions.elementToBeClickable(edit)).sendKeys(Keys.ENTER);
     }
 
     public void printSuggestedProductDetails() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-            List<WebElement> productCards = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
-                    By.xpath("//div[@class='content ']")));
-
-            System.out.println("Total Products Found: " + productCards.size());
-            System.out.println("-----------------");
+            List<WebElement> productCards = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(productCard));
 
             for (WebElement card : productCards) {
                 String brand = "";
@@ -133,28 +120,29 @@ public class HeaderPage extends BasePage {
                 String discount = "";
 
                 try {
-                    // Exact targeted XPaths inside each card
-                    WebElement brandEl = card.findElement(By.xpath("//div[@class=\"ff-chatbot-caption brand\"]"));
-                    WebElement titleEl = card.findElement(By.xpath("//div[@class=\"title  \"]"));
-                    WebElement discountPriceEl = card.findElement(By.xpath("//div[@class=\"ff-chatbot-body2 sale-price\"]"));
-                    WebElement discountPercentEl = card.findElement(By.xpath("//div[@class=\"ff-chatbot-caption discount \"]"));
+                    // Use relative locators inside each card
+                    WebElement brandEl = card.findElement(brandLocator);
+                    WebElement titleEl = card.findElement(titleLocator);
+                    WebElement discountPriceEl = card.findElement(discountPriceLocator);
+                    WebElement discountPercentEl = card.findElement(discountPercentLocator);
 
                     brand = brandEl.getText().trim();
                     title = titleEl.getText().trim();
                     discountedPrice = discountPriceEl.getText().trim();
                     discount = discountPercentEl.getText().trim();
 
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                     continue;
                 }
-                // Final print
-                if (!brand.isEmpty() && !title.isEmpty() && !discountedPrice.isEmpty() && !discount.isEmpty()) {
-                    System.out.println(brand + " - " + title + " - " + discountedPrice + " - " + discount);
+
+                // Validation check (instead of printing)
+                if (brand.isEmpty() || title.isEmpty() || discountedPrice.isEmpty() || discount.isEmpty()) {
+                    throw new RuntimeException("Incomplete product details found in one of the cards.");
                 }
             }
+
         } catch (Exception e) {
-            System.out.println("Error while fetching cleaned product details: " + e.getMessage());
-            e.printStackTrace();
+            throw new RuntimeException("Error while fetching cleaned product details: " + e.getMessage(), e);
         }
     }
 
@@ -179,20 +167,18 @@ public class HeaderPage extends BasePage {
             }
 
             int index = 1;
-            System.out.println("----- " + sectionTitle + " -----");
             for (String name : uniqueNames) {
                 String formatted = index + ". " + name;
                 productNames.add(formatted);
-                System.out.println(" " + formatted);
                 index++;
             }
 
             if (productNames.isEmpty()) {
-                System.out.println("No unique product names found in section: " + sectionTitle);
+                throw new RuntimeException("No unique product names found in section: " + sectionTitle);
             }
 
         } catch (Exception e) {
-            Assert.fail("Exception in section '" + sectionTitle + "': " + e.getMessage());
+            throw new RuntimeException("Exception in section '" + sectionTitle + "': " + e.getMessage(), e);
         }
 
         return productNames;
@@ -215,7 +201,8 @@ public class HeaderPage extends BasePage {
             List<Map.Entry<String, WebElement>> entries = new ArrayList<>(uniqueProducts.entrySet());
 
             if (indexToClick <= 0 || indexToClick > entries.size()) {
-                Assert.fail("Invalid index '" + indexToClick + "' for section '" + sectionTitle + "'. Total products: " + entries.size());
+                throw new RuntimeException("Invalid index '" + indexToClick + "' for section '"
+                        + sectionTitle + "'. Total products: " + entries.size());
             }
 
             Map.Entry<String, WebElement> selected = entries.get(indexToClick - 1);
@@ -225,43 +212,35 @@ public class HeaderPage extends BasePage {
             js.executeScript("arguments[0].scrollIntoView({block:'center'});", elementToClick);
             wait.until(ExpectedConditions.elementToBeClickable(elementToClick)).click();
 
-            System.out.println("Clicked product at index " + indexToClick + ": " + expectedBrandName);
-
             String actualBrandName = extractBrandNameFromPage();
-            Assert.assertTrue(
-                    actualBrandName.equalsIgnoreCase(expectedBrandName),
-                    "Brand name mismatch! Expected: '" + expectedBrandName + "' but found: '" + actualBrandName + "'"
-            );
 
-
-            System.out.println("Brand assertion passed for: " + actualBrandName);
+            if (!actualBrandName.equalsIgnoreCase(expectedBrandName)) {
+                throw new AssertionError("Brand name mismatch! Expected: '"
+                        + expectedBrandName + "' but found: '" + actualBrandName + "'");
+            }
 
         } catch (Exception e) {
-            Assert.fail("Failed to click product at index " + indexToClick + " in section '" + sectionTitle + "': " + e.getMessage());
+            throw new RuntimeException("Failed to click product at index " + indexToClick
+                    + " in section '" + sectionTitle + "': " + e.getMessage(), e);
         }
     }
 
     public void entersTheDynamicSearchKeyword(String str) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement ele = driver.findElement(searchEditBox);
-        ele.sendKeys(str);
+        enterTextOnElement(searchEditBox, str);
     }
 
     public String extractBrandNameFromPage() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement brandTitleElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//div[@class='mb-6 text-lg font-normal uppercase leading-[21.47px] tracking-[1.8px] text-blackSS']")
-            ));
-            String fullText = brandTitleElement.getText().trim();
+            WebElement brandTitleElement = wait.until(ExpectedConditions.visibilityOfElementLocated(brandTitle));
 
+            String fullText = brandTitleElement.getText().trim();
             String brandName = fullText.replaceAll("\\(.*\\)", "").trim();
 
-            System.out.println("Brand Name Found: " + brandName);
             return brandName;
+
         } catch (Exception e) {
-            Assert.fail("Error extracting brand name from page: " + e.getMessage());
-            return null; // To satisfy compiler, won't reach here
+            throw new RuntimeException("Error extracting brand name from page: " + e.getMessage(), e);
         }
     }
 
@@ -279,44 +258,38 @@ public class HeaderPage extends BasePage {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-            // Fetch and print cities with serial numbers
-            List<WebElement> cityElements = driver.findElements(By.xpath
-                    ("//ul[@class=\"options-container countryDropdown absolute left-0 top-full z-[51] m-0 my-1 max-h-56 w-full list-none overflow-y-auto border border-gray-300 bg-white p-0 shadow-xl\"]/li"));
+            // Fetch cities
+            List<WebElement> cityElements = driver.findElements(cityDropdownList);
             List<String> allCities = new ArrayList<>();
 
-            int index = 1;
             for (WebElement city : cityElements) {
                 try {
                     String cityText = city.getText().trim();
                     if (!cityText.isEmpty() && !allCities.contains(cityText)) {
                         allCities.add(cityText);
-                        System.out.println(index + ". " + cityText);
-                        index++;
                     }
-                } catch (StaleElementReferenceException e) {
-                    System.out.println("Stale element skipped.");
-                }
+                } catch (StaleElementReferenceException ignored) {}
             }
+
             if (allCities.isEmpty()) {
                 throw new RuntimeException("No cities found in dropdown.");
             }
+
             // Handle city selection based on input
             if (cityIdentifier == null || cityIdentifier.equalsIgnoreCase("random")) {
                 cityIdentifier = allCities.get(new Random().nextInt(allCities.size()));
-                System.out.println("Randomly selected city: " + cityIdentifier);
             } else if (cityIdentifier.matches("\\d+")) {
                 int serial = Integer.parseInt(cityIdentifier);
                 if (serial < 1 || serial > allCities.size()) {
                     throw new RuntimeException("Invalid serial number: " + serial);
                 }
                 cityIdentifier = allCities.get(serial - 1);
-                System.out.println("Selected city by serial number: " + cityIdentifier);
             } else if (!allCities.contains(cityIdentifier)) {
                 throw new RuntimeException("City '" + cityIdentifier + "' not found in dropdown.");
             }
+
             // Click the selected city
-            List<WebElement> allOptions = driver.findElements(By.xpath
-                    ("//li[@class=\"option cursor-pointer p-2.5 text-xs capitalize text-ssBlack focus-within:bg-red-300 hover:bg-[#f0f0f0] md:text-sm\"]"));
+            List<WebElement> allOptions = driver.findElements(cityOptionList);
 
             for (WebElement option : allOptions) {
                 try {
@@ -325,23 +298,24 @@ public class HeaderPage extends BasePage {
                         js.executeScript("arguments[0].scrollIntoView({block:'center'});", option);
                         wait.until(ExpectedConditions.elementToBeClickable(option)).click();
                         selectedCity = cityIdentifier;
-                        System.out.println("Selected city: " + cityIdentifier);
                         break;
                     }
-                } catch (StaleElementReferenceException e) {
-                    System.out.println("Retrying stale element...");
-                }
+                } catch (StaleElementReferenceException ignored) {}
             }
+
             if (selectedCity == null) {
-                throw new RuntimeException(" Could not click on selected city.");
+                throw new RuntimeException("Could not click on selected city.");
             }
         } catch (Exception e) {
-            Assert.fail("Exception in selectCity(): " + e.getMessage());
+            throw new RuntimeException("Exception in selectCity(): " + e.getMessage());
         } finally {
             driver.switchTo().defaultContent();
         }
+
         return selectedCity;
     }
+
+
 
     }
 

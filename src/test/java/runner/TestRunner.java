@@ -12,7 +12,8 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(plugin = { "pretty", "json:target/Reports/cucumber-report.json"
         , "html:target/cucumber/cucumber.html"
-        ,"junit:C:target/Reports/cucumber_Report.xml"},
+        ,"junit:C:target/Reports/cucumber_Report.xml"
+        ,"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
         glue = { "scenarios", "hooks" },
         features = "src/test/java/scenarios",
         dryRun = false

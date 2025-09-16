@@ -49,6 +49,7 @@ public class BasePage {
     }
 
     public void enterTextOnElement(By element, String value) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(element));
         wait.until(ExpectedConditions.elementToBeClickable(element));
         driver.findElement(element).clear();
         driver.findElement(element).sendKeys(value);
@@ -247,24 +248,28 @@ public class BasePage {
 
     public void moveToElement(By locator) {
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(locator)));
-        actions.moveToElement(driver.findElement(locator)).build().perform();
+        actions.moveToElement(driver.findElement(locator)).pause(Duration.ofSeconds(2)).build().perform();
+
     }
 
     public void closeChildWindowAndSwitchBack() {
-        String currentWindow = driver.getWindowHandle();
+        String parentWindow = driver.getWindowHandle();
         Set<String> allWindows = driver.getWindowHandles();
 
-        driver.close(); // Close child
-
-        for (String handle : allWindows) {
-            if (!handle.equals(currentWindow)) {
-                driver.switchTo().window(handle); // switch back to parent
-                System.out.println("Switched back to parent window: " + driver.getTitle());
-                return;
+        if (allWindows.size() > 1) {
+            for (String windowHandle : allWindows) {
+                if (!windowHandle.equals(parentWindow)) {
+                    driver.switchTo().window(windowHandle);
+                    System.out.println("Closing child window: " + driver.getTitle());
+                    driver.close();
+                }
             }
+            // Switch back to parent
+            driver.switchTo().window(parentWindow);
+            System.out.println("Switched back to parent window: " + driver.getTitle());
+        } else {
+            System.out.println("No child window found. Proceeding with next step...");
         }
-
-        throw new RuntimeException("No parent window found to switch back!");
     }
 
     public void scrollToElement(By locator) {

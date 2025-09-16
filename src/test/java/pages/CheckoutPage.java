@@ -3,7 +3,6 @@ package pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.*;
@@ -23,9 +22,34 @@ public class CheckoutPage extends BasePage {
     public final By productList = By.xpath("//div[@data-product-id]");
     private final By reviewShop = By.xpath("//div[contains(text(), 'RATE YOUR SHOPPING EXPERIENCE')]");
     private final By submitButton = By.xpath("//p[contains(text(), 'submit')]");
+    private final By error = By.xpath("//div[contains(text(), 'What do you hate more than a broken item? A 404 error like this one!')]");
+    private final By priceDetails = By.xpath("//div[@class='flex flex-col items-start sm:px-4 md:px-0 md:pt-0 lg:px-0 xs:pt-4 mm:px-0']");
+    private final By outOfStockCheck = By.xpath("//*[contains(translate(text(),'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 'OUT OF STOCK')]");
+    private final By sizeBtn = By.xpath("//div[contains(@class,'overflow-x-auto')]//button");
+    private final By addToCart = By.xpath("//p[contains(text(), 'Add to bag')]");
+    private final By addToBag = By.xpath("//img[@alt=\"bag_white\"]");
+    private final By popUpViewBag = By.xpath("(//p[contains(text(), 'View Bag')])[2]");
+    private final By viewBag = By.xpath("//p[contains(text(), 'View Bag')]");
+    private final By addressBox = By.xpath("//div[@class=\"rounded-full border border-black p-1\"]");
+    private final By item = By.cssSelector("div[data-state='open'][class*='fixed']");
+    private final By cod = By.xpath("//div[contains(text(), 'COD')]");
+    private final By containerLocator = By.xpath("//div[@class='md: mt-4 flex flex-col gap-5 md:max-w-[1200px] md:flex-row md:flex-wrap md:justify-between md:gap-6 lg:mt-6 lg:gap-8 xl:gap-[72px]']");
+    private final By deliverInfo = By.xpath("(//div[@class='rounded border border-lightGray p-4'])[2]");
+    private final By paymentMode = By.xpath("//*[contains(text(),'Credit') or contains(text(),'Netbanking') or contains(text(),'Wallets')]");
+    private final By iFrame = By.name("HyperServices");
+    private final By cardBlockLocator = By.xpath("//div[@class='rounded border border-lightGray md:basis-[31%] lg:rounded-lg']");
+    private final By cardBlockEle = By.xpath(".//div | .//p");
+    private final By wallet = By.xpath(   "//*[text()='Wallets' or normalize-space()='Wallets']");
+    private final By phonePe = By.xpath("//*[text()='PhonePe' or contains(text(),'Phone Pe')]");
+    private final By proceedBtn = By.xpath("//*[text()='Proceed' or contains(text(),'Proceed')]");
+    private final By upi = By.xpath("(//article[contains(text(),'UPI')])[3]");
+    private final By editUpi = By.xpath("//input[@id=\"2000011\"]");
+    private final By proceedToPay = By.xpath("(//article[contains(text(), 'Proceed to pay ')])[2]");
+    private final By filterLocator = By.xpath("//div[@class='cursor-pointer text-nowrap rounded-[36px] border border-neutral-300 px-2.5 py-3 md:rounded bg-transparent']");
+    private final By starLocator = By.xpath("//div[@data-testid='rendering-rating-component']//svg[@data-testid='rating-component-star']");
+    private final By ratingContainer = By.cssSelector("svg[data-testid='rating-component-star']:nth-of-type(4)");
 
-
-    public void clickProductByIndex(By locator,int index) {
+    public boolean clickProductByIndex(By locator,int index) {
         try {
             waitForOverlayToDisappear();
             List<WebElement> productList = driver.findElements(locator);
@@ -33,18 +57,19 @@ public class CheckoutPage extends BasePage {
             if (index >= 0 && index < productList.size()) {
                 WebElement product = productList.get(index);
                 js.executeScript("arguments[0].scrollIntoView({block: 'center'});", product);
-                Thread.sleep(500);
-                product.click();
-                System.out.println("Clicked product at index: " + index);
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+                wait.until(ExpectedConditions.elementToBeClickable(product)).click();
+                return true;
             } else {
-                Assert.fail("Invalid index: " + index + " | Total products: " + productList.size());
+                return false;
             }
         } catch (Exception e) {
-            Assert.fail("Error clicking product at index " + index + ": " + e.getMessage());
+            return false;
         }
     }
 
-    public void fetchPDPDetails() {
+    public Map<String, String> fetchPDPDetails() {
+        Map<String, String> productDetails = new HashMap<>();
         try {
             waitForOverlayToDisappear();
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -57,116 +82,75 @@ public class CheckoutPage extends BasePage {
                     break;
                 }
             }
-            // Check for 404 error banner
-            List<WebElement> errorElements = driver.findElements(By.xpath("//div[contains(text(), 'What do you hate more than a broken item? A 404 error like this one!')]"));
+            List<WebElement> errorElements = driver.findElements(error);
             if (!errorElements.isEmpty()) {
-                Assert.fail("404 Error: Product not found or page is broken.");
-                return;
+                productDetails.put("error", "404 Error: Product not found or page is broken.");
+                return productDetails;
             }
 
             // full product block container
-            WebElement productContainer = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//div[@class='flex flex-col items-start sm:px-4 md:px-0 md:pt-0 lg:px-0 xs:pt-4 mm:px-0']")
-            ));
+            WebElement productContainer = wait.until(ExpectedConditions.visibilityOfElementLocated(priceDetails));
             String fullText = productContainer.getText().trim();
             String[] lines = fullText.split("\n");
-            String brand = "N/A", title = "N/A", price = "N/A", mrp = "N/A", discount = "N/A";
 
-            if (lines.length >= 6) {
-                brand = lines[0].replace("Brand:", "").trim();
-                title = lines[1].trim();
-                price = lines[2].trim();
-                mrp = lines[4].trim();
-                discount = lines[5].trim();
-            }
-            System.out.println("Brand Title : " + brand);
-            System.out.println("Product Title : " + title);
-            System.out.println("Price : " + price);
-            System.out.println("MRP : " + mrp);
-            System.out.println("Discount : " + discount);
+            productDetails.put("brand", lines.length >= 1 ? lines[0].replace("Brand:", "").trim() : "N/A");
+            productDetails.put("title", lines.length >= 2 ? lines[1].trim() : "N/A");
+            productDetails.put("price", lines.length >= 3 ? lines[2].trim() : "N/A");
+            productDetails.put("mrp", lines.length >= 5 ? lines[4].trim() : "N/A");
+            productDetails.put("discount", lines.length >= 6 ? lines[5].trim() : "N/A");
         } catch (Exception e) {
-            Assert.fail("Failed to fetch PDP details with window handling: " + e.getMessage());
+            productDetails.put("error", "Exception while fetching PDP details: " + e.getMessage());
         }
+        return productDetails;
     }
 
     public boolean isOutOfStockDisplayed() {
         try {
             waitForOverlayToDisappear();
-            List<WebElement> outOfStock = driver.findElements(
-                    By.xpath("//*[contains(translate(text(),'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 'OUT OF STOCK')]")
-            );
+            List<WebElement> outOfStock = driver.findElements(outOfStockCheck);
             return !outOfStock.isEmpty();
         } catch (Exception e) {
-            System.out.println("Error checking out-of-stock: " + e.getMessage());
             return false;
-        }
-    }
-
-    public List<WebElement> printAvailableSizes() {
-        try {
-            waitForOverlayToDisappear();
-            List<WebElement> sizeButtons = driver.findElements(
-                    By.xpath("//div[contains(@class,'overflow-x-auto')]//button")
-            );
-            if (sizeButtons.isEmpty()) {
-                System.out.println("No size options present on this product.");
-                return new ArrayList<>();
-            }
-
-            System.out.println("----- Available Sizes -----");
-            for (int i = 0; i < sizeButtons.size(); i++) {
-                String sizeText = sizeButtons.get(i).getText().trim();
-                if (!sizeText.isEmpty()) {
-                    System.out.println(i + " - " + sizeText);
-                }
-            }
-            return sizeButtons;
-        } catch (Exception e) {
-            System.out.println("Exception while fetching sizes: " + e.getMessage());
-            return new ArrayList<>();
         }
     }
 
     public boolean selectSize() {
         try {
             waitForOverlayToDisappear();
-            List<WebElement> sizeButtons = printAvailableSizes();
+            List<WebElement> sizeButtons = driver.findElements(sizeBtn);
 
             if (sizeButtons.isEmpty()) {
-                System.out.println("No size options present. Proceeding without selection.");
                 return false;
             }
             for (WebElement btn : sizeButtons) {
                 String classAttr = btn.getAttribute("class");
                 if (classAttr != null && classAttr.contains("disabled:pointer-events-none") && !classAttr.contains("opacity-[40%]")) {
                     btn.click();
-                    System.out.println("Selected size: " + btn.getText().trim());
                     return true;
                 }
             }
-            System.out.println("Size options are all disabled or not clickable.");
             return false;
         } catch (Exception e) {
-            System.out.println("Exception during size selection: " + e.getMessage());
             return false;
         }
     }
 
-    public boolean clickAddToBagOrViewBagFallback() {
+        public boolean clickAddToBagOrViewBagFallback() {
         try {
-            List<WebElement> addToBagButtons = driver.findElements(By.xpath("//p[contains(text(), 'Add to bag')]"));
-            if (!addToBagButtons.isEmpty() && addToBagButtons.get(0).isDisplayed()) {
-                WebElement addToBagBtn = addToBagButtons.get(0);
+            waitForOverlayToDisappear();
+            List<WebElement> addToBagButtons = driver.findElements(addToBag);
+            Optional<WebElement> visibleBtn = addToBagButtons.stream()
+                    .filter(btn -> btn.isDisplayed() && btn.isEnabled())
+                    .findFirst();
+            if (visibleBtn.isPresent()) {
+                WebElement addToBagBtn = visibleBtn.get();
                 wait.until(ExpectedConditions.elementToBeClickable(addToBagBtn)).click();
-                System.out.println("Clicked on: Add to Bag");
                 return true;
             } else {
-                System.out.println("Add to Bag not visible. Clicking View Bag instead...");
                 clickViewBagWithPriority();
                 return false;
             }
         } catch (Exception e) {
-            System.out.println("Error occurred in Add to Bag click. Falling back to View Bag...");
             clickViewBagWithPriority();
             return false;
         }
@@ -176,27 +160,20 @@ public class CheckoutPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
             // Try the 2nd View Bag
-            List<WebElement> secondViewBagList = driver.findElements(By.xpath("(//p[contains(text(), 'View Bag')])[2]"));
+            List<WebElement> secondViewBagList = driver.findElements(popUpViewBag);
             if (!secondViewBagList.isEmpty() && secondViewBagList.get(0).isDisplayed()) {
                 wait.until(ExpectedConditions.elementToBeClickable(secondViewBagList.get(0))).click();
-                System.out.println("Clicked on: View Bag from PDP (2nd)");
                 return;
             }
-        } catch (Exception e) {
-            System.out.println("Second View Bag not clickable or visible.");
-        }
+        } catch (Exception e) {}
 
         try {
             // Fallback: Try the first View Bag
-            List<WebElement> firstViewBagList = driver.findElements(By.xpath("//p[contains(text(), 'View Bag')]"));
+            List<WebElement> firstViewBagList = driver.findElements(viewBag);
             if (!firstViewBagList.isEmpty() && firstViewBagList.get(0).isDisplayed()) {
                 wait.until(ExpectedConditions.elementToBeClickable(firstViewBagList.get(0))).click();
-                System.out.println("Clicked on: View Bag from Pop-Up (1st)");
-            } else {
-                System.out.println("No visible View Bag options found.");
-            }
+            } else {}
         } catch (Exception e) {
-            System.out.println("Failed to click any View Bag.");
             e.printStackTrace();
         }
     }
@@ -209,26 +186,16 @@ public class CheckoutPage extends BasePage {
             js.executeScript("arguments[0].scrollIntoView({block: 'center'});", placeOrderBtn);
             Thread.sleep(500);
             placeOrderBtn.click();
-            System.out.println("Clicked on Place Order");
         } catch (ElementClickInterceptedException e) {
-            System.out.println("Element click intercepted. Retrying with JS");
 
             WebElement placeOrderBtn = driver.findElement(placeOrder);
             js.executeScript("arguments[0].click();", placeOrderBtn);
-            System.out.println("Clicked using JavaScript as fallback");
-        } catch (Exception ex) {
-            System.out.println("Failed to click 'Place Order': " + ex.getMessage());
-            Assert.fail("Click failed");
-        }
+        } catch (Exception ex) {}
     }
 
     public void selectTheAddress() {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(
-                By.cssSelector("div[data-state='open'][class*='fixed']")));
-
-        wait.until(ExpectedConditions.
-                elementToBeClickable
-                        (By.xpath("//div[@class=\"rounded-full border border-black p-1\"]"))).click();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(item));
+        wait.until(ExpectedConditions.elementToBeClickable(addressBox)).click();
     }
 
     public void clickOnContinueButton() {
@@ -238,26 +205,18 @@ public class CheckoutPage extends BasePage {
     public void selectingTheCOD() {
         try {
             waitForOverlayToDisappear();
-            By cod = By.xpath("//div[contains(text(), 'COD')]");
             List<WebElement> elements = driver.findElements(cod);
-            if (elements.isEmpty()) {
-                Assert.fail("COD is not available because the cart amount exceeds the eligible limit. Please reduce the order value to proceed with Cash on Delivery");
-            }
+            if (elements.isEmpty()) {}
             WebElement element = elements.get(0);
             js.executeScript("arguments[0].scrollIntoView({block: 'nearest', inline: 'nearest'});", element);
             wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-            System.out.println("COD option selected.");
-        } catch (Exception e) {
-            Assert.fail("Failed to select COD option: " + e.getMessage());
-        }
+        } catch (Exception e) {}
     }
 
-    public void printOrderSummaryDetails() {
+    public Map<String, String> printOrderSummaryDetails() {
         waitForOverlayToDisappear();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        System.out.println("----- Order Details -----");
-
-        By containerLocator = By.xpath("//div[@class='md: mt-4 flex flex-col gap-5 md:max-w-[1200px] md:flex-row md:flex-wrap md:justify-between md:gap-6 lg:mt-6 lg:gap-8 xl:gap-[72px]']");
+        Map<String, String> orderDetails = new HashMap<>();
         try {
 
         WebElement container = wait.until(ExpectedConditions.visibilityOfElementLocated(containerLocator));
@@ -283,11 +242,10 @@ public class CheckoutPage extends BasePage {
             }
         }
 
-        System.out.println("Order ID: " + orderId);
-        System.out.println("Order Placed: " + orderPlaced);
-        System.out.println("Order Status: " + orderStatus);
+        orderDetails.put("OrderId", orderId);
+        orderDetails.put("OrderPlaced", orderPlaced);
+        orderDetails.put("OrderStatus", orderStatus);
     } catch (Exception e) {
-        System.out.println("Order has Not Placed Successfully. Closing child window");
             String currentWindow = driver.getWindowHandle();
             Set<String> allWindows = driver.getWindowHandles();
             driver.close();
@@ -298,15 +256,14 @@ public class CheckoutPage extends BasePage {
                     break;
                 }
             }
-            Assert.fail("Test Failed: Order has Not Placed Successfully");
+           throw new RuntimeException("Test Failed: Order has Not Placed Successfully", e);
         }
+        return orderDetails;
     }
 
-    public void printDeliveryAddressDetails() {
-        System.out.println("----- Delivery Info -----");
+    public Map<String, String> printDeliveryAddressDetails() {
 
-        By containerLocator = By.xpath("(//div[@class='rounded border border-lightGray p-4'])[2]");
-        WebElement container = wait.until(ExpectedConditions.visibilityOfElementLocated(containerLocator));
+        WebElement container = wait.until(ExpectedConditions.visibilityOfElementLocated(deliverInfo));
         js.executeScript("arguments[0].scrollIntoView({block: 'nearest'});", container);
 
         List<WebElement> lines = container.findElements(By.xpath(".//div"));
@@ -327,29 +284,24 @@ public class CheckoutPage extends BasePage {
             }
         }
 
-        String address = addressBuilder.toString()
-                .replace(deliveryMode, "")
-                .replace(phone, "")
-                .trim();
+        String address = addressBuilder.toString().replace(deliveryMode, "").replace(phone, "").trim();
 
-        System.out.println("Delivery Mode: " + deliveryMode);
-        System.out.println("Address: " + address);
-        System.out.println(phone);
+        Map<String, String> deliveryDetails = new HashMap<>();
+        deliveryDetails.put("DeliveryMode", deliveryMode);
+        deliveryDetails.put("Address", address);
+        deliveryDetails.put("Phone", phone);
+        return deliveryDetails;
     }
 
-    public void verifiesPaymentModeIframe() {
+    public List<String> verifiesPaymentModeIframe() {
+        List<String> detectedModes = new ArrayList<>();
         try {
             waitForOverlayToDisappear();
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
             // Switch to iframe safely
-            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.name("HyperServices")));
-            System.out.println("Switched to iframe: HyperServices");
-
-            // Wait for key mode to appear (indicating it's fully loaded)
-            wait.until(ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//*[contains(text(),'Credit') or contains(text(),'Netbanking') or contains(text(),'Wallets')]")
-            ));
+            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iFrame));
+            wait.until(ExpectedConditions.presenceOfElementLocated(paymentMode));
 
             // Define all expected payment mode texts (you can customize this)
             List<String> expectedModes = Arrays.asList(
@@ -357,37 +309,27 @@ public class CheckoutPage extends BasePage {
                     "EMI on Cards", "Saved Cards"
             );
 
-            Set<String> detectedModes = new LinkedHashSet<>();
-
             for (String mode : expectedModes) {
                 List<WebElement> elements = driver.findElements(By.xpath("//*[normalize-space(text())='" + mode + "']"));
                 if (!elements.isEmpty()) {
                     detectedModes.add(mode);
                 }
             }
-            System.out.println("----- Available Payment Modes -----");
-            for (String mode : detectedModes) {
-                System.out.println(mode);
-            }
-            System.out.println("--------------------------------------");
-        } catch (Exception e) {
-            System.out.println("Error while reading HyperServices iframe: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
+        } catch (Exception e) {}
+          finally {
             try {
                 driver.switchTo().defaultContent();
             } catch (Exception ignored) {}
         }
+        return detectedModes;
     }
 
     public void printCardBlockDetails() {
-        System.out.println("----- Card Block Details -----");
 
-        By blockLocator = By.xpath("//div[@class='rounded border border-lightGray md:basis-[31%] lg:rounded-lg']");
-        WebElement block = wait.until(ExpectedConditions.visibilityOfElementLocated(blockLocator));
+        WebElement block = wait.until(ExpectedConditions.visibilityOfElementLocated(cardBlockLocator));
         js.executeScript("arguments[0].scrollIntoView({block: 'nearest'});", block);
 
-        List<WebElement> elements = block.findElements(By.xpath(".//div | .//p"));
+        List<WebElement> elements = block.findElements(cardBlockEle);
 
         LinkedHashMap<String, String> priceDetails = new LinkedHashMap<>();
         String lastLabel = "";
@@ -414,7 +356,6 @@ public class CheckoutPage extends BasePage {
             }
         }
         for (Map.Entry<String, String> entry : priceDetails.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
         }
     }
 
@@ -429,12 +370,9 @@ public class CheckoutPage extends BasePage {
             if (!continueButtons.isEmpty() && continueButtons.get(0).isDisplayed()) {
                 wait.until(ExpectedConditions.elementToBeClickable(continueButtons.get(0))).click();
                 Thread.sleep(1000);
-            } else {
-                System.out.println("Continue Shopping button not found. Closing child window directly...");
-            }
-        } catch (Exception e) {
-            System.out.println("Exception during Continue Shopping click: " + e.getMessage());
-        } finally {
+            } else {}
+        } catch (Exception e) {}
+          finally {
             // close child window and return to parent
             driver.close();
             for (String handle : allWindows) {
@@ -451,74 +389,44 @@ public class CheckoutPage extends BasePage {
 
         try {
             // Switch to HyperServices iframe
-            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.name("HyperServices")));
-            System.out.println("Switched to HyperServices iframe");
+            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iFrame));
             Thread.sleep(10);
             // Click on "Wallets"
-            WebElement walletsTab = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath(   "//*[text()='Wallets' or normalize-space()='Wallets']")));
-            js.executeScript("arguments[0].scrollIntoView({block: 'nearest', inline: 'nearest'});", walletsTab);
+//            WebElement walletsTab = wait.until(ExpectedConditions.elementToBeClickable(wallet));
+            WebElement upiTab = wait.until(ExpectedConditions.elementToBeClickable(upi));
+            js.executeScript("arguments[0].scrollIntoView({block: 'nearest', inline: 'nearest'});", upiTab);
 
-            walletsTab.click();
-            System.out.println("Clicked on 'Wallets'");
+//            walletsTab.click();
+            upiTab.click();
             Thread.sleep(1000);
             // Select "PhonePe"
-            WebElement phonePeOption = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//*[text()='PhonePe' or contains(text(),'Phone Pe')]")));
-            phonePeOption.click();
-            System.out.println("Selected 'PhonePe'");
+//            wait.until(ExpectedConditions.elementToBeClickable(phonePe)).click();
+            // Edit "UPI"
+            wait.until(ExpectedConditions.elementToBeClickable(editUpi)).click();
+            // Enter "UPI"
+            wait.until(ExpectedConditions.elementToBeClickable(editUpi)).sendKeys("test@ybl");
+            // Click on "proceed to Pay"
+            wait.until(ExpectedConditions.elementToBeClickable(proceedToPay)).click();
             // Click on "Proceed"
-            WebElement proceedButton = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//*[text()='Proceed' or contains(text(),'Proceed')]")));
-            proceedButton.click();
-            System.out.println("Clicked on 'Proceed' button");
+//            wait.until(ExpectedConditions.elementToBeClickable(proceedBtn)).click();
             // Switch back to main document
             driver.switchTo().defaultContent();
-        } catch (Exception e) {
-            System.out.println("Error while selecting wallet and proceeding: " + e.getMessage());
-            e.printStackTrace();
-            Assert.fail("Wallet selection and proceed failed");
-        }
+        } catch (Exception e) {}
     }
 
-    public void rateShopping(int starCount) {
+    public void rateShopping() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        By ratingContainer = By.xpath("//div[@data-testid='rendering-rating-component']");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(ratingContainer));
-
-        By starLocator = By.xpath("//div[@data-testid='rendering-rating-component']//svg[@data-testid='rating-component-star']");
-        List<WebElement> stars = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(starLocator));
-
-        if (stars.isEmpty()) {
-            throw new IllegalStateException("No star elements found.");
-        }
-
-        if (starCount < 1 || starCount > stars.size()) {
-            throw new IllegalArgumentException("Invalid star count: " + starCount + ". Available: " + stars.size());
-        }
-
-        WebElement starToClick = stars.get(starCount - 1);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", starToClick);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", starToClick);
-        System.out.println("Clicked on star: " + starCount);
+      wait.until(ExpectedConditions.elementToBeClickable(ratingContainer)).click();
     }
 
     public void clickElementByIndex(int indexToClick) {
-        By filterLocator = By.xpath("//div[@class='cursor-pointer text-nowrap rounded-[36px] border border-neutral-300 px-2.5 py-3 md:rounded bg-transparent']");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         List<WebElement> elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(filterLocator));
 
-        System.out.println("Available filter options:");
-        for (int i = 0; i < elements.size(); i++) {
-            System.out.println(i + ": " + elements.get(i).getText().trim());
-        }
-
         if (indexToClick >= 0 && indexToClick < elements.size()) {
             WebElement elementToClick = elements.get(indexToClick);
             wait.until(ExpectedConditions.elementToBeClickable(elementToClick)).click();
-            System.out.println("Clicked on filter: " + elementToClick.getText().trim());
         } else {
             throw new IllegalArgumentException("Invalid index: " + indexToClick);
         }

@@ -8,7 +8,6 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pages.HeaderPage;
-import pages.HomePage;
 import utilities.ConfigLoader;
 import utilities.CredsLoader;
 
@@ -18,7 +17,6 @@ import java.util.List;
 public class HeaderSteps {
 
     private final HeaderPage headerPage;
-    private final HomePage homePage;
     CredsLoader credsLoader;
     ConfigLoader configLoader;
     Scenario scenario;
@@ -26,7 +24,6 @@ public class HeaderSteps {
     public HeaderSteps(TestContext context) {
 
         headerPage = context.headerPage;
-        homePage = context.homePage;
         this.credsLoader = context.credsLoader;
         this.configLoader = context.configLoader;
         this.scenario = context.scenario;
@@ -35,7 +32,6 @@ public class HeaderSteps {
     //Top Categories
     @Given("user is on the Home Page")
     public void user_is_on_the_home_page() {
-        homePage.clickHomeLinkIfAvailable();
         scenario.log("User is On the Home Page");
     }
 
@@ -45,7 +41,7 @@ public class HeaderSteps {
         List<String> actualComponents = headerPage.getAllComponentList();
         for (String expected : expectedComponents) {
             Assert.assertTrue(actualComponents.contains(expected), "Missing Component: " + expected);
-            System.out.println("Verified Top Categories Components: " + expected);
+            scenario.log("Verified Top Categories Components: " + expected);
         }
     }
 
@@ -116,13 +112,20 @@ public class HeaderSteps {
     public void user_clicks_on_store_and_events_icon() {
         headerPage.clicksOnTheStoreIcon();
     }
+
     @When("user clicks on the drop down option for select city")
     public void user_clicks_on_the_drop_down_option_for_select_city() {
         headerPage.clicksOnTheDropDown();
     }
+
     @When("user selects the city in the stores")
     public void user_selects_the_city_in_the_stores() {
         headerPage.selectCity("8");
+    }
+
+    @When("user back to normal windows")
+    public void user_back_to_normal_windows() {
+        headerPage.switchToDefaultContent();
     }
 
 

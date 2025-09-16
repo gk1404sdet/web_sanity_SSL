@@ -1,8 +1,24 @@
 @account
 Feature: Verify the Account Module in the Application
 
-@accountComponents
-  Scenario: TES51 - Verify components of Account
+  Background:
+  @smoke @sanity @TC002
+  Scenario Outline: Verify the Sign-in functionality via phone number for existing user
+
+    Given user launches the application
+    When user taps on the Login button
+    And user enters mobile number "<mob no>"
+    And user clicks on the Proceed button
+    Then user enters OTP "<otp>"
+    And user clicks on the Verify OTP button
+    Then system should display the appropriate login status
+
+    Examples:
+      | mob no | otp |
+      | 9136734340 | 123456 |
+
+@smoke @sanity @TC045
+  Scenario: Verify components of Account
 
     Given user is on the Home Page
     Given user navigation to my profile
@@ -16,8 +32,8 @@ Feature: Verify the Account Module in the Application
       | Book a Personal Shopper|
       | Logout                 |
 
-@accountCRUD
-  Scenario: TES53 - Verify CRUD on the Address page
+@sanity @TC031 @TC046
+  Scenario: Verify CRUD on the Address page
 
     Given user clicks on the my Profile option
     When user updates their personal details
@@ -44,8 +60,8 @@ Feature: Verify the Account Module in the Application
     And user clicks on the confirm button for delete address
     And user validate that delete address message is displayed
 
-@bookAnAppointment
-  Scenario: TES74 - Verify the Book an Appointment Functionality
+@sanity @TC051
+  Scenario: Verify the Book an Appointment Functionality
 
     Given user clicks on Book A Personal Shopper
     When user clicks on the book an appointment
@@ -59,8 +75,8 @@ Feature: Verify the Account Module in the Application
     And user clicks on the proceed to book button
     And user validate that booking confirmation is displayed
 
-@myOrder
-  Scenario: TES69 - Verify navigation and functionality of My Order
+@sanity @TC041 @TC047
+  Scenario: Verify navigation and functionality of My Order
 
     Given user clicks on My Orders
     When user is able to see the existing orders
@@ -81,14 +97,32 @@ Feature: Verify the Account Module in the Application
     And user clicks on an existing order to view details
     Then user validates the order details successfully
 
-@myWallet
-  Scenario: TES71 - Verify navigation and functionality of My Wallet
+@smoke @sanity @TC048
+   Scenario: Verify navigation and functionality of My Wallet
 
-    When user clicks the my Wallet
-    And user validates that wallet account details
+      When user clicks the my Wallet
+      And user validates that wallet account details
 
-@giftCard
-   Scenario: TES72 - Verify navigation and functionality of GC/EGV
+@smoke @sanity @TC052
+  Scenario: Verify components of FCC page
+
+      When user clicks the First Citizen Club
+      And system should display the following components in the Fcc section
+        | SILVER EDGE                       |
+        | GOLDEN GLOW                       |
+        | PLATINUM AURA                     |
+        | BLACK TIER                        |
+        | Membership Details & Benefits     |
+
+  @smoke @sanity @TC049
+   Scenario: Verify navigation and functionality of GC/EGV
 
      When user clicks the My Gift card or EGV
      And user validates that gift vouchers product list
+
+@smoke @sanity @TC055
+  Scenario: Verify the logout functionality
+
+    When user clicks on the Logout button
+    And user clicks on the yes button for logout
+    Then user validate that the user is logged out
