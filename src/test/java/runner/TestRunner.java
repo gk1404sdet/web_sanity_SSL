@@ -2,7 +2,6 @@ package runner;
 
 import static java.util.Objects.requireNonNull;
 
-import hooks.JvmReport;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -13,7 +12,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(plugin = { "pretty", "json:target/Reports/cucumber-report.json"
         , "html:target/cucumber/cucumber.html"
         ,"junit:C:target/Reports/cucumber_Report.xml"
-        ,"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
+        },
         glue = { "scenarios", "hooks" },
         features = "src/test/java/scenarios",
         dryRun = false
@@ -31,8 +30,4 @@ public class TestRunner extends AbstractTestNGCucumberTests {
         return super.scenarios();
     }
 
-    @AfterSuite
-    public void generateReport() {
-        JvmReport.report("target\\Reports\\cucumber-report.json");
-    }
 }

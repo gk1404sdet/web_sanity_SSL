@@ -1,4 +1,3 @@
-
 Feature: Verify the Cart Page Functionality
 
   Background:

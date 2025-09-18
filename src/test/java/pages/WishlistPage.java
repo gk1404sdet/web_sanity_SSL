@@ -28,7 +28,6 @@ public class WishlistPage extends BasePage {
     private final By priceLocator = By.xpath(".//div[contains(text(),'₹')]");
     private final By overlay = By.cssSelector("div.fixed.inset-0.z-\\[102\\]");
     private final By overlayWishlist = By.cssSelector("div.fixed.inset-0.bg-neutral-900\\/90");
-    public final By closePopup = By.xpath("//img[@alt=\"cross\"]");
 
 
 

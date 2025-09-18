@@ -38,8 +38,8 @@ public class AccountSteps {
         try {
             accountPage.waitForOverlayToDisappear();
             loginPage.moveToHello();
-            Thread.sleep(1000);
             accountPage.moveToProfile();
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

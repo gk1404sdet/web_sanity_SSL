@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import pages.*;
 import utilities.ConfigLoader;
 import utilities.CredsLoader;
-
 import java.io.*;
 
 public class Hooks {
@@ -24,7 +23,6 @@ public class Hooks {
     @BeforeAll
     public static void setUpAll() {
         driver = DriverFactory.initializeDriver();
-//        driver = DriverFactory.getDriver();
     }
 
     @Before

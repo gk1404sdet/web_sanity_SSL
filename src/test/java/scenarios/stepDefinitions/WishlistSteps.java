@@ -55,7 +55,12 @@ public class WishlistSteps {
 
     @When("user adds a product to the wishlist from the product listing page")
     public void user_adds_a_product_to_the_wishlist_from_the_product_listing_page() {
-        wishlistPage.addProductsToWishlist(3);
+
+        try {
+            user_removes_the_product_from_the_wishlist_from_the_product_listing_page();
+        } catch(RuntimeException e) {
+            wishlistPage.addProductsToWishlist(3);
+        }
     }
 
     @Then("user removes the product from the wishlist from the product listing page")

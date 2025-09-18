@@ -12,6 +12,7 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <!-- Dependency versions -->
         <version.cucumber-java>7.23.0</version.cucumber-java>
         <version.selenium-java>4.34.0</version.selenium-java>
@@ -19,8 +20,8 @@
         <version.cucumber-testng>7.11.0</version.cucumber-testng>
         <version.cucumber-reporting>5.7.0</version.cucumber-reporting>
         <version.maven-surefire-plugin>3.5.3</version.maven-surefire-plugin>
-        <version.extentreports-cucumber7-adapter>1.14.0</version.extentreports-cucumber7-adapter>
-        <version.extentreports-pdf>1.0.2</version.extentreports-pdf>
+        <version.commons-io>2.18.0</version.commons-io>
+        <version.openhtmltopdf-pdfbox>1.0.10</version.openhtmltopdf-pdfbox>
         <threadCount>1</threadCount>
     </properties>
 
@@ -66,6 +67,7 @@
             <version>${version.cucumber-java}</version>
         </dependency>
 
+        <!-- TestNG -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-testng</artifactId>
@@ -78,6 +80,7 @@
             <version>${version.cucumber-java}</version>
         </dependency>
 
+        <!--Junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -85,39 +88,21 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>tech.grasshopper</groupId>
-            <artifactId>extentreports-cucumber7-adapter</artifactId>
-            <version>${version.extentreports-cucumber7-adapter}</version>
-        </dependency>
-
         <!-- Utils -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.18.0</version>
+            <version>${version.commons-io}</version>
         </dependency>
 
-        <!-- TestNG -->
+        <!-- HTML to PDF -->
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.11.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.11.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>net.masterthought</groupId>
-            <artifactId>cucumber-reporting</artifactId>
-            <version>5.7.0</version>
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-pdfbox</artifactId>
+            <version>${version.openhtmltopdf-pdfbox}</version>
         </dependency>
 
     </dependencies>
+
+
 </project>
