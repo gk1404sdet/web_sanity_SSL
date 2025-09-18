@@ -1,6 +1,6 @@
 Feature: User Login Functionality with Valid and Invalid Data
 
-@smoke @sanity @TC002 @login
+@smoke @sanity @TC002
   Scenario Outline: Verify the Sign-in functionality via phone number for existing user
 
     Given user launches the application
@@ -22,7 +22,7 @@ Feature: User Login Functionality with Valid and Invalid Data
     And user clicks on the yes button for logout
     Then user validate that the user is logged out
 
-@smoke @sanity @TC003
+@smoke @sanity @TC003 @login
   Scenario Outline: Verify the Sign-in functionality via Email ID for existing user
 
     Given user launches the application
