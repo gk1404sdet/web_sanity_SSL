@@ -1,7 +1,6 @@
-@login
 Feature: User Login Functionality with Valid and Invalid Data
 
-@smoke @sanity @TC002
+@smoke @sanity @TC002 @login
   Scenario Outline: Verify the Sign-in functionality via phone number for existing user
 
     Given user launches the application
@@ -16,7 +15,7 @@ Feature: User Login Functionality with Valid and Invalid Data
   | mob no | otp |
   | 9136734340 | 123456 |
 
-@smoke @sanity @TC055
+@smoke @sanity @TC055 @login
   Scenario: Verify the logout functionality
 
     When user clicks on the Logout button
