@@ -1,3 +1,4 @@
+@login
 Feature: User Login Functionality with Valid and Invalid Data
 
 @smoke @sanity @TC002
