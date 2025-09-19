@@ -1,4 +1,3 @@
-@account
 Feature: Verify the Account Module in the Application
 
   Background:

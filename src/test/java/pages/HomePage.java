@@ -133,8 +133,8 @@ public class HomePage extends BasePage{
         clickOnElement(sortBy);
     }
 
-    public void applyFilter(By loca) {
-        clickOnElement(loca);
+    public void applyFilter(By locator) {
+        clickOnElement(locator);
     }
 
 }

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Feature: Verify the Wishlist Functionality
 
   Background:

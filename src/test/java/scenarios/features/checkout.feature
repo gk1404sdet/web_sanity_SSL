@@ -1,4 +1,3 @@
-@checkout
 Feature: Verify Successful and Failed Payment mode
 
   Background:

@@ -46,7 +46,6 @@ public class CheckoutPage extends BasePage {
     private final By editUpi = By.xpath("//input[@id=\"2000011\"]");
     private final By proceedToPay = By.xpath("(//article[contains(text(), 'Proceed to pay ')])[2]");
     private final By filterLocator = By.xpath("//div[@class='cursor-pointer text-nowrap rounded-[36px] border border-neutral-300 px-2.5 py-3 md:rounded bg-transparent']");
-    private final By starLocator = By.xpath("//div[@data-testid='rendering-rating-component']//svg[@data-testid='rating-component-star']");
     private final By ratingContainer = By.cssSelector("svg[data-testid='rating-component-star']:nth-of-type(4)");
 
     public boolean clickProductByIndex(By locator,int index) {
