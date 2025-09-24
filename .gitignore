@@ -8,4 +8,6 @@
 automation.iml
 *.iml
 *.DS_Store
+*.logtarget/
 *.log
+*.xml

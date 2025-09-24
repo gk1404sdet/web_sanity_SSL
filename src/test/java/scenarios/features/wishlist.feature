@@ -17,7 +17,7 @@ Feature: Verify the Wishlist Functionality
       | 9136734340 | 123456 |
 
 @smoke @sanity @TC015
-  Scenario: Verify adding/removing products from PLP
+  Scenario: TES3851 - Verify adding/removing products from PLP
 
     Given user clicks on the Wishlist icon
     When user validates the wish listed products list
@@ -33,7 +33,7 @@ Feature: Verify the Wishlist Functionality
     When user validates the wish listed products list
 
 @smoke @sanity @TC016
-  Scenario: Verify adding/removing products from PDP
+  Scenario: TES3852 - Verify adding/removing products from PDP
 
     Given user clicks on the kids category
     When user selects a sub-category under kids
@@ -45,7 +45,7 @@ Feature: Verify the Wishlist Functionality
     Then user validates that product removed wishlist successfully
 
 @sanity @TC022
-  Scenario: Verify adding/removing products from wishlist to bag/cart
+  Scenario: TES3858 - Verify adding/removing products from wishlist to bag/cart
 
     Given user back to Home Page
     When user clicks on the Wishlist icon
@@ -57,7 +57,7 @@ Feature: Verify the Wishlist Functionality
     And user clicks on Add to Bag and View Bag
 
 @sanity @TC017
-  Scenario: Verify adding/removing products from Wishlist page (You Might also Like)
+  Scenario: TES3860 - Verify adding/removing products from Wishlist page (You Might also Like)
 
     Given user back to Home Page
     And user clicks on the Wishlist icon
@@ -67,7 +67,7 @@ Feature: Verify the Wishlist Functionality
     And user validates that product removed wishlist successfully
 
 @sanity @TC024
-  Scenario: Verify adding/removing products from Wishlist page to cart/bag (You Might also Like)
+  Scenario: TES3853 - Verify adding/removing products from Wishlist page to cart/bag (You Might also Like)
 
     When user add a product to add to bag from you might also like section
     And user selects the size

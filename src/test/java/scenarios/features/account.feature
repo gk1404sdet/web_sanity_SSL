@@ -17,7 +17,7 @@ Feature: Verify the Account Module in the Application
       | 9136734340 | 123456 |
 
 @smoke @sanity @TC045
-  Scenario: Verify components of Account
+  Scenario: TES3881 - Verify components of Account
 
     Given user is on the Home Page
     Given user navigation to my profile
@@ -32,7 +32,7 @@ Feature: Verify the Account Module in the Application
       | Logout                 |
 
 @sanity @TC031 @TC046
-  Scenario: Verify CRUD on the Address page
+  Scenario: TES3882 - Verify CRUD on the Address page
 
     Given user clicks on the my Profile option
     When user updates their personal details
@@ -60,7 +60,7 @@ Feature: Verify the Account Module in the Application
     And user validate that delete address message is displayed
 
 @sanity @TC051
-  Scenario: Verify the Book an Appointment Functionality
+  Scenario: TES3887 - Verify the Book an Appointment Functionality
 
     Given user clicks on Book A Personal Shopper
     When user clicks on the book an appointment
@@ -75,7 +75,7 @@ Feature: Verify the Account Module in the Application
     And user validate that booking confirmation is displayed
 
 @sanity @TC041 @TC047
-  Scenario: Verify navigation and functionality of My Order
+  Scenario: TES3883 - Verify navigation and functionality of My Order
 
     Given user clicks on My Orders
     When user is able to see the existing orders
@@ -97,13 +97,13 @@ Feature: Verify the Account Module in the Application
     Then user validates the order details successfully
 
 @smoke @sanity @TC048
-   Scenario: Verify navigation and functionality of My Wallet
+   Scenario: TES3884 - Verify navigation and functionality of My Wallet
 
       When user clicks the my Wallet
       And user validates that wallet account details
 
 @smoke @sanity @TC052
-  Scenario: Verify components of FCC page
+  Scenario: TES3888 - Verify components of FCC page
 
       When user clicks the First Citizen Club
       And system should display the following components in the Fcc section
@@ -114,7 +114,7 @@ Feature: Verify the Account Module in the Application
         | Membership Details & Benefits     |
 
   @smoke @sanity @TC049
-   Scenario: Verify navigation and functionality of GC/EGV
+   Scenario: TES3885 - Verify navigation and functionality of GC/EGV
 
      When user clicks the My Gift card or EGV
      And user validates that gift vouchers product list

@@ -20,8 +20,8 @@
         <version.cucumber-testng>7.11.0</version.cucumber-testng>
         <version.cucumber-reporting>5.7.0</version.cucumber-reporting>
         <version.maven-surefire-plugin>3.5.3</version.maven-surefire-plugin>
-        <version.commons-io>2.18.0</version.commons-io>
-        <version.openhtmltopdf-pdfbox>1.0.10</version.openhtmltopdf-pdfbox>
+        <version.extentreports-cucumber7-adapter>1.14.0</version.extentreports-cucumber7-adapter>
+        <version.extentreports-pdf>1.0.2</version.extentreports-pdf>
         <threadCount>1</threadCount>
     </properties>
 
@@ -32,6 +32,7 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${version.maven-surefire-plugin}</version>
+<!--                    <version>3.1.2</version>-->
                     <configuration>
                         <properties>
                             <property>
@@ -88,18 +89,10 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Utils -->
         <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${version.commons-io}</version>
-        </dependency>
-
-        <!-- HTML to PDF -->
-        <dependency>
-            <groupId>com.openhtmltopdf</groupId>
-            <artifactId>openhtmltopdf-pdfbox</artifactId>
-            <version>${version.openhtmltopdf-pdfbox}</version>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>extentreports-cucumber7-adapter</artifactId>
+            <version>${version.extentreports-cucumber7-adapter}</version>
         </dependency>
 
     </dependencies>

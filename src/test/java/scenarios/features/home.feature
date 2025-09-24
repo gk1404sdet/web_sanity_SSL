@@ -17,7 +17,7 @@ Feature: Verify the Home Page Functionality
       | 9136734340 | 123456 |
 
 @sanity @TC011 @TC012
-  Scenario: Verify the Sort Functionality
+  Scenario: TES3848 - Verify the Sort Functionality
 
     Given user clicks on the Women category
     When user selects a sub-category under Women
@@ -37,7 +37,7 @@ Feature: Verify the Home Page Functionality
     And user applying the sort by as price high to low
 
 @sanity @TC011 @TC012
-  Scenario: Verify the Filter Functionality
+  Scenario: TES3848 - Verify the Filter Functionality
 
     Given user clicks on the Women category
     When user selects a sub-category under Women sarees
@@ -49,7 +49,7 @@ Feature: Verify the Home Page Functionality
     Then user applying the Color filter
 
 @smoke @sanity @TC013
-  Scenario: Verify the components of PDP
+  Scenario: TES349 - Verify the components of PDP
 
     Given user clicks on the Men category
     When user selects a sub-category under men
@@ -63,7 +63,7 @@ Feature: Verify the Home Page Functionality
     And user validates that product details
 
 @smoke @sanity @TC013 @TC020
-  Scenario: functionality of Pincode check on the PDP
+  Scenario: Verify functionality of Invalid Pincode check on the PDP
 
     Given user clicks the pincode check box
     When user enters the invalid pincode
@@ -71,7 +71,7 @@ Feature: Verify the Home Page Functionality
     And system should display the appropriate error message
 
 @smoke @sanity @TC013 @TC065
-  Scenario: functionality of Pincode check on the PDP
+  Scenario: Verify functionality of Pincode check on the PDP
 
     Given user clicks the pincode check box
     When user enters the pincode

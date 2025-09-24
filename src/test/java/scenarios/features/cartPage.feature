@@ -17,7 +17,7 @@ Feature: Verify the Cart Page Functionality
       | 9136734340 | 123456 |
 
 @sanity @TC031
-  Scenario: Verify CRUD on the Address page
+  Scenario: TES3864 - Verify CRUD on the Address page
 
     Given user clicks on the Men category
     When user selects a sub-category under Men
@@ -43,7 +43,7 @@ Feature: Verify the Cart Page Functionality
     And user validate that new address added successfully
 
 @smoke @sanity @TC018
-  Scenario: Verify the components of Bag
+  Scenario: TES3854 - Verify the components of Bag
 
     When user back to Home Page
     When user clicks on the Cart icon
@@ -63,20 +63,20 @@ Feature: Verify the Cart Page Functionality
     And system should display the appropriate error status
 
 @smoke @sanity @TC020
-  Scenario: Verify functionality of Valid Pincode check on the cart page
+  Scenario: TES3856 - Verify functionality of Valid Pincode check on the cart page
 
     Given user clicks the pincode check box
     When user enters the pincode
     Then user clicks the check option to validate the pincode
 
 @smoke @sanity @TC026
-  Scenario: Verify increase and decrease of the product quantity
+  Scenario: TES3862 - Verify increase and decrease of the product quantity
 
     When user increase the quantity from the cart
     Then user decrease the quantity from the cart
 
 @sanity @TC027
-  Scenario: Verify adding/removing coupons and Gift Wrap message
+  Scenario: TES3863 - Verify adding/removing coupons and Gift Wrap message
 
     When user clicks gift wrap option
     And user enters the receiver's name
@@ -88,13 +88,13 @@ Feature: Verify the Cart Page Functionality
     And user validate that gift wrap details removed successfully
 
 @sanity @TC025
-  Scenario: Verify functionality of size changing on the cart page
+  Scenario: TES3861 - Verify functionality of size changing on the cart page
 
     Given user clicks the size changing option
     When user validate that available size
 
 @smoke @sanity @TC019
-  Scenario: Verify adding/removing product to bag from PDP and Move to Wishlist
+  Scenario: TES3855 - Verify adding/removing product to bag from PDP and Move to Wishlist
 
     When user clicks on the xmark icon
     And user is moving the product to wishlist from bag
@@ -105,7 +105,7 @@ Feature: Verify the Cart Page Functionality
     And user is on the Home Page
 
 #@sanity @TC024
-#  Scenario: Verify adding/removing product to bag from You May Also Like on the Bag page
+#  Scenario: TES3860 - Verify adding/removing product to bag from You May Also Like on the Bag page
 #
 #    Given user add a product to the bag from you may also like
 #    When user clicks on the add to bag

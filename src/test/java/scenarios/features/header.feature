@@ -17,7 +17,7 @@ Feature: Verify the Header Functionality
       | 9136734340 | 123456 |
 
 @smoke @sanity @TC006 @TC010
-  Scenario: User verifies navigation and functionality of all top-level homepage categories
+  Scenario: TES3842 - User verifies navigation and functionality of all top-level homepage categories
 
     Given user launches the application
     Given user is on the Home Page
@@ -33,7 +33,7 @@ Feature: Verify the Header Functionality
     And verifying the each category navigation
 
 @sanity @TC008
-  Scenario: Verify the Search Functionality
+  Scenario: TES3844 - Verify the Search Functionality
 
     Given user is on the Home Page
     Given user clicks on the search bar
@@ -48,7 +48,7 @@ Feature: Verify the Header Functionality
     And user is on the Home Page
 
 @sanity @TC050
-  Scenario: Verify the Store and Events Functionality
+  Scenario: TES3886 - Verify the Store and Events Functionality
 
     When user clicks on Store and Events icon
     When user clicks on the drop down option for select city
@@ -57,7 +57,7 @@ Feature: Verify the Header Functionality
     And user is on the Home Page
 
 @sanity @TC007
-  Scenario: Verify navigation and functionality of Fashion Stylist
+  Scenario: TES3843 - Verify navigation and functionality of Fashion Stylist
 
     When user clicks the Fashion Stylist
     Then user enters the query

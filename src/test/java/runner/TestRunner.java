@@ -2,7 +2,6 @@ package runner;
 
 import static java.util.Objects.requireNonNull;
 
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 
@@ -11,7 +10,8 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(plugin = { "pretty", "json:target/Reports/cucumber-report.json"
         , "html:target/cucumber/cucumber.html"
-        ,"junit:C:target/Reports/cucumber_Report.xml"
+        , "junit:target/Reports/cucumber_Report.xml"
+        , "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         },
         glue = { "scenarios", "hooks" },
         features = "src/test/java/scenarios",

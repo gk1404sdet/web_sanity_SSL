@@ -1,7 +1,7 @@
 Feature: User Login Functionality with Valid and Invalid Data
 
-@smoke @sanity @TC002
-  Scenario Outline: Verify the Sign-in functionality via phone number for existing user
+@smoke @sanity @TC002 @login
+  Scenario Outline: TES3838 - Verify the Sign-in functionality via phone number for existing user
 
     Given user launches the application
     When user taps on the Login button
@@ -16,14 +16,14 @@ Feature: User Login Functionality with Valid and Invalid Data
   | 9136734340 | 123456 |
 
 @smoke @sanity @TC055
-  Scenario: Verify the logout functionality
+  Scenario: TES3891 - Verify the logout functionality
 
     When user clicks on the Logout button
     And user clicks on the yes button for logout
     Then user validate that the user is logged out
 
-@smoke @sanity @TC003 @login
-  Scenario Outline: Verify the Sign-in functionality via Email ID for existing user
+@smoke @sanity @TC003
+  Scenario Outline: TES3839 - Verify the Sign-in functionality via Email ID for existing user
 
     Given user launches the application
     When user taps on the Login button
@@ -33,9 +33,10 @@ Feature: User Login Functionality with Valid and Invalid Data
 
     Examples:
       | email id                             |
-      | gopalkrishnan.sslconsultant@shoppersstop.com |
+#      | gopalkrishnan.sslconsultant@shoppersstop.com |
+      | Saravanan.MSTConsultant@shoppersstop.com |
 
-@smoke @sanity @TC004 @TC065
+@smoke @sanity @TC065
   Scenario Outline: Verify the OTP functionality with an invalid OTP and Resend functionality
 
     Given user launches the application
@@ -51,7 +52,7 @@ Feature: User Login Functionality with Valid and Invalid Data
 
   Examples:
   | mob no | otp |
-  | 9790153971 | 123456 |
+  | 9790153972 | 123456 |
 
 @sanity @TC065
   Scenario Outline: Verify the Sign-in functionality via phone number with an invalid number
@@ -80,7 +81,7 @@ Feature: User Login Functionality with Valid and Invalid Data
       | gopalakrishnan.palanisamy@mool.comok          |
 
 @smoke @sanity @TC021
-  Scenario: Verify functionality of Merge cart as a guest to logged-in user
+  Scenario: TES3857 - Verify functionality of Merge cart as a guest to logged-in user
 
     Given user launches the application
     When user clicks on the Women category

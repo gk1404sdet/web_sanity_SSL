@@ -1,12 +1,819 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="30.584" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-09-19T05:50:00.752958Z">
-<testcase classname="User Login Functionality with Valid and Invalid Data" name="Verify the Sign-in functionality via Email ID for existing user - #1.1" time="20.475">
+<testsuite name="Cucumber" time="3,982.32" tests="53" skipped="0" failures="8" errors="0" timestamp="2025-09-23T11:52:15.190478Z">
+<testcase classname="Verify the Account Module in the Application" name="Verify the Sign-in functionality via phone number for existing user - #1.1" time="70.642">
+<system-out><![CDATA[
+Given user launches the application.........................................passed
+When user taps on the Login button..........................................passed
+And user enters mobile number "9136734340"..................................passed
+And user clicks on the Proceed button.......................................passed
+Then user enters OTP "123456"...............................................passed
+And user clicks on the Verify OTP button....................................passed
+Then system should display the appropriate login status.....................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Account Module in the Application" name="Verify components of Account" time="85.499">
+<system-out><![CDATA[
+Given user is on the Home Page..............................................passed
+Given user navigation to my profile.........................................passed
+When system should display the following components in the Account section..passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Account Module in the Application" name="Verify CRUD on the Address page" time="227.308">
+<system-out><![CDATA[
+Given user clicks on the my Profile option..................................passed
+When user updates their personal details....................................passed
+And user update their name..................................................passed
+And user update their gender details........................................passed
+And user clicks on the update changes.......................................passed
+And user validate that personal details successfully updated................passed
+And user is able to add a new address.......................................passed
+And user enters the new name................................................passed
+And user enters the new number..............................................passed
+And user enters the new pin code............................................passed
+And user enters the new address.............................................passed
+And user selects a address type as work.....................................passed
+And user clicks on the add address..........................................passed
+And user validate that new address added successfully.......................passed
+Then user updates an existing address.......................................passed
+And user updates their name.................................................passed
+And user updates their number...............................................passed
+And user updates their pin code.............................................passed
+And user updates their address..............................................passed
+And user clicks on the update changes.......................................passed
+And validate that existing address has updated..............................passed
+And user is able to delete exiting address..................................passed
+And user clicks on the confirm button for delete address....................passed
+And user validate that delete address message is displayed..................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Account Module in the Application" name="Verify the Book an Appointment Functionality" time="50.118">
+<system-out><![CDATA[
+Given user clicks on Book A Personal Shopper................................passed
+When user clicks on the book an appointment.................................passed
+And user selects the city...................................................passed
+And user selects the store..................................................passed
+And user validate that get store directions option is displayed.............passed
+And user select the date....................................................passed
+And user clicks on the select time..........................................passed
+Then user clicks on the book a service button...............................passed
+And user validate that personal details.....................................passed
+And user clicks on the proceed to book button...............................passed
+And user validate that booking confirmation is displayed....................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Account Module in the Application" name="Verify navigation and functionality of My Order" time="253.493">
+<system-out><![CDATA[
+Given user clicks on My Orders..............................................passed
+When user is able to see the existing orders................................passed
+And user applies the filter option..........................................passed
+And user applies filter Past 30 days........................................passed
+And user is able to see the filtered orders accordingly.....................passed
+And user applies the filter option..........................................passed
+And user applies filter Past 6 Months.......................................passed
+And user is able to see the filtered orders accordingly.....................passed
+And user applies the filter option..........................................passed
+And user applies filter Completed...........................................passed
+Then user is able to see the filtered orders accordingly....................passed
+And user applies the filter option..........................................passed
+And user applies filter Cancelled...........................................passed
+And user is able to see the filtered orders accordingly.....................passed
+And user applies the filter option..........................................passed
+And user applies filter Past 1 Year.........................................passed
+And user clicks on an existing order to view details........................passed
+Then user validates the order details successfully..........................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Account Module in the Application" name="Verify navigation and functionality of My Wallet" time="44.604">
+<system-out><![CDATA[
+When user clicks the my Wallet..............................................passed
+And user validates that wallet account details..............................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Account Module in the Application" name="Verify components of FCC page" time="44.792">
+<system-out><![CDATA[
+When user clicks the First Citizen Club.....................................passed
+And system should display the following components in the Fcc section.......passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Account Module in the Application" name="Verify navigation and functionality of GC/EGV" time="65.668">
+<system-out><![CDATA[
+When user clicks the My Gift card or EGV....................................passed
+And user validates that gift vouchers product list..........................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Account Module in the Application" name="Verify the logout functionality" time="23.713">
+<system-out><![CDATA[
+When user clicks on the Logout button.......................................passed
+And user clicks on the yes button for logout................................passed
+Then user validate that the user is logged out..............................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Cart Page Functionality" name="Verify the Sign-in functionality via phone number for existing user - #1.1" time="69.662">
+<system-out><![CDATA[
+Given user launches the application.........................................passed
+When user taps on the Login button..........................................passed
+And user enters mobile number "9136734340"..................................passed
+And user clicks on the Proceed button.......................................passed
+Then user enters OTP "123456"...............................................passed
+And user clicks on the Verify OTP button....................................passed
+Then system should display the appropriate login status.....................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Cart Page Functionality" name="Verify CRUD on the Address page" time="215.347">
+<system-out><![CDATA[
+Given user clicks on the Men category.......................................passed
+When user selects a sub-category under Men..................................passed
+And user selects the product from the product listing page..................passed
+And user is navigated to the product detail page............................passed
+And user selects a size if available........................................passed
+And user clicks on Add to Bag and View Bag..................................passed
+And user clicks on the View Bag.............................................passed
+And user clicks on Place Order..............................................passed
+Then user updates an existing address.......................................passed
+And user updates their name.................................................passed
+And user updates their number...............................................passed
+And user updates their pin code.............................................passed
+And user updates their address..............................................passed
+And user clicks on the update changes.......................................passed
+Then user clicks on the add new address.....................................passed
+And user enters the new name................................................passed
+And user enters the new number..............................................passed
+And user enters the new pin code............................................passed
+And user enters the new address.............................................passed
+And user selects a address type as home.....................................passed
+And user clicks on the add address..........................................passed
+And user validate that new address added successfully.......................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Cart Page Functionality" name="Verify the components of Bag" time="25.866">
+<system-out><![CDATA[
+When user back to Home Page.................................................passed
+When user clicks on the Cart icon...........................................passed
+When system should display the following components in the cart page........passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Cart Page Functionality" name="Verify functionality of Invalid Pincode check on the cart page" time="43.4">
+<system-out><![CDATA[
+Given user clicks the pincode check box.....................................passed
+When user enters the invalid pincode........................................passed
+Then user clicks the check option to validate the pincode...................passed
+And system should display the appropriate error status......................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Cart Page Functionality" name="Verify functionality of Valid Pincode check on the cart page" time="40.45">
+<system-out><![CDATA[
+Given user clicks the pincode check box.....................................passed
+When user enters the pincode................................................passed
+Then user clicks the check option to validate the pincode...................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Cart Page Functionality" name="Verify increase and decrease of the product quantity" time="20.032">
+<system-out><![CDATA[
+When user increase the quantity from the cart...............................passed
+Then user decrease the quantity from the cart...............................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Cart Page Functionality" name="Verify adding/removing coupons and Gift Wrap message" time="48.962">
+<system-out><![CDATA[
+When user clicks gift wrap option...........................................passed
+And user enters the receiver's name.........................................passed
+And user enters the gift message............................................passed
+And user enters the sender's name...........................................passed
+Then user clicks on the save gift message...................................passed
+And user validate that gift wrap details added successfully.................passed
+And user clicks gift wrap option............................................passed
+And user validate that gift wrap details removed successfully...............passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Cart Page Functionality" name="Verify functionality of size changing on the cart page" time="24.367">
+<system-out><![CDATA[
+Given user clicks the size changing option..................................passed
+When user validate that available size......................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Cart Page Functionality" name="Verify adding/removing product to bag from PDP and Move to Wishlist" time="142.064">
+<failure type="java.lang.AssertionError" message="Failed to validate error message for partial text: 'Product removed from your bag and added to your wishlist' - Expected condition failed: waiting for visibility of element located by By.xpath: //*[contains(text(),'Product removed from your bag and added to your wishlist')] (tried for 30 second(s) with 500 milliseconds interval)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '26.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.133, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: /var/folders/34/kvhlpvdn48v...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53304}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:53304/devtoo..., se:cdpVersion: 140.0.7339.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 64d7e0d9b612bfe93e94e789f84b7a57">
+<![CDATA[java.lang.AssertionError: Failed to validate error message for partial text: 'Product removed from your bag and added to your wishlist' - Expected condition failed: waiting for visibility of element located by By.xpath: //*[contains(text(),'Product removed from your bag and added to your wishlist')] (tried for 30 second(s) with 500 milliseconds interval)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '26.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.133, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: /var/folders/34/kvhlpvdn48v...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53304}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:53304/devtoo..., se:cdpVersion: 140.0.7339.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 64d7e0d9b612bfe93e94e789f84b7a57
+	at org.testng.Assert.fail(Assert.java:111)
+	at pages.BasePage.validateErrorMessageByPartialText(BasePage.java:305)
+	at scenarios.stepDefinitions.CartPageSteps.user_validates_that_product_moved_to_wishlist_from_bag(CartPageSteps.java:155)
+	at ✽.user validates that product moved to wishlist from bag(file:///Volumes/Macintosh%20HD%20-%20Data/Code/SS-Sanity/SS_Automation_Web_Sanity/src/test/java/scenarios/features/cartPage.feature:101)
+]]>
+</failure>
+<system-out><![CDATA[
+When user clicks on the xmark icon..........................................passed
+And user is moving the product to wishlist from bag.........................passed
+And user validates that product moved to wishlist from bag..................failed
+When user clicks on the xmark icon..........................................skipped
+Then user is removing the product from bag..................................skipped
+And user validates that product removed from bag............................skipped
+And user is on the Home Page................................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Cart Page Functionality" name="Verify the logout functionality" time="45.196">
+<system-out><![CDATA[
+When user back to Home Page.................................................passed
+When user clicks on the Logout button.......................................passed
+And user clicks on the yes button for logout................................passed
+Then user validate that the user is logged out..............................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify Successful and Failed Payment mode" name="Verify the Sign-in functionality via phone number for existing user - #1.1" time="69.316">
+<system-out><![CDATA[
+Given user launches the application.........................................passed
+When user taps on the Login button..........................................passed
+And user enters mobile number "9136734340"..................................passed
+And user clicks on the Proceed button.......................................passed
+Then user enters OTP "123456"...............................................passed
+And user clicks on the Verify OTP button....................................passed
+Then system should display the appropriate login status.....................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify Successful and Failed Payment mode" name="Verify a successful payment" time="311.688">
+<system-out><![CDATA[
+Given user clicks on the Men category.......................................passed
+When user selects a sub-category under Men..................................passed
+And user selects a product from the PLP.....................................passed
+Then user is navigated to the product detail page...........................passed
+And user validating the out of stock product................................passed
+When user selects a size if available.......................................passed
+And user clicks on Add to Bag and View Bag..................................passed
+And user clicks on the View Bag.............................................passed
+Then user validates the price details in the bag............................passed
+When user clicks on Place Order.............................................passed
+When user selects the delivery address......................................passed
+Then user validates the price details in the bag............................passed
+When user clicks the Continue button........................................passed
+And user verifies the available payment modes...............................passed
+Then user validates the price details in the bag............................passed
+Then user checks if Cash on Delivery is available...........................passed
+When user clicks on Place Order.............................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify Successful and Failed Payment mode" name="the navigation to successful order summary page" time="29.494">
+<system-out><![CDATA[
+Then user validating successful order summary...............................passed
+And user validating the Deliver Mode and Address............................passed
+Then user validates the final price details.................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify Successful and Failed Payment mode" name="functionality of Review Shopping Experience" time="2.08">
+<system-out><![CDATA[
+When user verifying the review shopping experience..........................passed
+And user giving the rate for shopping.......................................passed
+And user selecting the what can be improved option..........................passed
+And user submit the review..................................................passed
+Then user clicks the Continue Shopping Button...............................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify Successful and Failed Payment mode" name="Verify a Failed payment" time="316.523">
+<failure type="org.openqa.selenium.TimeoutException" message="Expected condition failed: waiting for element to be clickable: By.xpath: //div[@class=&quot;rounded-full border border-black p-1&quot;] (tried for 30 second(s) with 500 milliseconds interval)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '26.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.133, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: /var/folders/34/kvhlpvdn48v...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53304}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:53304/devtoo..., se:cdpVersion: 140.0.7339.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 64d7e0d9b612bfe93e94e789f84b7a57">
+<![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //div[@class="rounded-full border border-black p-1"] (tried for 30 second(s) with 500 milliseconds interval)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '26.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.133, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: /var/folders/34/kvhlpvdn48v...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53304}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:53304/devtoo..., se:cdpVersion: 140.0.7339.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 64d7e0d9b612bfe93e94e789f84b7a57
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.CheckoutPage.selectTheAddress(CheckoutPage.java:197)
+	at scenarios.stepDefinitions.CheckoutSteps.user_selects_the_delivery_address(CheckoutSteps.java:141)
+	at ✽.user selects the delivery address(file:///Volumes/Macintosh%20HD%20-%20Data/Code/SS-Sanity/SS_Automation_Web_Sanity/src/test/java/scenarios/features/checkout.feature:71)
+]]>
+</failure>
+<system-out><![CDATA[
+Given user back to Home Page................................................passed
+Given user is on the Home Page..............................................passed
+Given user clicks on the Women category.....................................passed
+When user selects a sub-category under Women................................passed
+And user selects a product from the PLP.....................................passed
+Then user is navigated to the product detail page...........................passed
+Then user validating the out of stock product...............................passed
+And user selects a size if available........................................passed
+And user clicks on Add to Bag and View Bag..................................passed
+And user clicks on the View Bag.............................................passed
+Then user validates the price details in the bag............................passed
+When user clicks on Place Order.............................................passed
+When user selects the delivery address......................................failed
+Then user validates the price details in the bag............................skipped
+When user clicks the Continue button........................................skipped
+And user verifies the available payment modes...............................skipped
+Then user validates the price details in the bag............................skipped
+Then user selecting the Wallet Option.......................................skipped
+Then user back to Home Page.................................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="Verify Successful and Failed Payment mode" name="Verify the logout functionality" time="44.605">
+<system-out><![CDATA[
+When user back to Home Page.................................................passed
+When user clicks on the Logout button.......................................passed
+And user clicks on the yes button for logout................................passed
+Then user validate that the user is logged out..............................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Header Functionality" name="Verify the Sign-in functionality via phone number for existing user - #1.1" time="69.279">
+<system-out><![CDATA[
+Given user launches the application.........................................passed
+When user taps on the Login button..........................................passed
+And user enters mobile number "9136734340"..................................passed
+And user clicks on the Proceed button.......................................passed
+Then user enters OTP "123456"...............................................passed
+And user clicks on the Verify OTP button....................................passed
+Then system should display the appropriate login status.....................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Header Functionality" name="User verifies navigation and functionality of all top-level homepage categories" time="11.934">
+<system-out><![CDATA[
+Given user launches the application.........................................passed
+Given user is on the Home Page..............................................passed
+When system should display the following components in the Top Categories section.passed
+And verifying the each category navigation..................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Header Functionality" name="Verify the Search Functionality" time="24.418">
+<failure type="java.lang.RuntimeException" message="Failed to click product at index 2 in section 'Popular Brands navigation': Error extracting brand name from page: Expected condition failed: waiting for visibility of element located by By.xpath: //div[@class='mb-6 text-lg font-normal uppercase leading-[21.47px] tracking-[1.8px] text-blackSS'] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '26.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.133, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: /var/folders/34/kvhlpvdn48v...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53304}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:53304/devtoo..., se:cdpVersion: 140.0.7339.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 64d7e0d9b612bfe93e94e789f84b7a57">
+<![CDATA[java.lang.RuntimeException: Failed to click product at index 2 in section 'Popular Brands navigation': Error extracting brand name from page: Expected condition failed: waiting for visibility of element located by By.xpath: //div[@class='mb-6 text-lg font-normal uppercase leading-[21.47px] tracking-[1.8px] text-blackSS'] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '26.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.133, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: /var/folders/34/kvhlpvdn48v...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53304}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:53304/devtoo..., se:cdpVersion: 140.0.7339.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 64d7e0d9b612bfe93e94e789f84b7a57
+	at pages.HeaderPage.clickProductByIndex(HeaderPage.java:224)
+	at scenarios.stepDefinitions.HeaderSteps.user_validates_that_from_popular_brands_suggestion_landing_the_relevant_products(HeaderSteps.java:102)
+	at ✽.user validates that from Popular Brands suggestion landing the relevant products(file:///Volumes/Macintosh%20HD%20-%20Data/Code/SS-Sanity/SS_Automation_Web_Sanity/src/test/java/scenarios/features/header.feature:45)
+Caused by: java.lang.RuntimeException: Error extracting brand name from page: Expected condition failed: waiting for visibility of element located by By.xpath: //div[@class='mb-6 text-lg font-normal uppercase leading-[21.47px] tracking-[1.8px] text-blackSS'] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '26.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.133, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: /var/folders/34/kvhlpvdn48v...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53304}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:53304/devtoo..., se:cdpVersion: 140.0.7339.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 64d7e0d9b612bfe93e94e789f84b7a57
+	at pages.HeaderPage.extractBrandNameFromPage(HeaderPage.java:243)
+	at pages.HeaderPage.clickProductByIndex(HeaderPage.java:215)
+	... 2 more
+Caused by: org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //div[@class='mb-6 text-lg font-normal uppercase leading-[21.47px] tracking-[1.8px] text-blackSS'] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '26.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.133, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: /var/folders/34/kvhlpvdn48v...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53304}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:53304/devtoo..., se:cdpVersion: 140.0.7339.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 64d7e0d9b612bfe93e94e789f84b7a57
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.HeaderPage.extractBrandNameFromPage(HeaderPage.java:235)
+	... 3 more
+]]>
+</failure>
+<system-out><![CDATA[
+Given user is on the Home Page..............................................passed
+Given user clicks on the search bar.........................................passed
+When user validates that Trending Search suggestion.........................passed
+And user validates that from Trending Search suggestion landing the relevant products.passed
+And user clicks on the search bar...........................................passed
+And user validates that Trending Products suggestion........................passed
+Then user validates that Popular Brands.....................................passed
+And user validates that from Popular Brands suggestion landing the relevant products.failed
+And user clicks on the search bar...........................................skipped
+And user search with dynamic keywords.......................................skipped
+And user is on the Home Page................................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Header Functionality" name="Verify the Store and Events Functionality" time="2.054">
+<system-out><![CDATA[
+When user clicks on Store and Events icon...................................passed
+When user clicks on the drop down option for select city....................passed
+And user selects the city in the stores.....................................passed
+And user validate that get store directions option is displayed.............passed
+And user is on the Home Page................................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Header Functionality" name="Verify navigation and functionality of Fashion Stylist" time="53.079">
+<system-out><![CDATA[
+When user clicks the Fashion Stylist........................................passed
+Then user enters the query..................................................passed
+And user validating the suggested product list..............................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Header Functionality" name="Verify the logout functionality" time="23.676">
+<system-out><![CDATA[
+When user back to normal windows............................................passed
+When user clicks on the Logout button.......................................passed
+And user clicks on the yes button for logout................................passed
+Then user validate that the user is logged out..............................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Home Page Functionality" name="Verify the Sign-in functionality via phone number for existing user - #1.1" time="69.337">
+<system-out><![CDATA[
+Given user launches the application.........................................passed
+When user taps on the Login button..........................................passed
+And user enters mobile number "9136734340"..................................passed
+And user clicks on the Proceed button.......................................passed
+Then user enters OTP "123456"...............................................passed
+And user clicks on the Verify OTP button....................................passed
+Then system should display the appropriate login status.....................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Home Page Functionality" name="Verify the Sort Functionality" time="15.991">
+<system-out><![CDATA[
+Given user clicks on the Women category.....................................passed
+When user selects a sub-category under Women................................passed
+And user clicks on the sort by..............................................passed
+And user applying the sort by as price low to high..........................passed
+And user clicks on the bargains category....................................passed
+When user selects a sub-category under men..................................passed
+And user clicks on the sort by..............................................passed
+And user applying the sort by as discount...................................passed
+Then user clicks on the bargains category...................................passed
+Then user selects a sub-category under home offer...........................passed
+And user clicks on the sort by..............................................passed
+And user applying the sort by as new........................................passed
+And user clicks on the bargains category....................................passed
+Then user selects a sub-category under beauty...............................passed
+And user clicks on the sort by..............................................passed
+And user applying the sort by as price high to low..........................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Home Page Functionality" name="Verify the Filter Functionality" time="10.407">
+<system-out><![CDATA[
+Given user clicks on the Women category.....................................passed
+When user selects a sub-category under Women sarees.........................passed
+And user clicks on the sort by..............................................passed
+And user applying the sort by as price low to high..........................passed
+And user applying the Brands filter.........................................passed
+And user applying the Size filter...........................................passed
+And user applying the Price filter..........................................passed
+Then user applying the Color filter.........................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Home Page Functionality" name="Verify the components of PDP" time="43.156">
+<failure type="org.openqa.selenium.TimeoutException" message="Expected condition failed: waiting for presence of element located by: By.xpath: //p[contains(text(), 'Shirts')] (tried for 30 second(s) with 500 milliseconds interval)">
+<![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for presence of element located by: By.xpath: //p[contains(text(), 'Shirts')] (tried for 30 second(s) with 500 milliseconds interval)
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.BasePage.waitForPresenceOfElement(BasePage.java:194)
+	at pages.BasePage.clickOnElement(BasePage.java:40)
+	at pages.HomePage.clickOnSubCategory(HomePage.java:53)
+	at scenarios.stepDefinitions.HomeSteps.user_selects_a_sub_category_under_men(HomeSteps.java:52)
+	at ✽.user selects a sub-category under men(file:///Volumes/Macintosh%20HD%20-%20Data/Code/SS-Sanity/SS_Automation_Web_Sanity/src/test/java/scenarios/features/home.feature:55)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//p[contains(text(), 'Shirts')]"}
+  (Session info: chrome=140.0.7339.133)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '26.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [64d7e0d9b612bfe93e94e789f84b7a57, findElement {value=//p[contains(text(), 'Shirts')], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.133, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: /var/folders/34/kvhlpvdn48v...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53304}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:53304/devtoo..., se:cdpVersion: 140.0.7339.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 64d7e0d9b612bfe93e94e789f84b7a57
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:367)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:361)
+	at org.openqa.selenium.support.ui.ExpectedConditions$6.apply(ExpectedConditions.java:171)
+	at org.openqa.selenium.support.ui.ExpectedConditions$6.apply(ExpectedConditions.java:168)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
+	... 5 more
+]]>
+</failure>
+<system-out><![CDATA[
+Given user clicks on the Men category.......................................passed
+When user selects a sub-category under men..................................failed
+And user selects a product from the PLP.....................................skipped
+Then user is navigated to the product detail page...........................skipped
+And user validates all product detail section components are displayed......skipped
+And user validates that product details.....................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Home Page Functionality" name="functionality of Pincode check on the PDP" time="41.027">
+<failure type="org.openqa.selenium.TimeoutException" message="Expected condition failed: waiting for presence of element located by: By.xpath: //input[@placeholder=&quot;Enter your PIN code&quot;] (tried for 30 second(s) with 500 milliseconds interval)">
+<![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for presence of element located by: By.xpath: //input[@placeholder="Enter your PIN code"] (tried for 30 second(s) with 500 milliseconds interval)
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.BasePage.waitForPresenceOfElement(BasePage.java:194)
+	at pages.BasePage.clickOnElement(BasePage.java:40)
+	at pages.CartPage.clickOnPincodeBox(CartPage.java:69)
+	at scenarios.stepDefinitions.CartPageSteps.user_clicks_the_pincode_check_box(CartPageSteps.java:53)
+	at ✽.user clicks the pincode check box(file:///Volumes/Macintosh%20HD%20-%20Data/Code/SS-Sanity/SS_Automation_Web_Sanity/src/test/java/scenarios/features/home.feature:68)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//input[@placeholder="Enter your PIN code"]"}
+  (Session info: chrome=140.0.7339.133)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '26.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [64d7e0d9b612bfe93e94e789f84b7a57, findElement {value=//input[@placeholder="Enter your PIN code"], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.133, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: /var/folders/34/kvhlpvdn48v...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53304}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:53304/devtoo..., se:cdpVersion: 140.0.7339.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 64d7e0d9b612bfe93e94e789f84b7a57
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:367)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:361)
+	at org.openqa.selenium.support.ui.ExpectedConditions$6.apply(ExpectedConditions.java:171)
+	at org.openqa.selenium.support.ui.ExpectedConditions$6.apply(ExpectedConditions.java:168)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
+	... 5 more
+]]>
+</failure>
+<system-out><![CDATA[
+Given user clicks the pincode check box.....................................failed
+When user enters the invalid pincode........................................skipped
+Then user clicks the check option to validate the pincode...................skipped
+And system should display the appropriate error message.....................skipped
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Home Page Functionality" name="functionality of Pincode check on the PDP" time="40.989">
+<failure type="org.openqa.selenium.TimeoutException" message="Expected condition failed: waiting for presence of element located by: By.xpath: //input[@placeholder=&quot;Enter your PIN code&quot;] (tried for 30 second(s) with 500 milliseconds interval)">
+<![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for presence of element located by: By.xpath: //input[@placeholder="Enter your PIN code"] (tried for 30 second(s) with 500 milliseconds interval)
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.BasePage.waitForPresenceOfElement(BasePage.java:194)
+	at pages.BasePage.clickOnElement(BasePage.java:40)
+	at pages.CartPage.clickOnPincodeBox(CartPage.java:69)
+	at scenarios.stepDefinitions.CartPageSteps.user_clicks_the_pincode_check_box(CartPageSteps.java:53)
+	at ✽.user clicks the pincode check box(file:///Volumes/Macintosh%20HD%20-%20Data/Code/SS-Sanity/SS_Automation_Web_Sanity/src/test/java/scenarios/features/home.feature:76)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//input[@placeholder="Enter your PIN code"]"}
+  (Session info: chrome=140.0.7339.133)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '26.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [64d7e0d9b612bfe93e94e789f84b7a57, findElement {value=//input[@placeholder="Enter your PIN code"], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.133, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: /var/folders/34/kvhlpvdn48v...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53304}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:53304/devtoo..., se:cdpVersion: 140.0.7339.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 64d7e0d9b612bfe93e94e789f84b7a57
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:367)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:361)
+	at org.openqa.selenium.support.ui.ExpectedConditions$6.apply(ExpectedConditions.java:171)
+	at org.openqa.selenium.support.ui.ExpectedConditions$6.apply(ExpectedConditions.java:168)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
+	... 5 more
+]]>
+</failure>
+<system-out><![CDATA[
+Given user clicks the pincode check box.....................................failed
+When user enters the pincode................................................skipped
+Then user clicks the check option to validate the pincode...................skipped
+And user back to Home Page..................................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Home Page Functionality" name="Verify the logout functionality" time="23.823">
+<system-out><![CDATA[
+When user clicks on the Logout button.......................................passed
+And user clicks on the yes button for logout................................passed
+Then user validate that the user is logged out..............................passed
+]]></system-out>
+</testcase>
+<testcase classname="User Login Functionality with Valid and Invalid Data" name="Verify the Sign-in functionality via phone number for existing user - #1.1" time="69.439">
+<system-out><![CDATA[
+Given user launches the application.........................................passed
+When user taps on the Login button..........................................passed
+And user enters mobile number "9136734340"..................................passed
+And user clicks on the Proceed button.......................................passed
+Then user enters OTP "123456"...............................................passed
+And user clicks on the Verify OTP button....................................passed
+Then system should display the appropriate login status.....................passed
+]]></system-out>
+</testcase>
+<testcase classname="User Login Functionality with Valid and Invalid Data" name="Verify the logout functionality" time="23.625">
+<system-out><![CDATA[
+When user clicks on the Logout button.......................................passed
+And user clicks on the yes button for logout................................passed
+Then user validate that the user is logged out..............................passed
+]]></system-out>
+</testcase>
+<testcase classname="User Login Functionality with Valid and Invalid Data" name="Verify the Sign-in functionality via Email ID for existing user - #1.1" time="7.824">
 <system-out><![CDATA[
 Given user launches the application.........................................passed
 When user taps on the Login button..........................................passed
 And user enters email id "gopalkrishnan.sslconsultant@shoppersstop.com".....passed
 And user clicks on the Proceed button.......................................passed
 Then user enters OTP........................................................passed
+]]></system-out>
+</testcase>
+<testcase classname="User Login Functionality with Valid and Invalid Data" name="Verify the OTP functionality with an invalid OTP and Resend functionality - #1.1" time="50.925">
+<failure type="java.lang.AssertionError" message="Invalid OTP/User Not entered the OTP expected [false] but found [true]">
+<![CDATA[java.lang.AssertionError: Invalid OTP/User Not entered the OTP expected [false] but found [true]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertFalse(Assert.java:79)
+	at scenarios.stepDefinitions.LoginSteps.user_clicks_on_the_verify_otp_button_for_validation(LoginSteps.java:122)
+	at ✽.user clicks on the Verify OTP button for validation(file:///Volumes/Macintosh%20HD%20-%20Data/Code/SS-Sanity/SS_Automation_Web_Sanity/src/test/java/scenarios/features/login.feature:46)
+]]>
+</failure>
+<system-out><![CDATA[
+Given user launches the application.........................................passed
+When user taps on the Login button..........................................passed
+And user enters mobile number "9790153971"..................................passed
+And user clicks on the Proceed button.......................................passed
+Then user enters OTP "123456"...............................................passed
+And user clicks on the Verify OTP button for validation.....................failed
+And user clicks the resend otp option.......................................skipped
+And user has successfully resent the OTP....................................skipped
+Then user enters OTP "654321"...............................................skipped
+And user clicks on the Verify OTP button for validation.....................skipped
+]]></system-out>
+</testcase>
+<testcase classname="User Login Functionality with Valid and Invalid Data" name="Verify the Sign-in functionality via phone number with an invalid number - #1.1" time="1.897">
+<system-out><![CDATA[
+Given user launches the application.........................................passed
+When user taps on the Login button..........................................passed
+And user enters mobile number "979015373778"................................passed
+And user clicks the Proceed button for validation of invalidUid.............passed
+Then user validate that the appropriate error message is displayed..........passed
+]]></system-out>
+</testcase>
+<testcase classname="User Login Functionality with Valid and Invalid Data" name="Verify the Sign-in functionality via phone number with an invalid email id - #1.1" time="1.296">
+<system-out><![CDATA[
+Given user launches the application.........................................passed
+When user taps on the Login button..........................................passed
+And user enters the invalid email id "gopalakrishnan.palanisamy@mool.comok".passed
+And user clicks the Proceed button for validation of invalidUid.............passed
+Then user validate that the appropriate error message is displayed..........passed
+]]></system-out>
+</testcase>
+<testcase classname="User Login Functionality with Valid and Invalid Data" name="Verify functionality of Merge cart as a guest to logged-in user" time="307.462">
+<system-out><![CDATA[
+Given user launches the application.........................................passed
+When user clicks on the Women category......................................passed
+And user selects a sub-category under Women.................................passed
+And user selects a product from the PLP.....................................passed
+And user is navigated to the product detail page............................passed
+And user validating the out of stock product................................passed
+Then user selects a size if available.......................................passed
+And user clicks on Add to Bag and View Bag..................................passed
+And user clicks on the View Bag.............................................passed
+And user validates the price details in the bag.............................passed
+And user clicks on Place Order..............................................passed
+And user validates that a guest user is prompted to enter login credentials.passed
+And user enters mobile number "9136734340"..................................passed
+And user clicks on the Proceed button.......................................passed
+Then user enters OTP "123456"...............................................passed
+And user clicks on the Verify OTP button....................................passed
+And user validates the price details in the bag.............................passed
+Then user back to Home Page.................................................passed
+]]></system-out>
+</testcase>
+<testcase classname="User Login Functionality with Valid and Invalid Data" name="Verify the logout functionality" time="23.644">
+<system-out><![CDATA[
+When user clicks on the Logout button.......................................passed
+And user clicks on the yes button for logout................................passed
+Then user validate that the user is logged out..............................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Wishlist Functionality" name="Verify the Sign-in functionality via phone number for existing user - #1.1" time="69.636">
+<system-out><![CDATA[
+Given user launches the application.........................................passed
+When user taps on the Login button..........................................passed
+And user enters mobile number "9136734340"..................................passed
+And user clicks on the Proceed button.......................................passed
+Then user enters OTP "123456"...............................................passed
+And user clicks on the Verify OTP button....................................passed
+Then system should display the appropriate login status.....................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Wishlist Functionality" name="Verify adding/removing products from PLP" time="193.598">
+<system-out><![CDATA[
+Given user clicks on the Wishlist icon......................................passed
+When user validates the wish listed products list...........................passed
+And user clicks on the Women category.......................................passed
+And user selects a sub-category under Women.................................passed
+When user adds a product to the wishlist from the product listing page......passed
+And user clicks on the Wishlist icon........................................passed
+When user validates the wish listed products list...........................passed
+And user clicks on the Women category.......................................passed
+And user selects a sub-category under Women.................................passed
+And user removes the product from the wishlist from the product listing page.passed
+And user clicks on the Wishlist icon........................................passed
+When user validates the wish listed products list...........................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Wishlist Functionality" name="Verify adding/removing products from PDP" time="68.745">
+<system-out><![CDATA[
+Given user clicks on the kids category......................................passed
+When user selects a sub-category under kids.................................passed
+And user selects the product from the product listing page..................passed
+And user is navigated to the product detail page............................passed
+And user add a product to the wishlist from the product details page........passed
+Then user validates that product add wishlist successfully..................passed
+And user removes the product from the wishlist from the product details page.passed
+Then user validates that product removed wishlist successfully..............passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Wishlist Functionality" name="Verify adding/removing products from wishlist to bag/cart" time="225.209">
+<system-out><![CDATA[
+Given user back to Home Page................................................passed
+When user clicks on the Wishlist icon.......................................passed
+When user validates the wish listed products list...........................passed
+And user adds a product to bag from wishlist................................passed
+And user is navigated to the product detail page............................passed
+And user validating the out of stock product................................passed
+Then user selects a size if available.......................................passed
+And user clicks on Add to Bag and View Bag..................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Wishlist Functionality" name="Verify adding/removing products from Wishlist page (You Might also Like)" time="144.15">
+<system-out><![CDATA[
+Given user back to Home Page................................................passed
+And user clicks on the Wishlist icon........................................passed
+When user add a product to wishlist from you might also like section........passed
+And user validates that product add wishlist successfully...................passed
+Then user removes the product to wishlist from you might also like section..passed
+And user validates that product removed wishlist successfully...............passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Wishlist Functionality" name="Verify adding/removing products from Wishlist page to cart/bag (You Might also Like)" time="22.801">
+<failure type="org.openqa.selenium.ElementClickInterceptedException" message="element click intercepted: Element &lt;div class=&quot;cursor-pointer border-b border-black pb-0.5 text-xs font-medium capitalize leading-lg tracking-sm text-black dark:border-white dark:text-white select-none md:select-text&quot;&gt;...&lt;/div&gt; is not clickable at point (560, 9). Other element would receive the click: &lt;div class=&quot;hidden h-4 items-center justify-end gap-2 bg-black pr-[4.9%] md:flex md:h-7 xl:h-9&quot;&gt;...&lt;/div&gt;
+  (Session info: chrome=140.0.7339.133)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '26.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [64d7e0d9b612bfe93e94e789f84b7a57, clickElement {id=f.CD02F6BB27BBBD15ACEF55C8B2369D63.d.6353E711DF8F713102FB16B5A15CFF60.e.237}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.133, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: /var/folders/34/kvhlpvdn48v...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53304}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:53304/devtoo..., se:cdpVersion: 140.0.7339.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on mac (64d7e0d9b612bfe93e94e789f84b7a57)] -&gt; xpath: //div[contains(text(), 'Add to Bag')]]
+Session ID: 64d7e0d9b612bfe93e94e789f84b7a57">
+<![CDATA[org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element <div class="cursor-pointer border-b border-black pb-0.5 text-xs font-medium capitalize leading-lg tracking-sm text-black dark:border-white dark:text-white select-none md:select-text">...</div> is not clickable at point (560, 9). Other element would receive the click: <div class="hidden h-4 items-center justify-end gap-2 bg-black pr-[4.9%] md:flex md:h-7 xl:h-9">...</div>
+  (Session info: chrome=140.0.7339.133)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '26.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [64d7e0d9b612bfe93e94e789f84b7a57, clickElement {id=f.CD02F6BB27BBBD15ACEF55C8B2369D63.d.6353E711DF8F713102FB16B5A15CFF60.e.237}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.133, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: /var/folders/34/kvhlpvdn48v...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53304}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:53304/devtoo..., se:cdpVersion: 140.0.7339.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on mac (64d7e0d9b612bfe93e94e789f84b7a57)] -> xpath: //div[contains(text(), 'Add to Bag')]]
+Session ID: 64d7e0d9b612bfe93e94e789f84b7a57
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+	at pages.WishlistPage.clickAddToBagByIndex(WishlistPage.java:133)
+	at scenarios.stepDefinitions.WishlistSteps.user_add_a_product_to_add_to_bag_from_you_might_also_like_section(WishlistSteps.java:139)
+	at ✽.user add a product to add to bag from you might also like section(file:///Volumes/Macintosh%20HD%20-%20Data/Code/SS-Sanity/SS_Automation_Web_Sanity/src/test/java/scenarios/features/wishlist.feature:72)
+]]>
+</failure>
+<system-out><![CDATA[
+When user add a product to add to bag from you might also like section......failed
+And user selects the size...................................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="Verify the Wishlist Functionality" name="Verify the logout functionality" time="23.639">
+<system-out><![CDATA[
+When user clicks on the Logout button.......................................passed
+And user clicks on the yes button for logout................................passed
+Then user validate that the user is logged out..............................passed
 ]]></system-out>
 </testcase>
 </testsuite>

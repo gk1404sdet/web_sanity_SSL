@@ -17,7 +17,7 @@ Feature: Verify Successful and Failed Payment mode
       | 9136734340 | 123456 |
 
 @smoke @sanity @TC014 @TC028 @TC029 @TC030 @TC032 @TC033 @TC042
-  Scenario: Verify a successful payment
+  Scenario: TES3869 - Verify a successful payment
 
     Given user clicks on the Men category
     When user selects a sub-category under Men
@@ -38,14 +38,14 @@ Feature: Verify Successful and Failed Payment mode
     When user clicks on Place Order
 
 @smoke @sanity @TC038 @TC039
-  Scenario: the navigation to successful order summary page
+  Scenario: TES3874 - Verify the navigation to successful order summary page
 
     Then user validating successful order summary
     And user validating the Deliver Mode and Address
     Then user validates the final price details
 
 @smoke @sanity @TC043 @TC044
-  Scenario: functionality of Review Shopping Experience
+  Scenario: TES3874 - Verify functionality of Review Shopping Experience
 
     When user verifying the review shopping experience
     And user giving the rate for shopping
@@ -54,7 +54,7 @@ Feature: Verify Successful and Failed Payment mode
     Then user clicks the Continue Shopping Button
 
 @sanity @TC014 @TC028 @TC029 @TC030 @TC032 @TC033 @TC037 @TC042
-  Scenario: Verify a Failed payment
+  Scenario: TES3873 - Verify a Failed payment
 
     Given user back to Home Page
     Given user is on the Home Page
