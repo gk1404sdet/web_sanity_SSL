@@ -25,7 +25,7 @@ public class HomePage extends BasePage{
     public final By bargains = By.xpath("(//div[@data-testid])[2]");
     private final By sortBy = By.xpath("//button[@role=\"combobox\"]");
     public final By dressWomen = By.xpath("//p[contains(text(), 'Ethnicwear')]");
-    public final By shirt = By.xpath("//p[contains(text(), 'Shirts')]");
+    public final By shirt = By.xpath("(//li[contains(text(), 'Shirts')])[1]");
     public final By bed = By.xpath("//p[contains(text(),'Bed')]");
     public final By womenFragrance = By.xpath("//p[contains(text(), 'Womens Fragrance')]");
     public final By newSort = By.xpath("//span[contains(text(), 'New')]");

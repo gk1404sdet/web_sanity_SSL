@@ -58,8 +58,8 @@ Feature: Verify Successful and Failed Payment mode
 
     Given user back to Home Page
     Given user is on the Home Page
-    Given user clicks on the Women category
-    When user selects a sub-category under Women
+    Given user clicks on the Men category
+    When user selects a sub-category under Men
     And user selects a product from the PLP
     Then user is navigated to the product detail page
     Then user validating the out of stock product

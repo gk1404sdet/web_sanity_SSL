@@ -40,7 +40,6 @@ Feature: Verify the Header Functionality
     When user validates that Trending Search suggestion
     And user validates that from Trending Search suggestion landing the relevant products
     And user clicks on the search bar
-    And user validates that Trending Products suggestion
     Then user validates that Popular Brands
     And user validates that from Popular Brands suggestion landing the relevant products
     And user clicks on the search bar

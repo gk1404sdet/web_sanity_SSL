@@ -26,7 +26,6 @@ public class CheckoutPage extends BasePage {
     private final By priceDetails = By.xpath("//div[@class='flex flex-col items-start sm:px-4 md:px-0 md:pt-0 lg:px-0 xs:pt-4 mm:px-0']");
     private final By outOfStockCheck = By.xpath("//*[contains(translate(text(),'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 'OUT OF STOCK')]");
     private final By sizeBtn = By.xpath("//div[contains(@class,'overflow-x-auto')]//button");
-    private final By addToCart = By.xpath("//p[contains(text(), 'Add to bag')]");
     private final By addToBag = By.xpath("//img[@alt=\"bag_white\"]");
     private final By popUpViewBag = By.xpath("(//p[contains(text(), 'View Bag')])[2]");
     private final By viewBag = By.xpath("//p[contains(text(), 'View Bag')]");
@@ -39,7 +38,7 @@ public class CheckoutPage extends BasePage {
     private final By iFrame = By.name("HyperServices");
     private final By cardBlockLocator = By.xpath("//div[@class='rounded border border-lightGray md:basis-[31%] lg:rounded-lg']");
     private final By cardBlockEle = By.xpath(".//div | .//p");
-    private final By wallet = By.xpath(   "//*[text()='Wallets' or normalize-space()='Wallets']");
+    private final By wallet = By.xpath(   "(//*[text()='Wallets' or normalize-space()='Wallets'])[8]");
     private final By phonePe = By.xpath("//*[text()='PhonePe' or contains(text(),'Phone Pe')]");
     private final By proceedBtn = By.xpath("//*[text()='Proceed' or contains(text(),'Proceed')]");
     private final By upi = By.xpath("(//article[contains(text(),'UPI')])[3]");
@@ -178,6 +177,8 @@ public class CheckoutPage extends BasePage {
     }
 
     public void clickOnThePlaceOrder() {
+
+        waitForOverlayToDisappear();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
             WebElement placeOrderBtn = wait.until(ExpectedConditions.elementToBeClickable(placeOrder));
@@ -391,23 +392,29 @@ public class CheckoutPage extends BasePage {
             wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iFrame));
             Thread.sleep(10);
             // Click on "Wallets"
-//            WebElement walletsTab = wait.until(ExpectedConditions.elementToBeClickable(wallet));
-            WebElement upiTab = wait.until(ExpectedConditions.elementToBeClickable(upi));
-            js.executeScript("arguments[0].scrollIntoView({block: 'nearest', inline: 'nearest'});", upiTab);
+            WebElement walletsTab = wait.until(ExpectedConditions.elementToBeClickable(wallet));
+//            WebElement upiTab = wait.until(ExpectedConditions.elementToBeClickable(upi));
+            js.executeScript("arguments[0].scrollIntoView({block: 'nearest', inline: 'nearest'});", walletsTab);
 
-//            walletsTab.click();
-            upiTab.click();
+            walletsTab.click();
+//            upiTab.click();
             Thread.sleep(1000);
+
             // Select "PhonePe"
-//            wait.until(ExpectedConditions.elementToBeClickable(phonePe)).click();
+            wait.until(ExpectedConditions.elementToBeClickable(phonePe)).click();
+
             // Edit "UPI"
-            wait.until(ExpectedConditions.elementToBeClickable(editUpi)).click();
+//            wait.until(ExpectedConditions.elementToBeClickable(editUpi)).click();
+
             // Enter "UPI"
-            wait.until(ExpectedConditions.elementToBeClickable(editUpi)).sendKeys("test@ybl");
+//            wait.until(ExpectedConditions.elementToBeClickable(editUpi)).sendKeys("test@ybl");
+
             // Click on "proceed to Pay"
-            wait.until(ExpectedConditions.elementToBeClickable(proceedToPay)).click();
+//            wait.until(ExpectedConditions.elementToBeClickable(proceedToPay)).click();
+
             // Click on "Proceed"
-//            wait.until(ExpectedConditions.elementToBeClickable(proceedBtn)).click();
+            wait.until(ExpectedConditions.elementToBeClickable(proceedBtn)).click();
+
             // Switch back to main document
             driver.switchTo().defaultContent();
         } catch (Exception e) {}

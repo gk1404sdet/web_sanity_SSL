@@ -23,12 +23,12 @@ Feature: Verify the Home Page Functionality
     When user selects a sub-category under Women
     And user clicks on the sort by
     And user applying the sort by as price low to high
-    And user clicks on the bargains category
-    When user selects a sub-category under men
+    And user clicks on the Men category
+    When user selects a sub-category under Men
     And user clicks on the sort by
     And user applying the sort by as discount
-    Then user clicks on the bargains category
-    Then user selects a sub-category under home offer
+    Then user clicks on the Women category
+    Then user selects a sub-category under Women
     And user clicks on the sort by
     And user applying the sort by as new
     And user clicks on the bargains category
@@ -52,7 +52,7 @@ Feature: Verify the Home Page Functionality
   Scenario: TES349 - Verify the components of PDP
 
     Given user clicks on the Men category
-    When user selects a sub-category under men
+    When user selects a sub-category under Men
     And user selects a product from the PLP
     Then user is navigated to the product detail page
     And user validates all product detail section components are displayed
@@ -63,19 +63,19 @@ Feature: Verify the Home Page Functionality
     And user validates that product details
 
 @smoke @sanity @TC013 @TC020
-  Scenario: Verify functionality of Invalid Pincode check on the PDP
+  Scenario: Verify functionality of Invalid Postal code check on the PDP
 
-    Given user clicks the pincode check box
-    When user enters the invalid pincode
-    Then user clicks the check option to validate the pincode
+    Given user check the postal code from pdp
+    When user clicks the postal code check box
+    When user enters the invalid postal code
     And system should display the appropriate error message
 
 @smoke @sanity @TC013 @TC065
-  Scenario: Verify functionality of Pincode check on the PDP
+  Scenario: Verify functionality of Postal code check on the PDP
 
-    Given user clicks the pincode check box
-    When user enters the pincode
-    Then user clicks the check option to validate the pincode
+    Given user clicks the postal code check box
+    When user enters the postal code
+    Then user clicks the check option to validate the postal code
     And user back to Home Page
 
 @smoke @sanity @TC055

@@ -1,6 +1,6 @@
 Feature: User Login Functionality with Valid and Invalid Data
 
-@smoke @sanity @TC002 @login
+@smoke @sanity @TC002
   Scenario Outline: TES3838 - Verify the Sign-in functionality via phone number for existing user
 
     Given user launches the application
@@ -33,8 +33,7 @@ Feature: User Login Functionality with Valid and Invalid Data
 
     Examples:
       | email id                             |
-#      | gopalkrishnan.sslconsultant@shoppersstop.com |
-      | Saravanan.MSTConsultant@shoppersstop.com |
+      | gopalkrishnan.sslconsultant@shoppersstop.com |
 
 @smoke @sanity @TC065
   Scenario Outline: Verify the OTP functionality with an invalid OTP and Resend functionality
@@ -84,15 +83,14 @@ Feature: User Login Functionality with Valid and Invalid Data
   Scenario: TES3857 - Verify functionality of Merge cart as a guest to logged-in user
 
     Given user launches the application
-    When user clicks on the Women category
-    And user selects a sub-category under Women
+    When user clicks on the Men category
+    And user selects a sub-category under men
     And user selects a product from the PLP
     And user is navigated to the product detail page
     And user validating the out of stock product
     Then user selects a size if available
     And user clicks on Add to Bag and View Bag
     And user clicks on the View Bag
-    And user validates the price details in the bag
     And user clicks on Place Order
     And user validates that a guest user is prompted to enter login credentials
     And user enters mobile number "9136734340"

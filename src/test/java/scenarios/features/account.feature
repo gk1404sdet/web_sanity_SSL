@@ -114,10 +114,10 @@ Feature: Verify the Account Module in the Application
         | Membership Details & Benefits     |
 
   @smoke @sanity @TC049
-   Scenario: TES3885 - Verify navigation and functionality of GC/EGV
+  Scenario: TES3885 - Verify navigation and functionality of GC/EGV
 
-     When user clicks the My Gift card or EGV
-     And user validates that gift vouchers product list
+    When user clicks the My Gift card or EGV
+    And user validates that gift vouchers product list
 
 @smoke @sanity @TC055
   Scenario: Verify the logout functionality

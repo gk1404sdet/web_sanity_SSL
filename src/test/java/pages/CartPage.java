@@ -19,7 +19,7 @@ public class CartPage extends BasePage{
     private final By cartIcon = By.xpath("//img[@alt=\"shopping-cart\"]");
     private final By viewBag = By.xpath("(//p[contains(text(), 'View Bag')])[2]");
     private final By viewBagOne = By.xpath("//p[contains(text(), 'View Bag')]");
-    private final By pincodeBox = By.xpath("//input[@placeholder=\"Enter your PIN code\"]");
+    public final By pincodeBox = By.xpath("//input[@placeholder=\"Enter your PIN code\"]");
     private final By check = By.xpath("(//div[contains(text(), 'Check')])[2]");
     private final By sizeChart = By.xpath("//button[@role=\"combobox\"]");
     private final By increaseQuan = By.xpath("//img[@alt=\"plus\"]");
@@ -66,6 +66,7 @@ public class CartPage extends BasePage{
     }
 
     public void clickOnPincodeBox() {
+        waitForOverlayToDisappear();
         clickOnElement(pincodeBox);
     }
 

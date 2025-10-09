@@ -18,7 +18,6 @@ public class HeaderPage extends BasePage {
     private final By fashionStylist = By.xpath("//img[@alt=\"fashion_stylist_logo\"]");
     private final By searchEditBox = By.xpath("//input[@type=\"text\"]");
     public final By trendingSearch = By.xpath("//div[@class=\"xs:text-sm select-none md:select-text\"]");
-    public final By trendingProduct = By.xpath("//div[@class=\"text-[10px] md:text-xs lg:text-sm xl:text-base font-medium !leading-[18px] text-neutral-900 select-none md:select-text\"]");
     public final By popularBrands = By.xpath("//div[@class=\"bg-transparent flex flex-col flex-wrap\"]");
     private final By storeIcon = By.xpath("//img[@alt=\"near-by-store\"]");
     private final By storeCity = By.id("Select City");

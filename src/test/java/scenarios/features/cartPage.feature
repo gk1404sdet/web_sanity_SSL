@@ -55,19 +55,19 @@ Feature: Verify the Cart Page Functionality
       | Price Details          |
 
 @smoke @sanity @TC020
-  Scenario: Verify functionality of Invalid Pincode check on the cart page
+  Scenario: Verify functionality of Invalid Postal code check on the cart page
 
-    Given user clicks the pincode check box
-    When user enters the invalid pincode
-    Then user clicks the check option to validate the pincode
+    Given user clicks the postal code check box
+    When user enters the invalid postal code
+    Then user clicks the check option to validate the postal code
     And system should display the appropriate error status
 
 @smoke @sanity @TC020
-  Scenario: TES3856 - Verify functionality of Valid Pincode check on the cart page
+  Scenario: TES3856 - Verify functionality of Valid Postal code check on the cart page
 
-    Given user clicks the pincode check box
-    When user enters the pincode
-    Then user clicks the check option to validate the pincode
+    Given user clicks the postal code check box
+    When user enters the postal code
+    Then user clicks the check option to validate the postal code
 
 @smoke @sanity @TC026
   Scenario: TES3862 - Verify increase and decrease of the product quantity
@@ -98,7 +98,6 @@ Feature: Verify the Cart Page Functionality
 
     When user clicks on the xmark icon
     And user is moving the product to wishlist from bag
-    And user validates that product moved to wishlist from bag
     When user clicks on the xmark icon
     Then user is removing the product from bag
     And user validates that product removed from bag

@@ -44,18 +44,6 @@ Feature: Verify the Wishlist Functionality
     And user removes the product from the wishlist from the product details page
     Then user validates that product removed wishlist successfully
 
-@sanity @TC022
-  Scenario: TES3858 - Verify adding/removing products from wishlist to bag/cart
-
-    Given user back to Home Page
-    When user clicks on the Wishlist icon
-    When user validates the wish listed products list
-    And user adds a product to bag from wishlist
-    And user is navigated to the product detail page
-    And user validating the out of stock product
-    Then user selects a size if available
-    And user clicks on Add to Bag and View Bag
-
 @sanity @TC017
   Scenario: TES3860 - Verify adding/removing products from Wishlist page (You Might also Like)
 
@@ -72,9 +60,24 @@ Feature: Verify the Wishlist Functionality
     When user add a product to add to bag from you might also like section
     And user selects the size
 
+@sanity @TC022
+  Scenario: TES3858 - Verify adding/removing products from wishlist to bag/cart
+
+    Given user back to Home Page
+    When user clicks on the Wishlist icon
+    When user validates the wish listed products list
+    And user adds a product to bag from wishlist
+    And user is navigated to the product detail page
+    And user validating the out of stock product
+    Then user selects a size if available
+    And user clicks on Add to Bag and View Bag
+    And user clicks on the View Bag
+
+
 @smoke @sanity @TC055
   Scenario: Verify the logout functionality
 
+    Given user back to Home Page
     When user clicks on the Logout button
     And user clicks on the yes button for logout
     Then user validate that the user is logged out

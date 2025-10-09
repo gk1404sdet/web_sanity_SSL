@@ -22,6 +22,7 @@
         <version.maven-surefire-plugin>3.5.3</version.maven-surefire-plugin>
         <version.extentreports-cucumber7-adapter>1.14.0</version.extentreports-cucumber7-adapter>
         <version.extentreports-pdf>1.0.2</version.extentreports-pdf>
+        <version.cucumber-reporting>5.7.0</version.cucumber-reporting>
         <threadCount>1</threadCount>
     </properties>
 
@@ -95,6 +96,11 @@
             <version>${version.extentreports-cucumber7-adapter}</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>${version.cucumber-reporting}</version>
+        </dependency>
     </dependencies>
 
 

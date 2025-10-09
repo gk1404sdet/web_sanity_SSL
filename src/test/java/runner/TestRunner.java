@@ -2,6 +2,8 @@ package runner;
 
 import static java.util.Objects.requireNonNull;
 
+import hooks.JvmReport;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 
@@ -28,6 +30,11 @@ public class TestRunner extends AbstractTestNGCucumberTests {
     @DataProvider(parallel = false)
     public Object[][] scenarios() {
         return super.scenarios();
+    }
+
+    @AfterSuite
+    public void generateReport() {
+        JvmReport.report("target/Reports/cucumber-report.json");
     }
 
 }
