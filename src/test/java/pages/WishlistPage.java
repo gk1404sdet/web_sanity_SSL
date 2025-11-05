@@ -11,10 +11,9 @@ public class WishlistPage extends BasePage {
 
     public final JavascriptExecutor js = (JavascriptExecutor) driver;
 
-    public WishlistPage(WebDriver driver) {
-        super(driver);
-    }
 
+
+    // ---------- Locators ----------
     private final By wishlistIcon = By.xpath("//img[@alt=\"wish-list\"]");
     public final By wishlistProducts = By.xpath("//div[@class=\"bg-transparent pr-0\"]");
     private final By wishlistIconPLP = By.xpath("//img[@alt=\"empty_icon\"]");
@@ -30,7 +29,12 @@ public class WishlistPage extends BasePage {
     private final By overlayWishlist = By.cssSelector("div.fixed.inset-0.bg-neutral-900\\/90");
 
 
+    public WishlistPage(WebDriver driver) {
+        super(driver);
+    }
 
+
+    // ---------- Common Actions ----------
     public void clickOnWishlistIcon() {
         waitForOverlayToDisappear();
         clickOnElement(wishlistIcon);

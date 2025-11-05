@@ -11,10 +11,9 @@ public class HeaderPage extends BasePage {
 
     public final JavascriptExecutor js = (JavascriptExecutor) driver;
 
-    public HeaderPage(WebDriver driver) {
-        super(driver);
-    }
 
+
+    // ---------- Locators ----------
     private final By fashionStylist = By.xpath("//img[@alt=\"fashion_stylist_logo\"]");
     private final By searchEditBox = By.xpath("//input[@type=\"text\"]");
     public final By trendingSearch = By.xpath("//div[@class=\"xs:text-sm select-none md:select-text\"]");
@@ -35,8 +34,11 @@ public class HeaderPage extends BasePage {
     private final By cityOptionList = By.xpath("//li[@class=\"option cursor-pointer p-2.5 text-xs capitalize text-ssBlack focus-within:bg-red-300 hover:bg-[#f0f0f0] md:text-sm\"]");
 
 
+    public HeaderPage(WebDriver driver) {
+        super(driver);
+    }
 
-
+    // ---------- Common Actions ----------
     public List<String> getAllComponentList() {
         List<String> componentTexts = new ArrayList<>();
 

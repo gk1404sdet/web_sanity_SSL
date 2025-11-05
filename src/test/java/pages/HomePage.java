@@ -12,10 +12,8 @@ public class HomePage extends BasePage{
 
     private final JavascriptExecutor js = (JavascriptExecutor) driver;
 
-    public HomePage(WebDriver driver) {
-        super(driver);
-    }
 
+    // ---------- Locators ----------
     public final By men = By.xpath("(//a[@href=\"/category/men\"])[1]");
     public final By women = By.xpath("(//a[@href=\"/category/women\"])[1]");
     public final By kids = By.xpath("(//a[@href=\"/category/kids\"])[1]");
@@ -44,8 +42,11 @@ public class HomePage extends BasePage{
     private final By checkDelivery = By.xpath("//div[contains(text(), 'Check Delivery')]");
 
 
+    public HomePage(WebDriver driver) {
+        super(driver);
+    }
 
-
+    // ---------- Common Actions ----------
     public void moveToCategory(By locator) {
         moveToElement(locator);
     }

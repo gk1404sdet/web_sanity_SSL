@@ -12,10 +12,8 @@ public class CartPage extends BasePage{
 
     public final JavascriptExecutor js = (JavascriptExecutor) driver;
 
-    public CartPage(WebDriver driver) {
-        super(driver);
-    }
 
+    // ---------- Locators ----------
     private final By cartIcon = By.xpath("//img[@alt=\"shopping-cart\"]");
     private final By viewBag = By.xpath("(//p[contains(text(), 'View Bag')])[2]");
     private final By viewBagOne = By.xpath("//p[contains(text(), 'View Bag')]");
@@ -47,9 +45,11 @@ public class CartPage extends BasePage{
     private final By overlayLocator = By.cssSelector("div[class*='fixed'], div[class*='overlay']");
     private final By addAddress = By.xpath("//p[contains(text(), 'ADD NEW ADDRESS')]");
 
+    public CartPage(WebDriver driver) {
+        super(driver);
+    }
 
-
-
+    // ---------- Common Actions ----------
     public void clickOnCartIcon() {
         clickOnElement(cartIcon);
     }

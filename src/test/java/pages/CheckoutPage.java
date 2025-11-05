@@ -11,11 +11,9 @@ public class CheckoutPage extends BasePage {
 
     private final JavascriptExecutor js = (JavascriptExecutor) driver;
 
-    public CheckoutPage(WebDriver driver) {
-        super(driver);
-    }
 
 
+    // ---------- Locators ----------
     private final By placeOrder = By.xpath("//p[contains(text(), 'PLACE ORDER')]");
     private final By continueButton = By.xpath("//p[contains(text(), 'CONTINUE')]");
     private final By continueShopping = By.xpath("//p[contains(text(), 'CONTINUE SHOPPING')]");
@@ -47,6 +45,12 @@ public class CheckoutPage extends BasePage {
     private final By filterLocator = By.xpath("//div[@class='cursor-pointer text-nowrap rounded-[36px] border border-neutral-300 px-2.5 py-3 md:rounded bg-transparent']");
     private final By ratingContainer = By.cssSelector("svg[data-testid='rating-component-star']:nth-of-type(4)");
 
+
+    public CheckoutPage(WebDriver driver) {
+        super(driver);
+    }
+
+    // ---------- Common Actions ----------
     public boolean clickProductByIndex(By locator,int index) {
         try {
             waitForOverlayToDisappear();
