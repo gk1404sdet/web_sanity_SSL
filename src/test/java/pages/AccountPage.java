@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.*;
 
 
@@ -16,11 +17,7 @@ public class AccountPage extends BasePage {
     private String selectedDateFormatted;
     private String selectedSlot;
 
-    public AccountPage(WebDriver driver) {
-        super(driver);
-    }
-
-
+    // ---------- Locators ----------
     private final By profile = By.xpath("//div[contains(text(),'My Profile')]");
     private final By name = By.xpath("//input[@id='Name']");
     private final By mobNo = By.xpath("//input[@id='Mobile No.']");
@@ -50,7 +47,6 @@ public class AccountPage extends BasePage {
     private final By insideStoreEle = By.xpath("//label[@for='-1']//div");
     private final By selectStore = By.xpath("(//button[contains(@role, 'radio')])[1]");
     private final By calendarIcon = By.xpath("//img[@alt='calendar icon']");
-    private final By modalPanel = By.xpath("//div[contains(@class,'overflow-y-scroll') or contains(@class,'overflow-auto')]");
     private final By timeIcon = By.xpath("(//button[@data-state='closed'])[3] | //span[@class='w-full font-normal text-neutral-500']");
     private final By summary = By.xpath("//div[@class='text-xs font-medium leading-6 tracking-wide text-ssBlack md:text-base select-none md:select-text']");
     private final By noOrderMessage = By.xpath("//div[contains(text(), 'No recent orders')]");
@@ -79,8 +75,11 @@ public class AccountPage extends BasePage {
     private final By membership = By.xpath("//div[contains(text(), 'Membership Details & Benefits')]");
 
 
+    public AccountPage(WebDriver driver) {
+        super(driver);
+    }
 
-
+    // ---------- Common Actions ----------
     public void clicksOnMyProfile() {
         waitForOverlayToDisappear();
         clickOnElement(profile);
@@ -167,7 +166,7 @@ public class AccountPage extends BasePage {
 
     public List<String> getAllComponentList() {
         waitForOverlayToDisappear();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(profile));
+        moveToProfile();
         List<WebElement> componentElements = driver.findElements(comElement);
 
         List<String> componentTexts = new ArrayList<>();
@@ -322,43 +321,53 @@ public class AccountPage extends BasePage {
     public void selectTomorrowDate() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-            // Locate the calendar icon
-            WebElement calendarIconElement = wait.until(ExpectedConditions.presenceOfElementLocated(calendarIcon));
+            // :one: Open the calendar
+            WebElement calendarIconElement = wait.until(ExpectedConditions.elementToBeClickable(calendarIcon));
             js.executeScript("arguments[0].scrollIntoView({block: 'center'});", calendarIconElement);
             js.executeScript("arguments[0].click();", calendarIconElement);
-
-            // tomorrow's date
-            LocalDate tomorrow = LocalDate.now().plusDays(1);
-            int dayInt = tomorrow.getDayOfMonth();
-            String day = String.valueOf(dayInt);
-
-            // XPath for tomorrow's day in the calendar
-            String dayXpath = "//tr[contains(@class, 'rdp-row')]//td[contains(@class,'rdp-cell')]//button[normalize-space(text())='" + day + "']";
-
-            WebElement dateButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(dayXpath)));
-
-            // Scroll the popup panel (if any)
+            System.out.println(":white_check_mark: Calendar opened");
+            // :two: Compute tomorrow’s date
+            LocalDate today = LocalDate.now();
+            LocalDate tomorrow = today.plusDays(1);
+            // :three: If tomorrow is in the next month, go to next month
+            if (tomorrow.getMonthValue() != today.getMonthValue()) {
+                System.out.println(":information_source: Tomorrow is in the next month. Clicking next...");
+                By nextMonthArrow = By.xpath("//button[contains(@aria-label,'Next') or contains(@class,'rdp-nav_button')]");
+                WebElement nextMonthButton = wait.until(ExpectedConditions.elementToBeClickable(nextMonthArrow));
+                js.executeScript("arguments[0].click();", nextMonthButton);
+                // Wait for header to change to next month
+                String nextMonthFullName = tomorrow.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+                wait.until(ExpectedConditions.textToBePresentInElementLocated(
+                        By.xpath("//h2[contains(@class,'rdp-caption_label')]"), nextMonthFullName
+                ));
+                System.out.println(":white_check_mark: Switched to " + nextMonthFullName);
+            }
+            // :four: Use your specific working XPath pattern
+            String dayXpath = "//*[contains(@class, 'rdp-day')]" + "[not(contains(@class, 'rdp-day_outside')) and not(@aria-disabled='true') and not(@disabled)]" + "[normalize-space()='" + tomorrow.getDayOfMonth() + "']";
+            System.out.println(":mag: Using XPath: " + dayXpath);
+            WebElement dateElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(dayXpath)));
+            // :five: Scroll into view and click safely
+            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", dateElement);
             try {
-                WebElement modalPanelElement = driver.findElement(modalPanel);
-                js.executeScript("arguments[0].scrollTop = arguments[1].offsetTop;", modalPanelElement, dateButton);
-            } catch (Exception ignored) {}
-
-            // Scroll to the date button and click it
-            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", dateButton);
-            wait.until(ExpectedConditions.elementToBeClickable(dateButton)).click();
-
-            // readable format output
+                wait.until(ExpectedConditions.elementToBeClickable(dateElement)).click();
+            } catch (Exception e) {
+                System.out.println(":warning: Selenium click failed. Trying JS click...");
+                js.executeScript("arguments[0].click();", dateElement);
+            }
+            System.out.println(":white_check_mark: Clicked date: " + tomorrow.getDayOfMonth());
+            // :six: Format the selected date nicely
+            int dayInt = tomorrow.getDayOfMonth();
             String suffix = (dayInt >= 11 && dayInt <= 13) ? "th" : switch (dayInt % 10) {
                 case 1 -> "st";
                 case 2 -> "nd";
                 case 3 -> "rd";
                 default -> "th";
             };
-
             selectedDateFormatted = dayInt + suffix + " " + tomorrow.format(DateTimeFormatter.ofPattern("MMM, yyyy"));
-
+            System.out.println(":date: Selected date: " + selectedDateFormatted);
         } catch (Exception e) {
+            System.out.println(":x: Error selecting tomorrow's date: " + e.getMessage());
+            e.printStackTrace();
             throw new RuntimeException("Error selecting tomorrow's date: " + e.getMessage(), e);
         }
     }
@@ -655,12 +664,12 @@ public class AccountPage extends BasePage {
 
     public int countGridItems() {
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            // Wait for the grid container
-            WebElement gridContainer = wait.until(ExpectedConditions.visibilityOfElementLocated(gridContainerLocator));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        // Wait for the grid container
+        WebElement gridContainer = wait.until(ExpectedConditions.visibilityOfElementLocated(gridContainerLocator));
 
-            List<WebElement> gridItems = gridContainer.findElements(By.xpath("./*"));
-            return gridItems.size();
+        List<WebElement> gridItems = gridContainer.findElements(By.xpath("./*"));
+        return gridItems.size();
     }
 
     public boolean validateFirstCitizenClubSections(List<String> expectedSections) {

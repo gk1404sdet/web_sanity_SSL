@@ -240,10 +240,7 @@ public class BasePage {
             js.executeScript(
                     "let modal = document.querySelector('div[role=\"dialog\"]');" +
                             "if(modal){ modal.scrollTop += 500; }");
-            System.out.println("Scrolled...");
-        } catch (Exception e) {
-            System.out.println("Scroll failed: " + e.getMessage());
-        }
+            } catch (Exception e) {}
     }
 
     public void moveToElement(By locator) {
@@ -260,23 +257,18 @@ public class BasePage {
             for (String windowHandle : allWindows) {
                 if (!windowHandle.equals(parentWindow)) {
                     driver.switchTo().window(windowHandle);
-                    System.out.println("Closing child window: " + driver.getTitle());
                     driver.close();
                 }
             }
             // Switch back to parent
             driver.switchTo().window(parentWindow);
-            System.out.println("Switched back to parent window: " + driver.getTitle());
-        } else {
-            System.out.println("No child window found. Proceeding with next step...");
-        }
+        } else {}
     }
 
     public void scrollToElement(By locator) {
         try {
             WebElement element = driver.findElement(locator);
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
-            System.out.println("Scrolled to element: " + locator.toString());
         } catch (Exception e) {
             Assert.fail("Error while scrolling to element: " + locator.toString());
             e.printStackTrace();
@@ -287,7 +279,7 @@ public class BasePage {
         try {
             By overlayLocator = By.cssSelector("div[class*='inset-0'][class*='bg-neutral']");
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.invisibilityOfElementLocated(overlayLocator));
         } catch (Exception e) {}
     }
@@ -298,13 +290,9 @@ public class BasePage {
             WebElement errorElement = wait.until(ExpectedConditions.visibilityOfElementLocated(errorLocator));
             String actualText = errorElement.getText().trim();
 
-            System.out.println("Actual: " + actualText);
             Assert.assertEquals(actualText, expectedText, "Toast message mismatch!");
-            System.out.println("Toasted Message is Matched: " + expectedText);
         } catch (Exception e) {
             Assert.fail("Failed to validate error message for partial text: '" + partialText + "' - " + e.getMessage());
         }
     }
-
-
 }

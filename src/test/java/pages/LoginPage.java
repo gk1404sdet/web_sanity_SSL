@@ -8,12 +8,10 @@ import java.time.Duration;
 
 public class LoginPage extends BasePage {
 
-    public LoginPage(WebDriver driver) {
-        super(driver);
-    }
-
+    // ---------- Locators ----------
     private final By login = By.xpath("//p[contains(text(),'Login')]");
-    private final By userID = By.id("Enter your phone or email ID");
+//    private final By userID = By.id("Enter your phone or email ID");
+    private final By userID = By.id("Enter your phone number");
     private final By proceedBtn = By.xpath("//p[contains(text(), 'PROCEED')]");
     private final By verifyOTPBtn = By.xpath("//p[contains(text(), 'VERIFY OTP')]");
     private final By hello = By.xpath("//p[contains(text(), 'Hello, ')]");
@@ -25,9 +23,13 @@ public class LoginPage extends BasePage {
     public final By maxOtpAttempts = By.xpath("//div[contains(text(),'Since you have exceeded the maximum OTP attempts')]");
     public final By otpField = By.xpath("//div[contains(text(),'Please enter a valid OTP')]");
 
+    public LoginPage(WebDriver driver) {
+        super(driver);
+    }
 
-    public void moveToHello() {
-        waitForOverlayToDisappear();
+    // ---------- Common Actions ----------
+    public void moveToHello() throws InterruptedException {
+        Thread.sleep(1000);
         moveToElement(hello);
     }
 
@@ -38,7 +40,7 @@ public class LoginPage extends BasePage {
     public void clickOnLogout() {
         try {
             moveToHello();
-            Thread.sleep(1000);
+            Thread.sleep(500);
             clickOnElement(logout);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -54,6 +56,7 @@ public class LoginPage extends BasePage {
     }
 
     public boolean clickOnTheProceedButton() {
+
         if (isElementPresent(invalidFormatMsg)) {
             return false;
         }
@@ -72,10 +75,12 @@ public class LoginPage extends BasePage {
     }
 
     public void enterOTP(String otp) {
+
+        waitForOverlayToDisappear();
         for(int i = 0; i < otp.length(); i++) {
             char digit = otp.charAt(i);
             String xpath = "//input[@aria-label='Please enter OTP character " + (i + 1) + "']";
-            WebElement otpInput = new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+            WebElement otpInput = new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 
             otpInput.click();
             otpInput.sendKeys(String.valueOf(digit));

@@ -20,6 +20,7 @@ public class HomePage extends BasePage{
     public final By women = By.xpath("(//a[@href=\"/category/women\"])[1]");
     public final By kids = By.xpath("(//a[@href=\"/category/kids\"])[1]");
     public final By formalShoes = By.xpath("//li[contains(text(),'Formal Shoes')]");
+    public final By shorts = By.xpath("(//li[contains(text(),'Shorts')])[1]");
     public final By topsAndTshirt = By.xpath("//li[contains(text(), 'Tops & T-shirts')]");
     public final By blazerKids = By.xpath("//li[contains(text(), 'Blazers & Coats')]");
     public final By bargains = By.xpath("(//div[@data-testid])[2]");
@@ -45,11 +46,12 @@ public class HomePage extends BasePage{
 
 
 
-    public void moveToCategory(By locat) {
-        moveToElement(locat);
+    public void moveToCategory(By locator) {
+        moveToElement(locator);
     }
 
-    public void clickOnSubCategory(By locator) {
+    public void clickOnSubCategory(By locator) throws InterruptedException {
+        Thread.sleep(2000);
         clickOnElement(locator);
     }
 

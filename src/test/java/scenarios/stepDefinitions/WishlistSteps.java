@@ -37,56 +37,49 @@ public class WishlistSteps {
 
         wishlistPage.clickOnWishlistIcon();
     }
-
-    @Then("user validates the wish listed products list")
-    public void user_validates_the_wish_listed_products_list() {
+    @Then("user validates the wishlisted products list")
+    public void user_validates_the_wishlisted_products_list() {
 
         wishlistPage.fetchProductList(wishlistPage.wishlistProducts);
     }
-
     @When("user clicks on the Women category")
     public void user_clicks_on_the_women_category() {
 
         homePage.moveToCategory(homePage.women);
     }
-
     @When("user selects a sub-category under Women")
-    public void user_selects_a_sub_category_under_women() {
+    public void user_selects_a_sub_category_under_women() throws InterruptedException {
 
         homePage.clickOnSubCategory(homePage.topsAndTshirt);
     }
-
     @When("user adds a product to the wishlist from the product listing page")
     public void user_adds_a_product_to_the_wishlist_from_the_product_listing_page() {
 
         try {
-            user_removes_the_product_from_the_wishlist_from_the_product_listing_page();
+            user_removes_the_product_from_the_wishlist_on_the_product_listing_page();
         } catch(RuntimeException e) {
             wishlistPage.addProductsToWishlist(3);
         }
     }
-
-    @Then("user removes the product from the wishlist from the product listing page")
-    public void user_removes_the_product_from_the_wishlist_from_the_product_listing_page() {
+    @Then("user removes the product from the wishlist on the product listing page")
+    public void user_removes_the_product_from_the_wishlist_on_the_product_listing_page() {
 
         wishlistPage.removeProductsFromWishlist(3);
     }
 
     //Wishlist PDP
-    @Given("user clicks on the kids category")
+    @Given("user clicks on the Kids category")
     public void user_clicks_on_the_kids_category() {
 
         homePage.moveToCategory(homePage.kids);
     }
-
-    @When("user selects a sub-category under kids")
-    public void user_selects_a_sub_category_under_kids() {
+    @When("user selects a sub-category under Kids")
+    public void user_selects_a_sub_category_under_kids() throws InterruptedException {
 
         homePage.clickOnSubCategory(homePage.blazerKids);
     }
-
-    @When("user selects the product from the product listing page")
-    public void user_selects_the_product_from_the_product_listing_page() {
+    @When("user selects a product from the product listing page")
+    public void user_selects_a_product_from_the_product_listing_page() {
 
         boolean result = checkoutPage.clickProductByIndex(checkoutPage.productList, 2);
         if (!result) {
@@ -95,35 +88,31 @@ public class WishlistSteps {
             scenario.log("Product clicked successfully at index 2");
         }
     }
-
-    @When("user add a product to the wishlist from the product details page")
-    public void user_add_a_product_to_the_wishlist_from_the_product_details_page() {
+    @When("user adds a product to the wishlist from the product details page")
+    public void user_adds_a_product_to_the_wishlist_from_the_product_details_page() {
 
         wishlistPage.clickOnWishlistPDP();
     }
-
-    @Then("user validates that product add wishlist successfully")
-    public void user_validates_that_product_add_wishlist_successfully() {
+    @Then("user validates that the product is added to the wishlist successfully")
+    public void user_validates_that_the_product_is_added_to_the_wishlist_successfully() {
 
         wishlistPage.validateErrorMessageByPartialText("Added to your Wishlist", "Added to your Wishlist");
     }
-
-    @Then("user removes the product from the wishlist from the product details page")
-    public void user_removes_the_product_from_the_wishlist_from_the_product_details_page() {
+    @Then("user removes the product from the wishlist on the product details page")
+    public void user_removes_the_product_from_the_wishlist_on_the_product_details_page() {
 
         wishlistPage.clickOnWishlistPDP();
     }
-
-    @Then("user validates that product removed wishlist successfully")
-    public void user_validates_that_product_removed_wishlist_successfully() {
+    @Then("user validates that the product is removed from the wishlist successfully")
+    public void user_validates_that_the_product_is_removed_from_the_wishlist_successfully() {
 
         wishlistPage.validateErrorMessageByPartialText("Removed from your Wishlist", "Removed from your Wishlist");
     }
 
 
     // Wishlist - Adding to Cart
-    @When("user adds a product to bag from wishlist")
-    public void user_adds_a_product_to_bag_from_wishlist() {
+    @When("user adds a product to the bag from the wishlist")
+    public void user_adds_a_product_to_the_bag_from_the_wishlist() {
 
         boolean result = checkoutPage.clickProductByIndex(checkoutPage.productList, 2);
         if (!result) {
@@ -134,29 +123,28 @@ public class WishlistSteps {
     }
 
     //Wishlist - You Might also like section
-    @When("user add a product to wishlist from you might also like section")
-    public void user_add_a_product_to_wishlist_from_you_might_also_like_section() {
+    @When("user adds a product to the wishlist from the You Might Also Like section")
+    public void user_adds_a_product_to_the_wishlist_from_the_you_might_also_like_section() {
 
         wishlistPage.scrollToElement(wishlistPage.youMight);
         wishlistPage.addProductsToWishlist(1);
     }
-
-    @Then("user removes the product to wishlist from you might also like section")
-    public void user_removes_the_product_to_wishlist_from_you_might_also_like_section() {
+    @Then("user removes the product from the wishlist in the You Might Also Like section")
+    public void user_removes_the_product_from_the_wishlist_in_the__you_might_also_like_section() {
 
         wishlistPage.removeProductsFromWishlist(3);
     }
 
     //Add to bag - You Might also like section
-    @When("user add a product to add to bag from you might also like section")
-    public void user_add_a_product_to_add_to_bag_from_you_might_also_like_section() {
+    @Then("user adds a product to the bag from the You Might Also Like section")
+    public void user_adds_a_product_to_the_bag_from_the_you_might_also_like_section() throws InterruptedException {
 
+        Thread.sleep(1000);
         wishlistPage.scrollToElement(wishlistPage.youMight);
         wishlistPage.scrollDown();
         wishlistPage.clickAddToBagByIndex(1);
     }
-
-    @When("user selects the size")
+    @Then("user selects the size")
     public void user_selects_the_size() {
 
         wishlistPage.clickByIndexIfAnyAvailable();
