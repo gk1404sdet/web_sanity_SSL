@@ -34,16 +34,19 @@ public class LoginSteps {
 
         loginPage.goTo(configLoader.getProperty("prodUrl"));
     }
+
     @When("user taps on the Login button")
     public void user_taps_on_the_login_button() {
 
         loginPage.clickOnLogin();
     }
+
     @When("user enters the mobile number {string}")
     public void user_enters_the_mobile_number(String string) {
 
         loginPage.enterUserID(string);
     }
+
     @When("user clicks on the Proceed button")
     public void user_clicks_on_the_proceed_button() {
 
@@ -63,11 +66,13 @@ public class LoginSteps {
         }
         Assert.assertTrue(isProceedSuccessful, "Proceed Failed: User may be blocked for 24 hours or invalid input was provided");
     }
+
     @Then("user enters the OTP {string}")
     public void user_enters_the_otp(String string) {
 
         loginPage.enterOTP(string);
     }
+
     @Then("user clicks on the Verify OTP button")
     public void user_clicks_on_the_verify_otp_button() {
 
@@ -83,6 +88,7 @@ public class LoginSteps {
         }
         Assert.assertTrue(isVerified, "OTP Verification Failed");
     }
+
     @Then("system should display the appropriate login status")
     public void system_should_display_the_appropriate_login_status() {
 
@@ -96,11 +102,13 @@ public class LoginSteps {
         loginPage.waitForOverlayToDisappear();
         loginPage.clickOnLogout();
     }
+
     @When("user clicks on the Yes button to confirm logout")
     public void user_clicks_on_the_yes_button_to_confirm_logout() {
 
         loginPage.clickOnYesButton();
     }
+
     @Then("validate that the user is logged out")
     public void validate_that_the_user_is_logged_out() {
 
@@ -114,6 +122,7 @@ public class LoginSteps {
         loginPage.enterUserID(emailId);
         scenario.log("Entered the Email ID: " + emailId);
     }
+
     @Then("user enters the OTP")
     public void user_enters_the_otp() {
 
@@ -124,7 +133,17 @@ public class LoginSteps {
     @Then("user clicks on the Verify OTP button for validation")
     public void user_clicks_on_the_verify_otp_button_for_validation() {
 
-        Assert.assertFalse(loginPage.clickOnTheVerifyOTPButton(), "Invalid OTP/User Not entered the OTP");
+        boolean isVerified = loginPage.clickOnTheVerifyOTPButton();
+        if (isVerified) {
+            scenario.log("OTP validated successfully. Proceeding...");
+        } else {
+            if (loginPage.isElementPresent(loginPage.otpField)) {
+                scenario.log("Test failed: Invalid OTP entered or User not entered the OTP");
+            } else {
+                scenario.log("Exception while clicking Verify OTP or OTP validation failed");
+            }
+        }
+        Assert.assertTrue(isVerified, "OTP Verification Failed");
     }
     @Then("user clicks on the Resend OTP option")
     public void user_clicks_on_the_resend_otp_option() {

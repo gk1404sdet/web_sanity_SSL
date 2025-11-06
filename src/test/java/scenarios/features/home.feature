@@ -66,14 +66,14 @@ Feature: Verify the Home Page Functionality
 
     Given user checks the postal code on PDP
     When user clicks on the postal code check box
-    And user enters an invalid postal code
+    And user enters an invalid postal code "08624"
     Then system should display the appropriate error message
 
   @smoke @sanity @TC013 @TC065
   Scenario: Verify functionality of valid postal code check on the PDP
 
     Given user clicks on the postal code check box
-    When user enters the postal code
+    When user enters the postal code "560076"
     Then user clicks on the check option to validate the postal code
     And user navigates back to the Home Page
 

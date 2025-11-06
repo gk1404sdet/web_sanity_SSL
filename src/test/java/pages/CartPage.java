@@ -35,7 +35,7 @@ public class CartPage extends BasePage{
     private final By giftWrapCom = By.xpath("//div[contains(text(),'GIFT WRAP')]");
     private final By couponCode = By.xpath("//div[contains(text(),'HAVE A COUPON CODE?')]");
     private final By priceDetails  = By.xpath("//div[contains(text(),'Price Details')]");
-    private final By emptyBag = By.xpath("By.xpath(\"//div[contains(text(), 'Your Bag Feels Too Light!')]\")");
+    private final By emptyBag = By.xpath("//div[contains(text(), 'Your Bag Feels Too Light!')]");
     private final By mrpProduct =  By.xpath("//p[contains(text(), 'Total MRP')]/following-sibling::div");
     private final By discountProduct = By.xpath("//p[contains(text(), 'Offer Discount')]/following-sibling::div");
     private final By savingsProduct = By.xpath("//div[contains(text(), 'Your Total Savings')]/following-sibling::div");

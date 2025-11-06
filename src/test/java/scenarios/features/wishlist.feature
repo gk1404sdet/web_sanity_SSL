@@ -70,6 +70,7 @@ Feature: Verify the Wishlist Functionality
 
   @smoke @sanity @TC055
   Scenario: Verify the logout functionality
+    Given user navigates back to the Home Page
     When user clicks on the Logout button
     And user clicks on the Yes button to confirm logout
     Then validate that the user is logged out

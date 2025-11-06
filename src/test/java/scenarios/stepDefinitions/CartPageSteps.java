@@ -55,15 +55,15 @@ public class CartPageSteps {
 
         cartPage.clickOnPincodeBox();
     }
-    @When("user enters an invalid postal code")
-    public void user_enters_an_invalid_postal_code() {
+    @When("user enters an invalid postal code {string}")
+    public void user_enters_an_invalid_postal_code(String pin) {
 
-        cartPage.enterThePincode( "08624");
+        cartPage.enterThePincode( pin);
     }
-    @When("user enters the postal code")
-    public void user_enters_the_postal_code() {
+    @When("user enters the postal code {string}")
+    public void user_enters_the_postal_code(String pin) {
 
-        cartPage.enterThePincode( "560076");
+        cartPage.enterThePincode(pin);
     }
     @Then("user clicks on the check option to validate the postal code")
     public void user_clicks_on_the_check_option_to_validate_the_postal_code() {
@@ -95,18 +95,18 @@ public class CartPageSteps {
         cartPage.scrollup(0,0);
         cartPage.clickOnGiftWrap();
     }
-    @When("user enters the receiver's name")
-    public void user_enters_the_receiver_s_name() {
+    @When("user enters the receiver name")
+    public void user_enters_the_receiver_name() {
 
         cartPage.enterTheReceiverName("Moolya Software Testing");
     }
-    @When("user enters the gift message")
-    public void user_enters_the_gift_message() {
+    @When("user enters the gift message {string}")
+    public void user_enters_the_gift_message(String message) {
 
-        cartPage.enterTheMessage("Happy Birthday.....");
+        cartPage.enterTheMessage(message);
     }
-    @When("user enters the sender's name")
-    public void user_enters_the_sender_s_name() {
+    @When("user enters the sender name")
+    public void user_enters_the_sender_name() {
 
         cartPage.enterTheSenderName("May God bless you");
     }

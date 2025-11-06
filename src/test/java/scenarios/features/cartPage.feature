@@ -58,7 +58,7 @@ Feature: Verify the Cart Page Functionality
   Scenario: Verify functionality of invalid postal code check on the cart page
 
     Given user clicks on the postal code check box
-    When user enters an invalid postal code
+    When user enters an invalid postal code "08624"
     Then user clicks on the check option to validate the postal code
     And system should display the appropriate error message
 
@@ -66,7 +66,7 @@ Feature: Verify the Cart Page Functionality
   Scenario: Verify functionality of valid postal code check on the cart page
 
     Given user clicks on the postal code check box
-    When user enters the postal code
+    When user enters the postal code "560076"
     Then user clicks on the check option to validate the postal code
 
   @smoke @sanity @TC026
@@ -79,9 +79,9 @@ Feature: Verify the Cart Page Functionality
   Scenario: Verify adding/removing coupons and Gift Wrap message
 
     When user clicks on the Gift Wrap option
-    And user enters the receiver's name
-    And user enters the gift message
-    And user enters the sender's name
+    And user enters the receiver name
+    And user enters the gift message "Happy Birthday"
+    And user enters the sender name
     Then user clicks on save gift message
     And user validates that Gift Wrap details added successfully
     And user clicks on the Gift Wrap option
