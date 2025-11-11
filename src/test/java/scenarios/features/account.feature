@@ -1,18 +1,14 @@
 Feature: Verify the Account Module in the Application
-  git ad
+
   @smoke @sanity @TC002
-  Scenario Outline: Verify the sign-in functionality via phone number for existing user
+  Scenario: Verify the sign-in functionality via phone number for an existing user
     Given user launches the application
     When user taps on the Login button
-    And user enters the mobile number "<mob no>"
+    And user enters the valid mobile number
     And user clicks on the Proceed button
-    Then user enters the OTP "<otp>"
+    Then user enters the OTP
     And user clicks on the Verify OTP button
     Then system should display the appropriate login status
-
-    Examples:
-      | mob no     | otp    |
-      | 9136734340 | 123456 |
 
   @smoke @sanity @TC045
   Scenario: Verify components of Account

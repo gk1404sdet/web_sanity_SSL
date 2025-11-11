@@ -32,7 +32,8 @@ public class LoginSteps {
     @Given("user launches the application")
     public void user_launches_the_application() {
 
-        loginPage.goTo(configLoader.getProperty("prodUrl"));
+        String url = configLoader.getProperty("prodUrl");
+        loginPage.goTo(url);
     }
 
     @When("user taps on the Login button")
@@ -41,10 +42,11 @@ public class LoginSteps {
         loginPage.clickOnLogin();
     }
 
-    @When("user enters the mobile number {string}")
-    public void user_enters_the_mobile_number(String string) {
+    @When("user enters the valid mobile number")
+    public void user_enters_the_valid_mobile_number() {
 
-        loginPage.enterUserID(string);
+        String mobile = configLoader.getProperty("login.validMobile");
+        loginPage.enterUserID(mobile);
     }
 
     @When("user clicks on the Proceed button")
@@ -67,10 +69,11 @@ public class LoginSteps {
         Assert.assertTrue(isProceedSuccessful, "Proceed Failed: User may be blocked for 24 hours or invalid input was provided");
     }
 
-    @Then("user enters the OTP {string}")
-    public void user_enters_the_otp(String string) {
+    @Then("user enters the OTP")
+    public void user_enters_the_otp() {
 
-        loginPage.enterOTP(string);
+        String otp = configLoader.getProperty("login.staticOtp");
+        loginPage.enterOTP(otp);
     }
 
     @Then("user clicks on the Verify OTP button")
@@ -116,20 +119,32 @@ public class LoginSteps {
     }
 
     //Login with Email ID
-    @When("user enters the email ID {string}")
-    public void user_enters_the_email_id(String emailId) {
+    @When("user enters the valid email ID")
+    public void user_enters_the_valid_email_id() {
 
-        loginPage.enterUserID(emailId);
-        scenario.log("Entered the Email ID: " + emailId);
+        String email = configLoader.getProperty("login.validEmail");
+        loginPage.enterUserID(email);
+        scenario.log("Entered the Email ID: " + email);
     }
-
-    @Then("user enters the OTP")
-    public void user_enters_the_otp() {
+    @Then("user enters the OTP for email")
+    public void user_enters_the_otp_for_email() {
 
         scenario.log("OTP cannot be automated for email. Skipping OTP validation step");
     }
 
     //OTP Functionality
+    @When("user enters the mobile number")
+    public void user_enters_the_mobile_number() {
+
+        String mobile = configLoader.getProperty("login.invalidMobileShort");
+        loginPage.enterUserID(mobile);
+    }
+    @Then("user enters the invalid OTP")
+    public void user_enters_the_invalid_otp() {
+
+        String invalid_otp = configLoader.getProperty("login.invalidOtp");
+        loginPage.enterOTP(invalid_otp);
+    }
     @Then("user clicks on the Verify OTP button for validation")
     public void user_clicks_on_the_verify_otp_button_for_validation() {
 
@@ -157,6 +172,12 @@ public class LoginSteps {
     }
 
     //Invalid Mobile Number
+    @When("user enters the invalid mobile number")
+    public void user_enters_the_invalid_mobile_number() {
+
+        String mobile = configLoader.getProperty("login.invalidMobileLong");
+        loginPage.enterUserID(mobile);
+    }
     @When("user clicks on the Proceed button to validate the invalid user ID")
     public void user_clicks_on_the_proceed_button_to_validate_the_invalid_user_id() {
 
@@ -169,11 +190,12 @@ public class LoginSteps {
     }
 
     //Invalid Email ID
-    @Given("user enters the invalid email ID {string}")
-    public void user_enters_the_invalid_email_id(String emailID) {
+    @Given("user enters the invalid email ID")
+    public void user_enters_the_invalid_email_id() {
 
-        loginPage.enterUserID(emailID);
-        scenario.log("Entered Email ID: " + emailID);
+        String email = configLoader.getProperty("login.invalidEmail");
+        loginPage.enterUserID(email);
+        scenario.log("Entered Email ID: " + email);
     }
 
     //Guest User

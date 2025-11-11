@@ -109,7 +109,6 @@ public class WishlistSteps {
         wishlistPage.validateErrorMessageByPartialText("Removed from your Wishlist", "Removed from your Wishlist");
     }
 
-
     // Wishlist - Adding to Cart
     @When("user adds a product to the bag from the wishlist")
     public void user_adds_a_product_to_the_bag_from_the_wishlist() {

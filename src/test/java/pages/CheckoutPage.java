@@ -11,8 +11,6 @@ public class CheckoutPage extends BasePage {
 
     private final JavascriptExecutor js = (JavascriptExecutor) driver;
 
-
-
     // ---------- Locators ----------
     private final By placeOrder = By.xpath("//p[contains(text(), 'PLACE ORDER')]");
     private final By continueButton = By.xpath("//p[contains(text(), 'CONTINUE')]");
@@ -137,7 +135,7 @@ public class CheckoutPage extends BasePage {
         }
     }
 
-        public boolean clickAddToBagOrViewBagFallback() {
+    public boolean clickAddToBagOrViewBagFallback() {
         try {
             waitForOverlayToDisappear();
             List<WebElement> addToBagButtons = driver.findElements(addToBag);

@@ -1,18 +1,14 @@
 Feature: Verify the Cart Page Functionality
 
   @smoke @sanity @TC002
-  Scenario Outline: Verify the sign-in functionality via phone number for existing user
+  Scenario: Verify the sign-in functionality via phone number for an existing user
     Given user launches the application
     When user taps on the Login button
-    And user enters the mobile number "<mob no>"
+    And user enters the valid mobile number
     And user clicks on the Proceed button
-    Then user enters the OTP "<otp>"
+    Then user enters the OTP
     And user clicks on the Verify OTP button
     Then system should display the appropriate login status
-
-    Examples:
-      | mob no     | otp    |
-      | 9136734340 | 123456 |
 
   @sanity @TC031
   Scenario: Verify CRUD on the Address page
@@ -57,7 +53,7 @@ Feature: Verify the Cart Page Functionality
   Scenario: Verify functionality of invalid postal code check on the cart page
 
     Given user clicks on the postal code check box
-    When user enters an invalid postal code "08624"
+    When user enters an invalid postal code
     Then user clicks on the check option to validate the postal code
     And system should display the appropriate error message
 
@@ -65,7 +61,7 @@ Feature: Verify the Cart Page Functionality
   Scenario: Verify functionality of valid postal code check on the cart page
 
     Given user clicks on the postal code check box
-    When user enters the postal code "560076"
+    When user enters the postal code ""
     Then user clicks on the check option to validate the postal code
 
   @smoke @sanity @TC026
@@ -79,7 +75,7 @@ Feature: Verify the Cart Page Functionality
 
     When user clicks on the Gift Wrap option
     And user enters the receiver name
-    And user enters the gift message "Happy Birthday"
+    And user enters the gift message
     And user enters the sender name
     Then user clicks on save gift message
     And user validates that Gift Wrap details added successfully

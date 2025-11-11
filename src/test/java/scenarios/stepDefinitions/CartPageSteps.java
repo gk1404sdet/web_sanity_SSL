@@ -55,14 +55,16 @@ public class CartPageSteps {
 
         cartPage.clickOnPincodeBox();
     }
-    @When("user enters an invalid postal code {string}")
-    public void user_enters_an_invalid_postal_code(String pin) {
+    @When("user enters an invalid postal code")
+    public void user_enters_an_invalid_postal_code() {
 
-        cartPage.enterThePincode( pin);
+        String pin = configLoader.getProperty("postal.invalidPin");
+        cartPage.enterThePincode(pin);
     }
-    @When("user enters the postal code {string}")
-    public void user_enters_the_postal_code(String pin) {
+    @When("user enters the postal code")
+    public void user_enters_the_postal_code() {
 
+        String pin = configLoader.getProperty("postal.validPin");
         cartPage.enterThePincode(pin);
     }
     @Then("user clicks on the check option to validate the postal code")
@@ -98,17 +100,20 @@ public class CartPageSteps {
     @When("user enters the receiver name")
     public void user_enters_the_receiver_name() {
 
-        cartPage.enterTheReceiverName("Moolya Software Testing");
+        String name = configLoader.getProperty("gift.receiverName");
+        cartPage.enterTheReceiverName(name);
     }
-    @When("user enters the gift message {string}")
-    public void user_enters_the_gift_message(String message) {
+    @When("user enters the gift message")
+    public void user_enters_the_gift_message() {
 
+        String message = configLoader.getProperty("gift.message");
         cartPage.enterTheMessage(message);
     }
     @When("user enters the sender name")
     public void user_enters_the_sender_name() {
 
-        cartPage.enterTheSenderName("May God bless you");
+        String name = configLoader.getProperty("address.firstName");
+        cartPage.enterTheSenderName(name);
     }
     @Then("user clicks on save gift message")
     public void user_clicks_on_save_gift_message() {

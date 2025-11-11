@@ -37,6 +37,7 @@ public class CheckoutSteps {
         this.scenario = context.scenario;
     }
 
+    // Successfully Payment
     @Given("user clicks on the Men category")
     public void user_clicks_on_the_men_category() {
 

@@ -79,7 +79,8 @@ public class HeaderSteps {
     @Then("user searches with dynamic keywords")
     public void user_searches_with_dynamic_keywords() {
 
-        headerPage.entersTheDynamicSearchKeyword("Kurta for Women");
+        String key = configLoader.getProperty("search.keyword");
+        headerPage.entersTheDynamicSearchKeyword(key);
     }
 
     //Store And Events
@@ -96,7 +97,8 @@ public class HeaderSteps {
     @When("user selects the city in the stores list")
     public void user_selects_the_city_in_the_stores_list() {
 
-        headerPage.selectCity("8");
+        String city = configLoader.getProperty("appointment.cityIndex");
+        headerPage.selectCity(city);
     }
 
     //Fashion Stylist
@@ -108,7 +110,8 @@ public class HeaderSteps {
     @When("user enters the query")
     public void user_enters_the_query() {
 
-        headerPage.entersTheQuery("Suggest me a party dress");
+        String key = configLoader.getProperty("search.fashionPrompt");
+        headerPage.entersTheQuery(key);
     }
     @Then("user validates the suggested product list")
     public void user_validates_the_suggested_product_list() {

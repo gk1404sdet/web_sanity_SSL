@@ -71,8 +71,8 @@ public class AccountSteps {
     }
     @When("user updates name")
     public void user_updates_name() {
-        String name1 = "Gopalakrishnan Palanisamy";
-        String name2 = "Automation Team";
+        String name1 = configLoader.getProperty("address.firstName");
+        String name2 = configLoader.getProperty("address.secondName");
         String currentName = accountPage.getEnteredName();
 
         if (currentName != null && currentName.equalsIgnoreCase(name1)) {
@@ -104,22 +104,26 @@ public class AccountSteps {
     @When("user enters new name")
     public void user_enters_new_name() {
 
-        accountPage.enterTheName("Shoppersstop Testing");
+        String name = configLoader.getProperty("address.new.name");
+        accountPage.enterTheName(name);
     }
     @When("user enters new number")
     public void user_enters_new_number() {
 
-        accountPage.enterTheMobile("9790153971");
+        String mob = configLoader.getProperty("address.new.mobile");
+        accountPage.enterTheMobile(mob);
     }
     @When("user enters new pin code")
     public void user_enters_new_pin_code() {
 
-        accountPage.enterThePinCode("638056");
+        String pin = configLoader.getProperty("address.new.pin");
+        accountPage.enterThePinCode(pin);
     }
     @When("user enters new address")
     public void user_enters_new_address() {
 
-        accountPage.enterTheAddress( "Jayanagar, Bengaluru");
+        String add = configLoader.getProperty("address.new.line");
+        accountPage.enterTheAddress( add);
     }
     @When("user selects address type as Work")
     public void user_selects_address_type_as_work() {
@@ -149,22 +153,26 @@ public class AccountSteps {
     @Then("user updates their name")
     public void user_updates_their_name() {
 
-        accountPage.enterTheName("Moolya Testing Software Pvt Ltd");
+        String name = configLoader.getProperty("address.existing.name");
+        accountPage.enterTheName(name);
     }
     @Then("user updates number")
     public void user_updates_number() {
 
-        accountPage.enterTheMobile("9790153970");
+        String mob = configLoader.getProperty("address.existing.mobile");
+        accountPage.enterTheMobile(mob);
     }
     @Then("user updates pin code")
     public void user_updates_pin_code() {
 
-        accountPage.enterThePinCode( "638052");
+        String pin = configLoader.getProperty("address.existing.pin");
+        accountPage.enterThePinCode(pin);
     }
     @Then("user updates address")
     public void user_updates_address() {
 
-        accountPage.enterTheAddress("Basavanakudi, Bengaluru");
+        String add = configLoader.getProperty("address.existing.line");
+        accountPage.enterTheAddress(add);
     }
     @Then("validate that existing address is updated")
     public void validate_that_existing_address_is_updated() {
@@ -208,7 +216,8 @@ public class AccountSteps {
     @When("user selects city")
     public void user_selects_city() {
 
-        accountPage.selectCity("6");
+        String city = configLoader.getProperty("appointment.selectCityIndex");
+        accountPage.selectCity(city);
     }
     @When("user selects store")
     public void user_selects_store() {
@@ -275,9 +284,10 @@ public class AccountSteps {
         accountPage.clickOnTheFilter();
     }
     @When("user applies filter Past {int} Days")
-    public void user_applies_filter_past_days(Integer int1) {
+    public void user_applies_filter_past_days(Integer mon) {
 
-        accountPage.applyFilterOption("Past 30 Days");
+        String filter = configLoader.getProperty("filter.option1");
+        accountPage.applyFilterOption(filter);
     }
     @Then("user views filtered orders accordingly")
     public void user_views_filtered_orders_accordingly() {
@@ -285,24 +295,28 @@ public class AccountSteps {
         accountPage.printAllProductDetailsAcrossPages();
     }
     @When("user applies filter Past {int} Months")
-    public void user_applies_filter_past_months(Integer int1) {
+    public void user_applies_filter_past_months(Integer mon) {
 
-        accountPage.applyFilterOption("Past 6 Months");
+        String filter = configLoader.getProperty("filter.option2");
+        accountPage.applyFilterOption(filter);
     }
     @When("user applies filter Completed")
     public void user_applies_filter_completed() {
 
-       accountPage.applyFilterOption("Completed");
+        String filter = configLoader.getProperty("filter.option3");
+        accountPage.applyFilterOption(filter);
     }
     @When("user applies filter Cancelled")
     public void user_applies_filter_cancelled() {
 
-        accountPage.applyFilterOption("Cancelled");
+        String filter = configLoader.getProperty("filter.option4");
+        accountPage.applyFilterOption(filter);
     }
     @When("user applies filter Past {int} Year")
-    public void user_applies_filter_past_year(Integer int1) {
+    public void user_applies_filter_past_year(Integer mon) {
 
-        accountPage.applyFilterOption("Past 1 Year");
+        String filter = configLoader.getProperty("filter.option5");
+        accountPage.applyFilterOption(filter);
     }
     @When("user clicks on an existing order to view details")
     public void user_clicks_on_an_existing_order_to_view_details() {

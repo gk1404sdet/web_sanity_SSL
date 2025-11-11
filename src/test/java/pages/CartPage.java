@@ -12,7 +12,6 @@ public class CartPage extends BasePage{
 
     public final JavascriptExecutor js = (JavascriptExecutor) driver;
 
-
     // ---------- Locators ----------
     private final By cartIcon = By.xpath("//img[@alt=\"shopping-cart\"]");
     private final By viewBag = By.xpath("(//p[contains(text(), 'View Bag')])[2]");

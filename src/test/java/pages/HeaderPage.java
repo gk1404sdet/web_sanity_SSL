@@ -11,8 +11,6 @@ public class HeaderPage extends BasePage {
 
     public final JavascriptExecutor js = (JavascriptExecutor) driver;
 
-
-
     // ---------- Locators ----------
     private final By fashionStylist = By.xpath("//img[@alt=\"fashion_stylist_logo\"]");
     private final By searchEditBox = By.xpath("//input[@type=\"text\"]");
@@ -316,7 +314,5 @@ public class HeaderPage extends BasePage {
         return selectedCity;
     }
 
-
-
-    }
+}
 

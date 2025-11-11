@@ -11,8 +11,6 @@ public class WishlistPage extends BasePage {
 
     public final JavascriptExecutor js = (JavascriptExecutor) driver;
 
-
-
     // ---------- Locators ----------
     private final By wishlistIcon = By.xpath("//img[@alt=\"wish-list\"]");
     public final By wishlistProducts = By.xpath("//div[@class=\"bg-transparent pr-0\"]");
