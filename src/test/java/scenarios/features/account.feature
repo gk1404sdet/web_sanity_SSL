@@ -1,6 +1,5 @@
 Feature: Verify the Account Module in the Application
-
-  Background:
+  git ad
   @smoke @sanity @TC002
   Scenario Outline: Verify the sign-in functionality via phone number for existing user
     Given user launches the application
@@ -114,6 +113,8 @@ Feature: Verify the Account Module in the Application
       | Platinum Aura                 |
       | Black Tier                    |
       | Membership Details & Benefits |
+    Then user clicks on Card
+    And user validates card details
 
   @smoke @sanity @TC049
   Scenario: Verify navigation and functionality of GC/EGV

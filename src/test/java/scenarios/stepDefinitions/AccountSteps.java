@@ -356,6 +356,29 @@ public class AccountSteps {
         Assert.assertTrue(result, "Some expected components are missing on the First Citizen Club page!");
 
     }
+    @Then("user clicks on Card")
+    public void user_clicks_on_card() {
+        accountPage.clickOnCard();
+    }
+    @Then("user validates card details")
+    public void user_validates_card_details() {
+
+        Map<String, String> cardInfo =accountPage.getCardNumberAndType();
+
+        String cardNumber = cardInfo.get("Card Number");
+        String cardType = cardInfo.get("Card type");
+        String primaryFCCPoints = cardInfo.get("First Citizen Club Primary Points");
+        String secondaryFCCPoints = cardInfo.get("First Citizen Club Secondary Points");
+
+        scenario.log("Card Number: " + cardNumber);
+        scenario.log("Card Type: " + cardType);
+        scenario.log("First Citizen Club Primary Points: " + primaryFCCPoints);
+        scenario.log("First Citizen Club Secondary Points: " + secondaryFCCPoints);
+
+        Assert.assertTrue(cardNumber != null && !cardNumber.isEmpty(), "Card Number is empty or missing");
+        Assert.assertTrue(cardType != null && !cardType.isEmpty(), "Card Type is empty or missing");
+
+    }
 
     //Gift or EGV
     @When("user clicks on My Gift Card or EGV")

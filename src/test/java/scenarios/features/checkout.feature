@@ -1,6 +1,5 @@
 Feature: Verify Successful and Failed Payment Modes
 
-  Background:
   @smoke @sanity @TC002
   Scenario Outline: Verify the sign-in functionality via phone number for existing user
     Given user launches the application

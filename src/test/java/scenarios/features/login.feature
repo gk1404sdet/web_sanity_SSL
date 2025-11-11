@@ -32,7 +32,7 @@ Feature: User Login Functionality with Valid and Invalid Data
       | email id                                   |
       | gopalkrishnan.sslconsultant@shoppersstop.com |
 
-  @smoke @sanity @TC065 @login
+  @smoke @sanity @TC065
   Scenario Outline: Verify the OTP functionality with an invalid OTP and resend functionality
     Given user launches the application
     When user taps on the Login button

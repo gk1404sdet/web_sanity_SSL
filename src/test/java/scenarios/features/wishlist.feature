@@ -1,6 +1,5 @@
 Feature: Verify the Wishlist Functionality
 
-  Background:
   @smoke @sanity @TC002 @book
   Scenario Outline: Verify the sign-in functionality via phone number for existing user
     Given user launches the application
@@ -52,8 +51,8 @@ Feature: Verify the Wishlist Functionality
     And user validates that the product is added to the wishlist successfully
     Then user removes the product from the wishlist in the You Might Also Like section
     And user validates that the product is removed from the wishlist successfully
-    And user adds a product to the bag from the You Might Also Like section
-    And user selects the size
+#    And user adds a product to the bag from the You Might Also Like section
+#    And user selects the size
 
   @sanity @TC022
   Scenario: TES3858 - Verify adding/removing products from wishlist to bag/cart

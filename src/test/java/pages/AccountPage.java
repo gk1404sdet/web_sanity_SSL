@@ -40,7 +40,7 @@ public class AccountPage extends BasePage {
     private final By editOption2 = By.xpath("(//div[contains(text(),'Edit')])[2]");
     private final By gender = By.xpath("(//button[@type='button'])");
     private final By updateChangesBtn = By.xpath("//p[translate(normalize-space(.), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')='UPDATE CHANGES']");
-    private final By addAddressBtn = By.xpath("//img[@alt=\"add_address\"]");
+    private final By addAddressBtn = By.xpath("//div[contains(text(), 'Add Address')]");
     private final By dropDownBtn = By.xpath("(//button[contains(@role, 'combobox') and @type='button'])[1]");
     private final By cityOptions = By.xpath("//div[@role='option']//span");
     private final By allOptionDivs = By.xpath("//div[@role='option']");
@@ -68,11 +68,14 @@ public class AccountPage extends BasePage {
     private final By amountWallet = By.xpath(".//div[2]");
     private final By gridContainerLocator = By.xpath("//div[contains(@class, 'grid justify-between') and contains(@class,'gap-')]");
     private final By firstCitizenClub = By.xpath("(//div[contains(text(),'First Citizen Club')])[2]");
+    private final By firstConnect = By.xpath("//div[contains(text(), 'FIRST CONNECT')]");
     private final By silver = By.xpath("//div[contains(text(), 'SILVER EDGE')]");
     private final By golden = By.xpath("//div[contains(text(), 'GOLDEN GLOW')]");
     private final By platinum = By.xpath("//div[contains(text(), 'PLATINUM AURA')]");
     private final By black = By.xpath("//div[contains(text(), 'BLACK TIER')]");
-    private final By membership = By.xpath("//div[contains(text(), 'Membership Details & Benefits')]");
+    private final By card = By.xpath("//button[contains(text(), 'CARD')]");
+    private final By fccDetails = By.xpath("//div[contains(@class,'wallet-text')]");
+    private final By fccValueDetails = By.xpath("//div[contains(@class,'wallet-value')]");
 
 
     public AccountPage(WebDriver driver) {
@@ -674,11 +677,11 @@ public class AccountPage extends BasePage {
 
     public boolean validateFirstCitizenClubSections(List<String> expectedSections) {
         List<By> expectedComponents = Arrays.asList(
+                firstConnect,
                 silver,
                 golden,
                 platinum,
-                black,
-                membership
+                black
         );
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         boolean allFound = true;
@@ -690,6 +693,36 @@ public class AccountPage extends BasePage {
             }
         }
         return allFound;
+    }
+
+    public void clickOnCard() {
+        clickOnElement(card);
+    }
+
+    public Map<String, String> getCardNumberAndType() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        Map<String, String> cardDetails = new LinkedHashMap<>();
+
+        try {
+            // Locate all wallet-value elements
+            List<WebElement> valueElements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(fccValueDetails));
+
+            // Locate corresponding label elements to identify which is which
+            List<WebElement> labelElements = driver.findElements(fccDetails);
+
+            for (int i = 0; i < labelElements.size(); i++) {
+                String label = labelElements.get(i).getText().trim();
+                String value = valueElements.get(i).getText().trim();
+
+                // Capture only Card Number and Card Type
+                if (label.equalsIgnoreCase("Card Number:") || label.equalsIgnoreCase("Card type:")
+                        || label.equalsIgnoreCase("First Citizen Club Primary Points") || label.equalsIgnoreCase("First Citizen Club Secondary Points")) {
+                    cardDetails.put(label.replace(":", ""), value);
+                }
+            }
+
+        } catch (TimeoutException e) {} catch (Exception e) {}
+        return cardDetails;
     }
 
 

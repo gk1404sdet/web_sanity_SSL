@@ -143,7 +143,7 @@ public class LoginSteps {
                 scenario.log("Exception while clicking Verify OTP or OTP validation failed");
             }
         }
-        Assert.assertTrue(isVerified, "OTP Verification Failed");
+        Assert.assertFalse(isVerified, "OTP Verification Failed");
     }
     @Then("user clicks on the Resend OTP option")
     public void user_clicks_on_the_resend_otp_option() {

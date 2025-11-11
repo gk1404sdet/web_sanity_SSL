@@ -14,7 +14,8 @@ public class LoginPage extends BasePage {
     private final By userID = By.id("Enter your phone number");
     private final By proceedBtn = By.xpath("//p[contains(text(), 'PROCEED')]");
     private final By verifyOTPBtn = By.xpath("//p[contains(text(), 'VERIFY OTP')]");
-    private final By hello = By.xpath("//p[contains(text(), 'Hello, ')]");
+//    private final By hello = By.xpath("//p[contains(text(), 'Hello, ')]");
+    private final By hello = By.xpath("//img[@alt=\"chevron-down\"]");
     private final By logout = By.xpath("//div[contains(text(), 'Logout')]");
     private final By yesLogout = By.xpath("//p[contains(text(), 'YES,LOG OUT')]");
     private final By resendOTP = By.xpath("//div[contains(text(), 'Resend OTP')]");
