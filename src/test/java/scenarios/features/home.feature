@@ -12,7 +12,6 @@ Feature: Verify the Home Page Functionality
 
   @sanity @TC011 @TC012
   Scenario: Verify the Sort Functionality
-
     Given user clicks on the Women category
     When user selects a sub-category under Women
     And user clicks on the Sort By option
@@ -32,7 +31,6 @@ Feature: Verify the Home Page Functionality
 
   @sanity @TC011 @TC012
   Scenario: Verify the Filter Functionality
-
     Given user clicks on the Women category
     When user selects a sub-category under Women Sarees
     And user clicks on the Sort By option
@@ -44,7 +42,6 @@ Feature: Verify the Home Page Functionality
 
   @smoke @sanity @TC013
   Scenario: Verify the components of PDP
-
     Given user clicks on the Men category
     When user selects a sub-category under Men
     And user selects a product from the PLP
@@ -58,23 +55,20 @@ Feature: Verify the Home Page Functionality
 
   @smoke @sanity @TC013 @TC020
   Scenario: Verify functionality of invalid postal code check on the PDP
-
     Given user checks the postal code on PDP
     When user clicks on the postal code check box
-    And user enters an invalid postal code "08624"
+    And user enters an invalid postal code
     Then system should display the appropriate error message
 
   @smoke @sanity @TC013 @TC065
   Scenario: Verify functionality of valid postal code check on the PDP
-
     Given user clicks on the postal code check box
-    When user enters the postal code "560076"
+    When user enters the postal code
     Then user clicks on the check option to validate the postal code
     And user navigates back to the Home Page
 
   @smoke @sanity @TC055
   Scenario: Verify the logout functionality
-
     When user clicks on the Logout button
     And user clicks on the Yes button to confirm logout
     Then validate that the user is logged out

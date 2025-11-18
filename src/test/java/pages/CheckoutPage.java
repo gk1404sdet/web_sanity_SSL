@@ -22,7 +22,8 @@ public class CheckoutPage extends BasePage {
     private final By priceDetails = By.xpath("//div[@class='flex flex-col items-start sm:px-4 md:px-0 md:pt-0 lg:px-0 xs:pt-4 mm:px-0']");
     private final By outOfStockCheck = By.xpath("//*[contains(translate(text(),'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 'OUT OF STOCK')]");
     private final By sizeBtn = By.xpath("//div[contains(@class,'overflow-x-auto')]//button");
-    private final By addToBag = By.xpath("//img[@alt=\"bag_white\"]");
+//    private final By addToBag = By.xpath("//img[@alt=\"bag_white\"]");
+    private final By addToBag = By.xpath("//p[contains(text(), 'Add to bag')]");
     private final By popUpViewBag = By.xpath("(//p[contains(text(), 'View Bag')])[2]");
     private final By viewBag = By.xpath("//p[contains(text(), 'View Bag')]");
     private final By addressBox = By.xpath("//div[@class=\"rounded-full border border-black p-1\"]");

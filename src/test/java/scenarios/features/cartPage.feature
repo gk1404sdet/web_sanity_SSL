@@ -12,7 +12,6 @@ Feature: Verify the Cart Page Functionality
 
   @sanity @TC031
   Scenario: Verify CRUD on the Address page
-
     Given user clicks on the Men category
     When user selects a sub-category under Men
     And user selects a product from the PLP
@@ -38,7 +37,6 @@ Feature: Verify the Cart Page Functionality
 
   @smoke @sanity @TC018
   Scenario: Verify the components of the Bag
-
     When user navigates back to the Home Page
     And user is on the Home Page
     And user clicks on the Cart icon
@@ -51,7 +49,6 @@ Feature: Verify the Cart Page Functionality
 
   @smoke @sanity @TC020
   Scenario: Verify functionality of invalid postal code check on the cart page
-
     Given user clicks on the postal code check box
     When user enters an invalid postal code
     Then user clicks on the check option to validate the postal code
@@ -59,20 +56,17 @@ Feature: Verify the Cart Page Functionality
 
   @smoke @sanity @TC020
   Scenario: Verify functionality of valid postal code check on the cart page
-
     Given user clicks on the postal code check box
-    When user enters the postal code ""
+    When user enters the postal code
     Then user clicks on the check option to validate the postal code
 
   @smoke @sanity @TC026
   Scenario: Verify increase and decrease of product quantity
-
     When user increases the quantity from the cart
     Then user decreases the quantity from the cart
 
   @sanity @TC027
   Scenario: Verify adding/removing coupons and Gift Wrap message
-
     When user clicks on the Gift Wrap option
     And user enters the receiver name
     And user enters the gift message
@@ -84,13 +78,11 @@ Feature: Verify the Cart Page Functionality
 
   @sanity @TC025
   Scenario: Verify functionality of size change on the cart page
-
     Given user clicks on the size change option
     When user validates that available size is displayed
 
   @smoke @sanity @TC019
   Scenario: Verify adding/removing product to bag from PDP and move to Wishlist
-
     When user clicks on the X-mark icon
     And user moves the product to wishlist from bag
     When user clicks on the X-mark icon

@@ -12,7 +12,6 @@ Feature: Verify the Header Functionality
 
   @smoke @sanity @TC006 @TC010
   Scenario: Verify navigation and functionality of all top-level homepage categories
-
     Given user launches the application
     And user is on the Home Page
     Then system should display the following components in the Top Categories section
@@ -28,7 +27,6 @@ Feature: Verify the Header Functionality
 
   @sanity @TC008
   Scenario: Verify the Search Functionality
-
     Given user is on the Home Page
     And user clicks on the search bar
     When user validates Trending Search suggestions
@@ -42,7 +40,6 @@ Feature: Verify the Header Functionality
 
   @sanity @TC050
   Scenario: TES3886 - Verify the Store and Events Functionality
-
     When user clicks on the Store and Events icon
     And user clicks on the dropdown option to select city
     And user selects the city in the stores list
@@ -51,14 +48,12 @@ Feature: Verify the Header Functionality
 
   @sanity @TC007
   Scenario: Verify navigation and functionality of Fashion Stylist
-
     When user clicks on the Fashion Stylist
     Then user enters the query
     And user validates the suggested product list
 
   @smoke @sanity @TC055
   Scenario: Verify the logout functionality
-
     When user switches back to the main window
     And user clicks on the Logout button
     And user clicks on the Yes button to confirm logout
