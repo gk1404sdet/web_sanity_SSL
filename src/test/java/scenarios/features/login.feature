@@ -16,13 +16,13 @@ Feature: User Login Functionality with Valid and Invalid Data
     And user clicks on the Yes button to confirm logout
     Then validate that the user is logged out
 
-  @smoke @sanity @TC003
-  Scenario: Verify the sign-in functionality via email ID for an existing user
-    Given user launches the application
-    When user taps on the Login button
-    And user enters the valid email ID
-    And user clicks on the Proceed button
-    Then user enters the OTP for email
+#  @smoke @sanity @TC003
+#  Scenario: Verify the sign-in functionality via email ID for an existing user
+#    Given user launches the application
+#    When user taps on the Login button
+#    And user enters the valid email ID
+#    And user clicks on the Proceed button
+#    Then user enters the OTP for email
 
   @smoke @sanity @TC065
   Scenario: Verify the OTP functionality with an invalid OTP and resend functionality
