@@ -27,6 +27,7 @@ Feature: Verify the Header Functionality
 
   @sanity @TC008
   Scenario: Verify the Search Functionality
+    Given user launches the application
     Given user is on the Home Page
     And user clicks on the search bar
     When user validates Trending Search suggestions

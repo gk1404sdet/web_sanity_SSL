@@ -75,7 +75,6 @@ public class LoginSteps {
         String otp = configLoader.getProperty("login.staticOtp");
         loginPage.enterOTP(otp);
     }
-
     @Then("user clicks on the Verify OTP button")
     public void user_clicks_on_the_verify_otp_button() {
 
@@ -91,7 +90,6 @@ public class LoginSteps {
         }
         Assert.assertTrue(isVerified, "OTP Verification Failed");
     }
-
     @Then("system should display the appropriate login status")
     public void system_should_display_the_appropriate_login_status() {
 
@@ -105,31 +103,15 @@ public class LoginSteps {
         loginPage.waitForOverlayToDisappear();
         loginPage.clickOnLogout();
     }
-
     @When("user clicks on the Yes button to confirm logout")
     public void user_clicks_on_the_yes_button_to_confirm_logout() {
 
         loginPage.clickOnYesButton();
     }
-
     @Then("validate that the user is logged out")
     public void validate_that_the_user_is_logged_out() {
 
         scenario.log("User has logged out successfully");
-    }
-
-    //Login with Email ID
-    @When("user enters the valid email ID")
-    public void user_enters_the_valid_email_id() {
-
-        String email = configLoader.getProperty("login.validEmail");
-        loginPage.enterUserID(email);
-        scenario.log("Entered the Email ID: " + email);
-    }
-    @Then("user enters the OTP for email")
-    public void user_enters_the_otp_for_email() {
-
-        scenario.log("OTP cannot be automated for email. Skipping OTP validation step");
     }
 
     //OTP Functionality
@@ -187,15 +169,6 @@ public class LoginSteps {
     public void validate_that_the_appropriate_error_message_is_displayed() {
 
         loginPage.validateErrorMessageByPartialText("Invalid phone number format", "Invalid phone number format");
-    }
-
-    //Invalid Email ID
-    @Given("user enters the invalid email ID")
-    public void user_enters_the_invalid_email_id() {
-
-        String email = configLoader.getProperty("login.invalidEmail");
-        loginPage.enterUserID(email);
-        scenario.log("Entered Email ID: " + email);
     }
 
     //Guest User
